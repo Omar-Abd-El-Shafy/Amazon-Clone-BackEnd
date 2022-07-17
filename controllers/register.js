@@ -8,8 +8,8 @@ exports.register =  async (req, res) => {
       // Get user input
       const { first_name, last_name, email, password } = req.body;
   
-      // Validate user input
-      if (!(email && password && first_name && last_name)) {
+      // Validate user input            // we need more validation //////..//////
+      if (!(email && password && first_name && last_name)) {  
         res.status(400).send("All input is required");
       }
   
@@ -33,17 +33,19 @@ exports.register =  async (req, res) => {
       });
   
       // Create token
-      const token = jwt.sign(
-        { user_id: user._id, email }, // adding atoken which contains user id and email // "_id" is generated autoamtically from mongoose
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        }
-      );
+      // const token = jwt.sign(
+      //   { user_id: user._id, email }, // adding atoken which contains user id and email // "_id" is generated autoamtically from mongoose
+      //   process.env.TOKEN_KEY,
+      //   {
+
+      //     expiresIn: "2h",
+
+      //   }
+      // );
       // save user token
-      user.token = token;
-  
+      // user.token = token;
       // return new user
+
       res.status(201).json(user);
     } catch (err) {
       console.log(err);
