@@ -28,7 +28,7 @@ app.listen(port, () => {
 });
 
 //route test for authentication
-// app.use(auth())
+ //app.use(auth())
 app.get("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome");
 });

@@ -20,7 +20,7 @@ exports.login = async (req, res) => {
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
       const token = jwt.sign(
-        { user_id: user._id, email },
+        { user_id: user._id, user_email: email, user_role: user.role },
         process.env.TOKEN_KEY,
         {
           expiresIn: "2h",
@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
 
       // user
       res.header("x-auth-token", token);
-      res.status(200).send("login succ");
+      res.status(200).send("login success");
     }
     res.status(400).send("Invalid Credentials");
   } catch (err) {
