@@ -30,8 +30,6 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    requird: true,
-    unique: true,
     validate: {
       validator: (val) => {
         return validator.isEmail(val);
@@ -49,16 +47,15 @@ const userSchema = new mongoose.Schema({
       message: "Weak password",
     },
   },
-  // phone: {
-  //   type: String,
-  //   unique: true,
-  //   validate: {
-  //     validator: (val) => {
-  //       return validator.isMobilePhone(val);
-  //     },
-  //     message: "Invalid phone number",
-  //   },
-  // },
+  phone: {
+    type: String,
+    validate: {
+      validator: (val) => {
+        return validator.isMobilePhone(val);
+      },
+      message: "Invalid phone number",
+    },
+  },
   admin: { type: Boolean },
 });
 

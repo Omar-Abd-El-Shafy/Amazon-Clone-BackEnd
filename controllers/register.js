@@ -6,16 +6,25 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res, next) => {
   try {
     // Get user input
-    const { first_name, last_name, email, password } = req.body;
+    const { first_name, last_name, email, phone, password, confirm_password } = req.body;
 
+    //DONE in userValidator
     // Validate user input            // we need more validation //////..//////
-    if (!(email && password && first_name && last_name)) {
-      return res.status(400).send("All input is required");
-    }
+    // if (!(email && password && first_name && last_name)) {
+    //   return res.status(400).send("All input is required");
+    // }
 
     // check if user already exist
     // Validate if user exist in our database
-    const oldUser = await User.findOne({ email });
+    let oldUser, emailOrPhone;
+    if(email) {
+      oldUser = await User.findOne({ email });
+      emailOrPhone = "email";
+    }
+    else if(phone) {
+      oldUser = await User.findOne({ phone });
+      emailOrPhone = "phone";
+    }
 
     if (oldUser) {
       return res.status(409).send("User Already Exist. Please Login");
@@ -28,7 +37,7 @@ exports.register = async (req, res, next) => {
     await User.create({
       first_name,
       last_name,
-      email: email.toLowerCase(), // convert email to lowercase
+      [emailOrPhone]: email? email.toLowerCase() : phone, // convert email to lowercase
       password
     }).then((user) => {
       res.status(201).send(user);

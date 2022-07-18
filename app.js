@@ -37,8 +37,8 @@ app.get("/welcome", auth, (req, res) => {
 });
 //...................
 
-
-app.post("/register", register);
+const { userValidator } = require("./MiddleWare/validators/userValidator");
+app.post("/register", userValidator, register);
 app.post("/login", login);
 
 
