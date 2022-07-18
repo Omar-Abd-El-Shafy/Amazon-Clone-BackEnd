@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
+  user_id: {
+    type: Number,
+  },
   first_name: {
     type: String,
     default: null,
+    required: true,
     validate: {
       validator: (val) => {
-        return validator.isAlphanumeric(val);
+        return validator.isAlpha(val);
       },
       message: "Invalid first name",
     },
@@ -15,9 +20,10 @@ const userSchema = new mongoose.Schema({
   last_name: {
     type: String,
     default: null,
+    required: true,
     validate: {
       validator: (val) => {
-        return validator.isAlphanumeric(val);
+        return validator.isAlpha(val);
       },
       message: "Invalid last name",
     },
@@ -43,21 +49,23 @@ const userSchema = new mongoose.Schema({
       message: "Weak password",
     },
   },
-  phone: {
-    type: String,
-    unique: true,
-    validate: {
-      validator: (val) => {
-        return validator.isMobilePhone(val);
-      },
-      message: "Invalid phone number",
-    },
-  },
+  // phone: {
+  //   type: String,
+  //   unique: true,
+  //   validate: {
+  //     validator: (val) => {
+  //       return validator.isMobilePhone(val);
+  //     },
+  //     message: "Invalid phone number",
+  //   },
+  // },
   admin: { type: Boolean },
-  user_id: {
-    type: Number,
-    unique: true
-  }
+});
+
+userSchema.pre("save", async function(next) {
+  const user = this;
+  user.password = await bcrypt.hash(user.password, 10);
+  next();
 });
 
 module.exports = mongoose.model("User", userSchema);

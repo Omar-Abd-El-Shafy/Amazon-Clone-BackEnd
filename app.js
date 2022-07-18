@@ -16,8 +16,11 @@ const { register } = require("./controllers/register");
 
 //server
 const express = require("express");
+const error = require("./MiddleWare/error");
 const app = express();
 app.use(express.json());
+app.use("/", error);
+
 const { API_PORT } = process.env;
 const port = process.env.PORT || API_PORT;
 

@@ -3,7 +3,7 @@ const User = require("../Model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   try {
     // Get user input
     const { first_name, last_name, email, password } = req.body;
@@ -22,14 +22,20 @@ exports.register = async (req, res) => {
     }
 
     //Encrypt user password
-    encryptedPassword = await bcrypt.hash(password, 10);
+    // encryptedPassword = await bcrypt.hash(password, 10);
 
     // Create user in our database
-    const user = await User.create({
+    await User.create({
       first_name,
       last_name,
       email: email.toLowerCase(), // convert email to lowercase
-      password: encryptedPassword,
+      password
+    }).then((user) => {
+      res.status(201).send(user);
+    })
+    .catch((err) => {
+      err.statusCode = 400;
+      next(err);
     });
 
     // Create token
@@ -46,7 +52,7 @@ exports.register = async (req, res) => {
     // user.token = token;
     // return new user
 
-    res.status(201).json(user);
+    // res.status(201).json(user);
   } catch (err) {
     console.log(err);
   }
