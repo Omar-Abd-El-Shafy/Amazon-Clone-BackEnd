@@ -7,36 +7,47 @@ exports.login = async (req, res) => {
   // Our login logic starts here
   try {
     // Get user input
-    const { email, password } = req.body;
+    const { email, phone, password } = req.body;
 
     // Validate user input
-    if (!(email && password)) {
-      res.status(400).send("All input is required");
+    if (!((email || phone) && password)) {
+      return res.status(400).send("All input is required");
     }
 
     // Validate if user exist in our database
-    const user = await User.findOne({ email });
+    let user, emailOrPhone;
+    if (email) {
+      user = await User.findOne({ email });
+      emailOrPhone = "email";
+    } else if (phone) {
+      user = await User.findOne({ phone });
+      emailOrPhone = "phone";
+    }
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
-      const token = jwt.sign(
-        { user_id: user._id, user_email: email, user_role: user.role },
+      const token = await jwt.sign(
+        {
+          user_id: user._id,
+          [emailOrPhone]: email ? email : phone,
+          user_role: user.role,
+        },
         process.env.TOKEN_KEY,
         {
           expiresIn: "2h",
         }
       );
-
       // // save user token
       // user.token = token;
 
       // user
       res.header("x-auth-token", token);
       res.status(200).send("login success");
+    } else {
+      res.status(400).send("Invalid Credentials");
     }
-    res.status(400).send("Invalid Credentials");
   } catch (err) {
     console.log(err);
   }
-  // Our register logic ends here
+  // Our login logic ends here
 };
