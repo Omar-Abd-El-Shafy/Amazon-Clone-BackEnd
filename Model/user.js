@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema({
       message: "Invalid phone number",
     },
   },
-  admin: { type: Boolean },
+  role: { type: Boolean },
 });
 
 userSchema.pre("save", async function(next) {

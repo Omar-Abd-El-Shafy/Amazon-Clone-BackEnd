@@ -1,5 +1,5 @@
 // will transefer register logic from app to this file
-const User = require("../Model/user");
+const User = require("../../Model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 

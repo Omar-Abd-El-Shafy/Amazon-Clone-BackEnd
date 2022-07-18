@@ -2,45 +2,27 @@
 require("dotenv").config();
 //connect database
 require("./DataSource/database").connect();
-//import jwt and bycrypt
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-//modules
-const User = require("./Model/user");
-//authentication :
-const auth = require("./middleware/auth");
-//controllers
-const { login } = require("./controllers/login");
-const { register } = require("./controllers/register");
-
+//midllewares [will add logs]
+const error = require("./MiddleWare/error");
+//routes
+const userRoute = require("./Routes/userRoute");
 
 //server
 const express = require("express");
-const error = require("./MiddleWare/error");
 const app = express();
-app.use(express.json());
-app.use("/", error);
-
 const { API_PORT } = process.env;
 const port = process.env.PORT || API_PORT;
-
+//to parse post req
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+//routes
+app.use("/user", userRoute);
+//error handler [MUST be the last middleware]
+app.use("/", error);
 
 // server listening
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
-//route test for authentication
- //app.use(auth())
-app.get("/welcome", auth, (req, res) => {
-  res.status(200).send("Welcome");
-});
 //...................
-
-const { userValidator } = require("./MiddleWare/validators/userValidator");
-app.post("/register", userValidator, register);
-app.post("/login", login);
-
-
-
 module.exports = app;

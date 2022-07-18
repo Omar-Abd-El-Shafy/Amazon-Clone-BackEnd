@@ -1,5 +1,5 @@
 // will transefer login logic from app to this file
-const User = require("../Model/user");
+const User = require("../../Model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
       // Create token
       const token = await jwt.sign(
         {
-          user_id: user._id,
+          user_id: user.user_id,
           [emailOrPhone]: email ? email : phone,
           user_role: user.role,
         },
@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
       // user.token = token;
 
       // user
-      res.header("x-auth-token", token);
+      res.header("x-access-token", token);
       res.status(200).send("login success");
     } else {
       res.status(400).send("Invalid Credentials");
