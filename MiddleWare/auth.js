@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, config.TOKEN_KEY); // here we match the token we got with the secret key we have
 
-    req.userID = decoded.user_id;
+    req.user_id = decoded.user_id;
     
     // console.log(req.userID);
 
