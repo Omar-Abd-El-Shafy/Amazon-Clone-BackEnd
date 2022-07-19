@@ -13,6 +13,7 @@ userRoute.post("/register", userValidator, userController.register);
 userRoute.post("/login", userController.login);
 
 userRoute.get("/profile", auth, userController.getUserProfile);
+userRoute.put("/profile", auth, userValidator, userController.updateProfile);
 
 //route test for authentication
 userRoute.get("/welcome", auth, (req, res) => {
