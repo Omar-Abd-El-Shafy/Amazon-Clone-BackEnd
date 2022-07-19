@@ -7,7 +7,8 @@ const userController = require("../controllers/userController");
 const { userValidator } = require("../MiddleWare/validators/userValidator");
 const auth = require("../MiddleWare/auth");
 
-//http methods
+//http methods 
+// we do check validaiton in request before  we register 
 userRoute.post("/register", userValidator, userController.register);
 userRoute.post("/login", userController.login);
 

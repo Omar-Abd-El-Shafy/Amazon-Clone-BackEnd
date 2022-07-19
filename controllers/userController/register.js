@@ -14,8 +14,7 @@ exports.register = async (req, res, next) => {
     //   return res.status(400).send("All input is required");
     // }
 
-    // check if user already exist
-    // Validate if user exist in our database
+
     let oldUser, emailOrPhone;
     if(email) {
       oldUser = await User.findOne({ email });
@@ -30,9 +29,7 @@ exports.register = async (req, res, next) => {
       return res.status(409).send("User Already Exist. Please Login");
     }
 
-    //Encrypt user password
-    // encryptedPassword = await bcrypt.hash(password, 10);
-
+    
     // Create user in our database
     await User.create({
       first_name,
@@ -47,20 +44,8 @@ exports.register = async (req, res, next) => {
       next(err);
     });
 
-    // Create token
-    // const token = jwt.sign(
-    //   { user_id: user._id, email }, // adding atoken which contains user id and email // "_id" is generated autoamtically from mongoose
-    //   process.env.TOKEN_KEY,
-    //   {
-
-    //     expiresIn: "2h",
-
-    //   }
-    // );
-    // save user token
-    // user.token = token;
-    // return new user
-
+    
+    
     // res.status(201).json(user);
   } catch (err) {
     console.log(err);

@@ -42,6 +42,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (val) => {
+
         return validator.isStrongPassword(val);
       },
       message: "Weak password",
@@ -58,8 +59,8 @@ const userSchema = new mongoose.Schema({
   },
   role: { type: Boolean },
 });
-
-userSchema.pre("save", async function(next) {
+//validate password before encrypting and saving in database
+userSchema.pre("save", async function(next) { 
   const user = this;
   user.password = await bcrypt.hash(user.password, 10);
   next();
