@@ -34,7 +34,7 @@ exports.register = async (req, res, next) => {
     await User.create({
       first_name,
       last_name,
-      [emailOrPhone]: email? email.toLowerCase() : phone, // convert email to lowercase
+      [emailOrPhone]: email? email : phone, // convert email to lowercase
       password
     }).then((user) => {
       res.status(201).send(user);
