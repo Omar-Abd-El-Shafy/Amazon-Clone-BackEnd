@@ -1,0 +1,6 @@
+1- package .josn engine and git repo
+2- ProcFile
+3- npm i cors 
+cors engine must be installed
+4- settings : added auth secret key  
+added mongo atlas uri
