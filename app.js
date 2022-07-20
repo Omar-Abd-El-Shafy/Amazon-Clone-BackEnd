@@ -17,7 +17,9 @@ app.use(cors());
 app.use("/user", userRoute);
 //error handler [MUST be the last middleware]
 app.use("/", (req, res) => {
-  res.send("<h1>Hello s7s</h1>");
+  res.send(
+    "<h1>Hello Amazing Team , Super Abdallah , heroine Enas, amazing Radwa , king Diaa</h1>"
+  );
 });
 app.use("/", error);
 
