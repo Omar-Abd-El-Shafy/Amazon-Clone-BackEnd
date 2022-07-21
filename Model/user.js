@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (val) => {
-        return validator.isAlpha(val);
+        return validator.isAlpha(val, "en-US", {ignore: " "});
       },
-      message: "Invalid first name",
+      message: "Invalid name",
     },
   },
   email: {
