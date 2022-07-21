@@ -1,18 +1,29 @@
-const { body, validationResult } = require("express-validator");
+const { body, oneOf, validationResult } = require("express-validator");
 
 // implement validators
-const name = body("name")
-  .exists()
-  .notEmpty()
-  .withMessage("Name is required")
-  .bail()
-  .trim()
-  .isAlpha("en-US", {ignore: " "})
-  .withMessage("Name must contain letters only")
-  .bail()
-  .isLength({ min: 3 })
-  .withMessage("Name min length is 3")
-  .bail();
+const name = [
+  body("name")
+    .exists()
+    .notEmpty()
+    .withMessage("Name is required")
+    .bail()
+    .trim() // remove spaces from start & end
+    .isLength({ min: 3 })
+    .withMessage("Name min length is 3")
+    .bail(),
+  //"en-US", "ar": to enable user enter name in arabic or english,
+  // ignore: " ": ignore space in the middle to enter first and last name [optional]
+  oneOf([
+    body("name")
+      .isAlpha("en-US", { ignore: " " })
+      .withMessage("Name must contain letters only")
+      .bail(),
+    body("name")
+      .isAlpha("ar", { ignore: " " })
+      .withMessage("Name must contain letters only")
+      .bail(),
+  ]),
+];
 
 const email = body("email")
   .exists()
