@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   user_id: {
     type: Number,
   },
-  first_name: {
+  name: {
     type: String,
     default: null,
     required: true,
@@ -15,17 +15,6 @@ const userSchema = new mongoose.Schema({
         return validator.isAlpha(val);
       },
       message: "Invalid first name",
-    },
-  },
-  last_name: {
-    type: String,
-    default: null,
-    required: true,
-    validate: {
-      validator: (val) => {
-        return validator.isAlpha(val);
-      },
-      message: "Invalid last name",
     },
   },
   email: {

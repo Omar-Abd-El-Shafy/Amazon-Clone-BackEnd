@@ -1,28 +1,28 @@
 const { body, oneOf, validationResult } = require("express-validator");
 
 exports.userValidator = [
-  body("first_name")
+  body("name")
     .exists()
     .notEmpty()
-    .withMessage("First is required")
+    .withMessage("Name is required")
     .bail()
     .isAlpha()
-    .withMessage("First name must contain letters only")
+    .withMessage("Name must contain letters only")
     .bail()
     .isLength({ min: 3 })
-    .withMessage("First name min length is 3")
+    .withMessage("Name min length is 3")
     .bail(),
-  body("last_name")
-    .exists()
-    .notEmpty()
-    .withMessage("Last name is required")
-    .bail()
-    .isAlpha()
-    .withMessage("Last name must contain letters only")
-    .bail()
-    .isLength({ min: 3 })
-    .withMessage("Last name min length is 3")
-    .bail(),
+  // body("last_name")
+  //   .exists()
+  //   .notEmpty()
+  //   .withMessage("Last name is required")
+  //   .bail()
+  //   .isAlpha()
+  //   .withMessage("Last name must contain letters only")
+  //   .bail()
+  //   .isLength({ min: 3 })
+  //   .withMessage("Last name min length is 3")
+  //   .bail(),
   oneOf([
     body("email")
       .exists()

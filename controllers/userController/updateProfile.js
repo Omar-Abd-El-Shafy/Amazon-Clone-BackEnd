@@ -4,23 +4,6 @@ const bcrypt = require("bcryptjs");
 
 exports.updateProfile = async (req, res, next) => {
   try {
-    // old code [To DELETE Later]
-    // if (password) {
-    //   const password = await bcrypt.hash(req.body.password, 10);
-    // }
-    // await User.findOneAndUpdate(
-    //   { user_id: req.user_id },
-    //   { ...req.body, password },
-    //   { new: true }
-    // )
-    //   .then(({ first_name, last_name, email, phone, password }) => {
-    //     res.status(200).send({ first_name, last_name, email, phone, password });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     next(err);
-    //   });
-
     let user = await User.findOne({ user_id: req.user_id });
     // update fields sent by user
     for(let key in req.body) {
