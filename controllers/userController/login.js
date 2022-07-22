@@ -9,10 +9,11 @@ exports.login = async (req, res) => {
     // Get user input
     const { email, phone, password } = req.body;
 
+    // to DELETE [already implemented in validation]
     // Validate user input
-    if (!((email || phone) && password)) {
-      return res.status(400).send("All input is required");
-    }
+    // if (!((email || phone) && password)) {
+    //   return res.status(400).send("All input is required");
+    // }
 
     // Validate if user exist in our database
     let user, emailOrPhone;

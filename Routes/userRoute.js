@@ -14,6 +14,7 @@ userRoute.post("/login", userValidator.loginValidator, userController.login);
 
 userRoute.get("/profile", auth, userController.getUserProfile);
 userRoute.put("/profile", auth, userValidator.updateValidator, userController.updateProfile);
+userRoute.delete("/profile", auth, userController.deleteAccount);
 
 //route test for authentication
 userRoute.get("/welcome", auth, (req, res) => {
