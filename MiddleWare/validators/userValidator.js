@@ -6,8 +6,8 @@ const {
   phone,
   password,
   confirmPassword,
-  validationResults,
 } = require("./userInputVaildators");
+const validationResults = require("./validationResults");
 
 // this is the validator used in userRoute
 
