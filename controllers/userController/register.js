@@ -54,9 +54,6 @@ exports.register = async (req, res, next) => {
         err.statusCode = 400;
         next(err);
       });
-
-    // save user token
-    User.token = token;
   } catch (err) {
     console.log(err);
   }
