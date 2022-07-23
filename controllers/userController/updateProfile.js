@@ -5,6 +5,24 @@ const bcrypt = require("bcryptjs");
 exports.updateProfile = async (req, res, next) => {
   try {
     let user = await User.findOne({ user_id: req.user_id });
+
+     // Get user input
+     const { email, phone } = req.body;
+
+    //  check for uinque email & phone
+    let otherUser;
+    if (email) {
+      otherUser = await User.findOne({ email });
+    } else if (phone) {
+      otherUser = await User.findOne({ phone });
+    }
+
+    // if true, then the provided email/phone is already used by another user
+    // need to change to error instead and call next()
+    if(otherUser && otherUser != user) {
+      return res.status(409).send("Already Exist.");
+    }
+
     // update fields sent by user
     for(let key in req.body) {
       user[key] = req.body[key];
@@ -23,10 +41,9 @@ exports.updateProfile = async (req, res, next) => {
         res.status(200).send(updatedUser);
       })
       .catch((err) => {
-        console.log(err);
         next(err);
       });
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };
