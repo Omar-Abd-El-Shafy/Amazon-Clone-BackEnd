@@ -4,14 +4,16 @@ const departmentRoute = express.Router();
 //controller
 const departmentController = require("../controllers/departmentController");
 //midllewares
-const { commonValidator } = require("../MiddleWare/validators/commonValidator");
+const {
+  departmentValidator,
+} = require("../MiddleWare/validators/departmentValidator");
 const auth = require("../MiddleWare/auth");
 
 // TO DO: admin auth
 // add department
 departmentRoute.post(
   ["/add", "/add/:name"],
-  commonValidator.nameValidator,
+  departmentValidator.addValidator,
   departmentController.addDepartment
 );
 
@@ -19,7 +21,7 @@ departmentRoute.post(
 // delete department
 departmentRoute.delete(
   ["/delete", "/delete/:id"],
-  commonValidator.idValidator,
+  departmentValidator.idValidator,
   departmentController.deleteDepartment
 );
 
@@ -27,11 +29,18 @@ departmentRoute.delete(
 // update department
 departmentRoute.put(
   ["/update", "/update/:id/:name"],
-  commonValidator.nameAndIdValidator,
+  departmentValidator.updateValidator,
   departmentController.updateDepartment
 );
 
 // get all depts
 departmentRoute.get("/", departmentController.getAllDepartments);
+
+// get dept by id
+departmentRoute.get(
+  ["/onedept", "/onedept/:id"],
+  departmentValidator.idValidator,
+  departmentController.getDepartmentById
+);
 
 module.exports = departmentRoute;

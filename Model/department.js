@@ -9,8 +9,9 @@ const departmentSchema = mongoose.Schema({
     type: String,
     unique: true,
     required: true,
-    minLength: 3
+    minLength: 3,
   },
+  categories: [String],
 });
 
 module.exports = mongoose.model("Department", departmentSchema);

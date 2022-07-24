@@ -12,7 +12,7 @@ const name = check("name")
   .withMessage("Name min length is 3")
   .bail();
 
-// validation chain for depat & category id
+// validation chain for depat id
 const id = check("id")
   .exists()
   .withMessage("ID is required")
@@ -21,17 +21,24 @@ const id = check("id")
   .withMessage("ID must be integer")
   .bail();
 
-// validators used in Route
+  // validation chain for depat categories
+const categories = check("categories")
+.isArray()
+.withMessage("Categories must be an array of strings")
+.bail();
 
+// validators used in Route
 // IMPORTANT
 // all validators must have validationResults as last item in the array
+const addValidator = [name, categories, validationResults];
 const nameValidator = [name, validationResults];
 const idValidator = [id, validationResults];
-const nameAndIdValidator = [id, name, validationResults];
+const updateValidator = [id, name, categories, validationResults];
 
 //combine all validators in one obj
-exports.commonValidator = {
-  nameValidator,
+exports.departmentValidator = {
+  addValidator,
   idValidator,
-  nameAndIdValidator
+  nameValidator,
+  updateValidator
 };

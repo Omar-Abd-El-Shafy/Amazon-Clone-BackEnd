@@ -1,10 +1,10 @@
 // department model
 const Department = require("../../Model/department");
 
-exports.deleteDepartment = (req, res, next) => {
+exports.deleteDepartment = async (req, res, next) => {
   // get department_id from user
   const department_id = req.body.id || req.params.id;
-  Department.findOneAndDelete({ department_id })
+  await Department.findOneAndDelete({ department_id })
     .then((dept) => {
       res.status(200).send(`Department ${dept.name} deleted`);
     })

@@ -5,9 +5,11 @@ exports.addDepartment = async (req, res, next) => {
   try {
     // Get user input
     const name  = req.body.name || req.params.name;
+    const categories = req.body.categories;
     // save dept in db
     await Department.create({
       name,
+      categories
     })
       .then((dept) => {
         res.status(201).send(dept);
