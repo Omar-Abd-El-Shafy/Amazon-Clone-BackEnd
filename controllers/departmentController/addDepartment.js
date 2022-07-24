@@ -1,13 +1,10 @@
 // department model
-const Department = require("../Model/department");
+const Department = require("../../Model/department");
 
-// deparment CRUD operations
-// to do: updateDepartment, deleteDepartment, getAllDepartments
-const addDepartment = async (req, res, next) => {
+exports.addDepartment = async (req, res, next) => {
   try {
     // Get user input
-    const { name } = req.body;
-
+    const name  = req.body.name || req.params.name;
     // save dept in db
     await Department.create({
       name,
@@ -24,4 +21,3 @@ const addDepartment = async (req, res, next) => {
   }
 };
 
-module.exports = { addDepartment };

@@ -1,0 +1,17 @@
+// department model
+const Department = require("../../Model/department");
+
+exports.updateDepartment = (req, res, next) => {
+  // get department_id and name from user
+  const department_id = req.body.id || req.params.id;
+  const name = req.body.name || req.params.name;
+  // update in db
+  Department.findOneAndUpdate({ department_id }, { name }, { new: true })
+    .then((dept) => {
+      res.status(200).send(`Department ${dept.name} updated`);
+    })
+    .catch((err) => {
+      err.statusCode = 404;
+      next(err);
+    });
+};
