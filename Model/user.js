@@ -2,55 +2,58 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema({
-  user_id: {
-    type: Number,
-  },
-  name: {
-    type: String,
-    default: null,
-    required: true,
-    validate: {
-      validator: (val) => {
-        return (
-          validator.isAlpha(val, "en-US", { ignore: " " }) ||
-          validator.isAlpha(val, "ar", { ignore: " " })
-        );
-      },
-      message: "Invalid name",
+const userSchema = new mongoose.Schema(
+  {
+    user_id: {
+      type: Number,
     },
-  },
-  email: {
-    type: String,
-    lowercase: true,
-    validate: {
-      validator: (val) => {
-        return validator.isEmail(val);
+    name: {
+      type: String,
+      default: null,
+      required: true,
+      validate: {
+        validator: (val) => {
+          return (
+            validator.isAlpha(val, "en-US", { ignore: " " }) ||
+            validator.isAlpha(val, "ar", { ignore: " " })
+          );
+        },
+        message: "Invalid name",
       },
-      message: "Invalid email address",
     },
-  },
-  password: {
-    type: String,
-    required: true,
-    validate: {
-      validator: (val) => {
-        return validator.isStrongPassword(val);
+    email: {
+      type: String,
+      lowercase: true,
+      validate: {
+        validator: (val) => {
+          return validator.isEmail(val);
+        },
+        message: "Invalid email address",
       },
-      message: "Weak password",
     },
-  },
-  phone: {
-    type: String,
-    validate: {
-      validator: (val) => {
-        return validator.isMobilePhone(val);
+    password: {
+      type: String,
+      required: true,
+      validate: {
+        validator: (val) => {
+          return validator.isStrongPassword(val);
+        },
+        message: "Weak password",
       },
-      message: "Invalid phone number",
     },
+    phone: {
+      type: String,
+      validate: {
+        validator: (val) => {
+          return validator.isMobilePhone(val);
+        },
+        message: "Invalid phone number",
+      },
+    },
+    role: { type: Boolean },
   },
-  role: { type: Boolean },
-});
+  { timestamps: true }
+);
 //validate password before encrypting and saving in database
 userSchema.pre("save", async function (next) {
   const user = this;
