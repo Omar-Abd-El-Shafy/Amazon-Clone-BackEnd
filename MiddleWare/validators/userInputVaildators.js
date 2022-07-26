@@ -1,4 +1,5 @@
-const { body, oneOf, validationResult } = require("express-validator");
+const { body } = require("express-validator");
+const validator = require("validator");
 
 // this file contains the customized validators to use them in userValidator
 
@@ -8,7 +9,7 @@ const { body, oneOf, validationResult } = require("express-validator");
 // bail(): Stops running validations if any of the previous ones have failed.
 // withMessage(): provides error message if the validation didn't pass
 
-// implement validators
+// validation chain
 const name = [
   body("name")
     .exists()
@@ -18,19 +19,24 @@ const name = [
     .trim() // remove spaces from start & end
     .isLength({ min: 3 })
     .withMessage("Name min length is 3")
-    .bail(),
-  //"en-US", "ar": to enable user enter name in arabic or english,
-  // ignore: " ": ignore space in the middle to enter first and last name [optional]
-  oneOf([
-    body("name")
-      .isAlpha("en-US", { ignore: " " }) // check name contains letters only
-      .withMessage("Name must contain letters only")
-      .bail(),
-    body("name")
-      .isAlpha("ar", { ignore: " " })
-      .withMessage("Name must contain letters only")
-      .bail(),
-  ]),
+    .bail()
+    //"en-US", "ar": to enable user enter name in arabic or english,
+    // ignore: " ": ignore space in the middle to enter first and last name [optional]
+    .custom(
+      (val) =>
+        validator.isAlpha(val, "en-US", { ignore: " " }) ||
+        validator.isAlpha(val, "ar", { ignore: " " })
+    ),
+  // oneOf([
+  //   body("name")
+  //     .isAlpha("en-US", { ignore: " " }) // check name contains letters only
+  //     .withMessage("Name must contain letters only")
+  //     .bail(),
+  //   body("name")
+  //     .isAlpha("ar", { ignore: " " })
+  //     .withMessage("Name must contain letters only")
+  //     .bail(),
+  // ]),
 ];
 
 const email = body("email")
@@ -72,15 +78,6 @@ const confirmPassword = body("confirm_password")
   .withMessage("Passwords did not match")
   .bail();
 
-// result middleware
-// Extracts the validation errors from a request and makes them available in a Result object.
-const validationResults = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty())
-    return res.status(422).json({ errors: errors.array() });
-  next();
-};
-
 //combine all validators in one obj
 module.exports = {
   name,
@@ -88,5 +85,4 @@ module.exports = {
   phone,
   password,
   confirmPassword,
-  validationResults,
 };

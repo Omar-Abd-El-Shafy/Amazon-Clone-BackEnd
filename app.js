@@ -3,8 +3,11 @@ require("dotenv").config();
 require("./DataSource/database").connect();
 const error = require("./MiddleWare/error");
 const userRoute = require("./Routes/userRoute");
+
 const productRoute = require("./routes/productsRoute");
 // const upload = require("./MiddleWare/S3uploadImages");
+const departmentRoute = require("./Routes/departmentRoute");
+
 //server
 const express = require("express");
 const app = express();
@@ -32,6 +35,15 @@ app.use("/user", userRoute);
 //   );
 // });
 
+// routes
+app.use("/user", userRoute);
+app.use("/department", departmentRoute);
+app.use("/", (req, res) => {
+  res.send(
+    "<h1>Hello Amazing Team , Super Abdallah , heroine Enas, amazing Radwa , king Diaa</h1>"
+  );
+});
+//error handler [MUST be the last middleware]
 app.use("/", error);
 
 app.listen(port, () => {

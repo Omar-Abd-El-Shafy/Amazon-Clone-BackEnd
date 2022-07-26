@@ -6,8 +6,8 @@ const {
   phone,
   password,
   confirmPassword,
-  validationResults,
 } = require("./userInputVaildators");
+const validationResults = require("./validationResults");
 
 // this is the validator used in userRoute
 
@@ -28,7 +28,7 @@ const loginValidator = [oneOf([email, phone]), password, validationResults];
 // oneOf Creates a middleware instance that will ensure at least one of the given chains
 // passes the validation
 const updateValidator = [
-  oneOf([name, password, email, phone]),
+  oneOf([name, email, phone, [password, confirmPassword]]),
   validationResults,
 ];
 
