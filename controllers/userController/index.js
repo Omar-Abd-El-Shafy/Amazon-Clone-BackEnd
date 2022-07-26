@@ -2,8 +2,9 @@
 const { login } = require("./login");
 const { register } = require("./register");
 const { getUserProfile } = require("./getUserProfile");
-const { updateProfile } = require("./updateProfile");
 const { deleteAccount } = require("./deleteAccount");
+const { updateProfile } = require("./updateProfile");
+const { updatePassword } = require("./updatePassword");
 
 //combine methods in userController obj
 const userController = {
@@ -11,7 +12,8 @@ const userController = {
   register,
   getUserProfile,
   updateProfile,
-  deleteAccount
+  deleteAccount,
+  updatePassword
 };
 
 //to use in userRoute
