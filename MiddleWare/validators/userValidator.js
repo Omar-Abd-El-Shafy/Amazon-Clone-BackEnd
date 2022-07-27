@@ -32,4 +32,14 @@ const updateValidator = [
   validationResults,
 ];
 
-exports.userValidator = { registerValidator, loginValidator, updateValidator };
+const forgotPasswordValidator = [email, validationResults];
+
+const resetPasswordValidator = [password, validationResults];
+
+exports.userValidator = {
+  registerValidator,
+  loginValidator,
+  updateValidator,
+  forgotPasswordValidator,
+  resetPasswordValidator,
+};

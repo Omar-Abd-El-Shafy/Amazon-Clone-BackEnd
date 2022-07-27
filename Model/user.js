@@ -50,10 +50,11 @@ const userSchema = new mongoose.Schema(
         message: "Invalid phone number",
       },
     },
-    role: { type: Boolean },
+    role: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
+
 //validate password before encrypting and saving in database
 userSchema.pre("save", async function (next) {
   const user = this;

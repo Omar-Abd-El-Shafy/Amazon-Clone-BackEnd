@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>File Upload Test</h1>
+
+    <form action="/product/upload" method="post" enctype="multipart/form-data">
+      
+      <input type="text" name="name" placeholder="PRODUCT NAME" />
+      <input type="text" name="description" placeholder="PRODUCT DESC" />
+      <input type="text" name="price" placeholder="PRODUCT PRICE" />
+
+      <input type="text" name="brand" placeholder="brand" />
+      <input type="text" name="weight" placeholder="weight" />
+
+      <input type="text" name="quantity" placeholder="PRODUCT QUANTITY" />
+
+      <input type="text" name="category_id" placeholder="category_id" />
+      <input type="text" name="category_name" placeholder="category_name" />
+
+      <input type="text" name="department_id" placeholder="department_id" />
+
+      <input type="text" name="department_name" placeholder="department_name" />
+
+      <input type="file" name="img" multiple />
+      <button>Submit</button>
+      <!-- <img src="https://productsprojectimages.s3.eu-west-3.amazonaws.com/ee7cca5d-b7a7-4c61-86bb-da12b42cb0d2.jpg"></img> -->
+    </form>
+  </body>
+</html>
