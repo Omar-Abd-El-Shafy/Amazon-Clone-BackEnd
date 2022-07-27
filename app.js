@@ -4,6 +4,7 @@ require("./DataSource/database").connect();
 const error = require("./MiddleWare/error");
 const userRoute = require("./Routes/userRoute");
 const departmentRoute = require("./Routes/departmentRoute");
+const categoryRoute = require("./Routes/categoryRoute");
 
 //server
 const express = require("express");
@@ -19,6 +20,7 @@ app.use(cors());
 // routes
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);
+app.use("/category", categoryRoute);
 app.use("/", (req, res) => {
   res.send(
     "<h1>Hello Amazing Team , Super Abdallah , heroine Enas, amazing Radwa , king Diaa</h1>"
