@@ -12,7 +12,7 @@ module.exports = async (email, subject, text) => {
       service: "Gmail",
       auth: {
         user: process.env.EMAIL,
-        pass: process.env.EMAI_PASS,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
