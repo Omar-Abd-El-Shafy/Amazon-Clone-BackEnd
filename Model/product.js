@@ -4,15 +4,15 @@ const productSchema = mongoose.Schema({
   product_id: { type: Number, unique: true },
   name: { type: String, required: true },
   description: { type: String, required: true },
-  price: { type: Number, required: true },
+  price: { type: String, required: true },
   quantity: { type: Number, required: true },
-  image_path: { type: String, required: true },
+  image_path: { type: [String], required: true },
   department: {
-    department_id: { type: Number, required: true },
+    department_id: { type: String, required: true },
     department_name: { type: String, required: true },
   },
   category: {
-    category_id: { type: Number, required: true },
+    category_id: { type: String, required: true },
     category_name: { type: String, required: true },
   },
   //ratings

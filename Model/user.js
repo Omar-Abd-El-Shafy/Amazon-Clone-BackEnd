@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema({
       message: "Invalid phone number",
     },
   },
-  role: { type: Boolean },
+  role: { type: Boolean, default: false },
 });
 //validate password before encrypting and saving in database
 userSchema.pre("save", async function (next) {
