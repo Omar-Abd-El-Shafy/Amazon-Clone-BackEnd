@@ -1,40 +1,54 @@
 const Product = require("../../Model/product");
 
-// product_id: { type: Number },
-// name: { type: String, required: true },
-// description: { type: String, required: true },
-// price: { type: Number, required: true },
-// quantity: { type: Number, required: true },
-// image_path: { type: String },
-// department: {
-//   department_id: { type: Number },
-//   department_name: { type: String },
-// },
-// category: {
-//   category_id: { type: Number },
-//   category_name: { type: String },
-// },
-
 exports.addProduct = async (req, res, next) => {
   try {
-    const { name, description, price, quantity } = req.body;
+    let image_path = req.files.map((file) => {
+      return file.location;
+    });
+    console.log(image_path);
+    // res.json({ status: "OK", uploaded: req.files.length });
+    const {
+      name,
+      description,
+      price,
+      quantity,
+      department_id,
+      department_name,
+      category_id,
+      category_name,
+      brand,
+      weight,
 
+      // category,
+      // brand,
+      // weight,
+    } = req.body;
 
-
+    console.log(req.body);
     let oldProduct;
-
     if (name) {
-      oldProduct = await User.findOne({ name });
+      oldProduct = await Product.findOne({ name });
     }
     if (oldProduct) {
-      return res.status(409).send("User Already Exist. Please Login");
+      return res.status(409).send("A Product already Exist with Same Name");
     }
-    // Create user in our database
+    // Create Product in our database
     await Product.create({
       name,
       description,
       price, // convert email to lowercase
       quantity,
+      image_path,
+      department: {
+        department_id,
+        department_name,
+      },
+      category: {
+        category_id,
+        category_name,
+      },
+      brand,
+      weight,
     })
       .then((product) => {
         res.status(201).json(product);
@@ -43,9 +57,7 @@ exports.addProduct = async (req, res, next) => {
         err.statusCode = 400;
         next(err);
       });
-
-    // res.status(201).json(user);
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };

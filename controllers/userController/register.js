@@ -1,5 +1,17 @@
-// will transefer register logic from app to this file
 const User = require("../../Model/user");
+// const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+// // Create token
+// const token = jwt.sign(
+//   { user_id: user._id, email },
+//   process.env.TOKEN_KEY,
+//   {
+//     expiresIn: "2h",
+//   }
+// );
+// // save user token
+// user.token = token;
 
 exports.register = async (req, res, next) => {
   try {
@@ -26,7 +38,17 @@ exports.register = async (req, res, next) => {
       password,
     })
       .then((user) => {
-        res.status(201).send(user);
+        // Create token
+        const token = jwt.sign(
+          { user_id: User.id, email },
+          process.env.TOKEN_KEY,
+          {
+            expiresIn: "2h",
+          }
+        );
+
+        res.header("x-access-token", token);
+        res.status(200).send("register success");
       })
       .catch((err) => {
         err.statusCode = 400;
