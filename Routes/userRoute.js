@@ -1,6 +1,7 @@
 //route associated with "/user" in server
 const express = require("express");
 const userRoute = express.Router();
+
 //controller
 const userController = require("../controllers/userController");
 //midllewares
@@ -9,11 +10,40 @@ const auth = require("../MiddleWare/auth");
 
 //http methods
 // we do check validaiton in request before  we register
-userRoute.post("/register", userValidator.registerValidator, userController.register);
+userRoute.post(
+  "/register",
+  userValidator.registerValidator,
+  userController.register
+);
 userRoute.post("/login", userValidator.loginValidator, userController.login);
 
+userRoute.post(
+  "/forgotPassword",
+  userValidator.forgotPasswordValidator,
+  userController.forgotPassword
+);
+
+userRoute.get(
+  "/password-reset/:id/:token",
+  auth,
+  userController.resetPassword_get
+);
+
+userRoute.post(
+  "/password-reset/:id/:token",
+  auth,
+  userValidator.resetPasswordValidator,
+
+  userController.resetPassword_post
+);
+
 userRoute.get("/profile", auth, userController.getUserProfile);
-userRoute.put("/profile", auth, userValidator.updateValidator, userController.updateProfile);
+userRoute.put(
+  "/profile",
+  auth,
+  userValidator.updateValidator,
+  userController.updateProfile
+);
 userRoute.delete("/profile", auth, userController.deleteAccount);
 
 //route test for authentication

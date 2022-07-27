@@ -1,7 +1,5 @@
 // will transefer register logic from app to this file
 const User = require("../../Model/user");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res, next) => {
   try {
@@ -24,7 +22,7 @@ exports.register = async (req, res, next) => {
     // Create user in our database
     await User.create({
       name,
-      [emailOrPhone]: email ? email : phone, 
+      [emailOrPhone]: email ? email : phone,
       password,
     })
       .then((user) => {
@@ -34,7 +32,6 @@ exports.register = async (req, res, next) => {
         err.statusCode = 400;
         next(err);
       });
-
   } catch (err) {
     console.log(err);
   }
