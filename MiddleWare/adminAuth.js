@@ -27,7 +27,6 @@ const isAdmin = async (req, res, next) => {
       if (role) {
         console.log(role);
         return next();
-        
       } else {
         return res.status(403).send("Forbidden");
       }
@@ -38,7 +37,8 @@ const isAdmin = async (req, res, next) => {
     // console.log(req.userID);
     //req.user = decoded;
   } catch (err) {
-    res.status(401).send("invalid token");
+    err.statusCode = 401;
+    next(err);
   }
 };
 
