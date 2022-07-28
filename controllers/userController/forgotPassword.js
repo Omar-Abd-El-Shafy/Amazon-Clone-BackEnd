@@ -1,7 +1,7 @@
 const User = require("../../Model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const sendEmail = require("../../MiddleWare/validators/sendEmail");
+const sendEmail = require("../../utils/sendEmail");
 
 exports.forgotPassword = async (req, res) => {
   console.log(req.body);

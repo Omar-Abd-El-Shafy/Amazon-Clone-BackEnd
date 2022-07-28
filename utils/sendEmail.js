@@ -11,13 +11,13 @@ module.exports = async (email, subject, text) => {
 
       service: "Gmail",
       auth: {
-        user: "muhammadabdalla51@gmail.com",
-        pass: "awiioylganqgdffg",
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     await transporter.sendMail({
-      from: "Ali@gmail.com",
+      from: "Amazon website",
       to: email,
       subject: subject,
       text: text,

@@ -25,18 +25,12 @@ userRoute.post(
   userController.forgotPassword
 );
 
-userRoute.get(
-  "/password-reset/:id/:token",
-  auth,
-  userController.resetPassword_get
-);
-
 userRoute.post(
   "/password-reset/:id/:token",
   auth,
   userValidator.resetPasswordValidator,
 
-  userController.resetPassword_post
+  userController.resetPassword
 );
 
 userRoute.get("/profile", auth, userController.getUserProfile);
