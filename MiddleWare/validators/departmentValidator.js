@@ -41,11 +41,6 @@ const department_id = check("department_id")
   .withMessage("ID must be integer")
   .bail();
 
-// validation chain for depat categories
-// const categories = check("categories")
-// .isArray()
-// .withMessage("Categories must be an array of strings")
-// .bail();
 
 // validators used in Route
 // IMPORTANT
