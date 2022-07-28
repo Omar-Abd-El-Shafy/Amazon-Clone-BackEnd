@@ -35,7 +35,7 @@ exports.login = async (req, res) => {
         },
         process.env.TOKEN_KEY,
         {
-          expiresIn: "2h",
+          expiresIn: "10d",
         }
       );
       // // save user token
