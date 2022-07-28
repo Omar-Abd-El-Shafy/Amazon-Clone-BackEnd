@@ -13,7 +13,7 @@ const auth = require("../MiddleWare/auth");
 // add department
 departmentRoute.post(
   ["/add", "/add/:name"],
-  departmentValidator.addValidator,
+  departmentValidator.nameValidator,
   departmentController.addDepartment
 );
 

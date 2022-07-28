@@ -24,18 +24,20 @@ const productSchema = mongoose.Schema({
   //weight
   weight: { type: Number, required: true },
 
-  // reviews : will have its own collection
+    // reviews : will have its own collection
 
-  // To Do in controller
+    // To Do in controller
 
-  //sorting:
-  //ratings// rating number
-  //price    //low to high //high to low
+    //sorting:
+    //ratings// rating number
+    //price    //low to high //high to low
 
-  //filter:
-  //department
-  //brand
-  //avilabilty
-});
+    //filter:
+    //department
+    //brand
+    //avilabilty
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Product", productSchema);

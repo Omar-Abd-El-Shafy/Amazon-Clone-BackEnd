@@ -1,8 +1,10 @@
-//import all user methods  
+//import all user methods
 const { login } = require("./login");
 const { register } = require("./register");
 const { getUserProfile } = require("./getUserProfile");
 const { deleteAccount } = require("./deleteAccount");
+const { forgotPassword } = require("./forgotPassword");
+const { resetPassword } = require("./resetPassword");
 const { updateProfile } = require("./updateProfile");
 const { updatePassword } = require("./updatePassword");
 
@@ -13,7 +15,9 @@ const userController = {
   getUserProfile,
   updateProfile,
   deleteAccount,
-  updatePassword
+  forgotPassword,
+  resetPassword,
+  updatePassword,
 };
 
 //to use in userRoute

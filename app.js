@@ -7,6 +7,7 @@ const userRoute = require("./Routes/userRoute");
 const productRoute = require("./routes/productsRoute");
 // const upload = require("./MiddleWare/S3uploadImages");
 const departmentRoute = require("./Routes/departmentRoute");
+const categoryRoute = require("./Routes/categoryRoute");
 
 //server
 const express = require("express");
@@ -38,6 +39,7 @@ app.use("/user", userRoute);
 // routes
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);
+app.use("/category", categoryRoute);
 app.use("/", (req, res) => {
   res.send(
     "<h1>Hello Amazing Team , Super Abdallah , heroine Enas, amazing Radwa , king Diaa</h1>"
