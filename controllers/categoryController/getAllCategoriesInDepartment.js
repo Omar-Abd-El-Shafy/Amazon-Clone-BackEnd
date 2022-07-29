@@ -7,7 +7,6 @@ exports.getAllCategoriesInDepartment = async (req, res, next) => {
   await Category.find({["department.department_id"]: department_id})
     .then((categories) => res.status(200).json(categories))
     .catch((err) => {
-      err.statusCode = 400;
       next(err);
     });
 };

@@ -1,5 +1,6 @@
 // Category model
 const Category = require("../../Model/category");
+const newError = require("../../utils/newError");
 
 exports.deleteCategory = async (req, res, next) => {
   // get category_id from user
@@ -9,11 +10,11 @@ exports.deleteCategory = async (req, res, next) => {
       if(category) {
         res.status(200).send(`Category ${category.name} deleted`);
       } else {
-        res.status(400).send(`No such category`);
+        throw newError(404, "Category not found");
+        // res.status(400).send(`No such category`);
       }
     })
     .catch((err) => {
-      err.statusCode = 400;
       next(err);
     });
 };

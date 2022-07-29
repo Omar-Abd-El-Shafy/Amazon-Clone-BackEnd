@@ -1,6 +1,7 @@
 // Category model
 const Category = require("../../Model/category");
 const Department = require("../../Model/department");
+const newError = require("../../utils/newError");
 
 exports.addCategory = async (req, res, next) => {
   try {
@@ -17,7 +18,8 @@ exports.addCategory = async (req, res, next) => {
     });
 
     if (!department) {
-      return res.status(400).send("Invalid department");
+      throw newError(404, "Department not found");
+      // return res.status(400).send("Invalid department");
     }
 
     // save dept in db
@@ -26,7 +28,7 @@ exports.addCategory = async (req, res, next) => {
       department: { department_id, department_name },
     })
       .then((category) => {
-        res.status(201).send(category);
+        res.status(201).json(category);
       })
       .catch((err) => {
         err.statusCode = 400;

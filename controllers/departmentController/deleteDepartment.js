@@ -1,5 +1,6 @@
 // department model
 const Department = require("../../Model/department");
+const newError = require("../../utils/newError");
 
 exports.deleteDepartment = async (req, res, next) => {
   // get department_id from user
@@ -9,11 +10,11 @@ exports.deleteDepartment = async (req, res, next) => {
       if (dept) {
         res.status(200).send(`Department ${dept.name} deleted`);
       } else {
-        res.status(400).send(`No such department`);
+        // res.status(400).send(`No such department`);
+        throw newError(404, "Department not found");
       }
     })
     .catch((err) => {
-      err.statusCode = 400;
       next(err);
     });
 };

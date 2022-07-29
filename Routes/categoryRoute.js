@@ -11,7 +11,7 @@ const isAdmin = require("../MiddleWare/adminAuth");
 
 // add category
 categoryRoute.post(
-  ["/", "/:name"],
+  ["/", "/:name/:department_id/:department_name"],
   isAdmin,
   departmentValidator.addCategoryValidator,
   categoryController.addCategory

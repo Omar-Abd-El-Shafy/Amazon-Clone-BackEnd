@@ -25,7 +25,7 @@ const isAdmin = async (req, res, next) => {
       const { role } = userProfile;
 
       if (role) {
-        console.log(role);
+        // console.log(role);
         return next();
       } else {
         return res.status(403).send("Forbidden");
