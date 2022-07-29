@@ -8,11 +8,16 @@ const productController = require("../controllers/productController");
 
 //midllewares
 const upload = require("../MiddleWare/S3uploadImages");
-productRoute.post("/add", upload.array("img"), productController.addProduct);
-productRoute.post("/delete", productController.deleteProduct);
+productRoute.post(
+  "/add",
+  isAdmin,
+  upload.array("img"),
+  productController.addProduct
+);
+productRoute.post("/delete", isAdmin, productController.deleteProduct);
 productRoute.get("/getAllProducts", productController.getAllProducts);
 productRoute.get("/getProductById", productController.getProductById);
-productRoute.post("/updateProduct", isAdmin, productController.updateProduct);
+productRoute.put("/updateProduct", isAdmin, productController.updateProduct);
 
 //http methods
 
