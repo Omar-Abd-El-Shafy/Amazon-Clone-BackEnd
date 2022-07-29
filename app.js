@@ -18,24 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-// app.post("/upload", upload.array("img"), (req, res) => {
-//   let locations = req.files.map((file) => {
-//     return file.location;
-//   });
-//   console.log(locations);
-//   return res.json({ status: "OK", uploaded: req.files.length });
-// });
-
 app.use(express.static("public"));
 app.use("/product", productRoute);
-app.use("/user", userRoute);
+//dummy route for checking add products
+// app.use("/upload", express.static("public"));
 //error handler [MUST be the last middleware]
-// app.use("/", (req, res) => {
-//   res.send(
-//     "<h1>Hello Amazing Team , Super Abdallah , heroine Enas, amazing Radwa , king Diaa</h1>"
-//   );
-// });
-
 // routes
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);
