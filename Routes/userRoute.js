@@ -28,7 +28,6 @@ userRoute.post(
   "/password-reset/:id/:token",
   auth,
   userValidator.resetPasswordValidator,
-
   userController.resetPassword
 );
 
@@ -36,10 +35,10 @@ userRoute.post(
 userRoute.post("/login", userValidator.loginValidator, userController.login);
 
 // route for get use data
-userRoute.get("/profile", auth, userController.getUserProfile);
+userRoute.get("/", auth, userController.getUserProfile);
 
 // route for delete user
-userRoute.delete("/profile", auth, userController.deleteAccount);
+userRoute.delete("/", auth, userController.deleteAccount);
 
 // userRoute.put(
 //   "/profile",
@@ -51,18 +50,20 @@ userRoute.delete("/profile", auth, userController.deleteAccount);
 // routes for update user profile
 // to update name or email or phone
 userRoute.put(
-  ["/updateName", "/updateEmail", "/updatePhone"],
+  ["/"],
   auth,
   userValidator.updateValidator,
   userController.updateProfile
 );
-// to update password
-userRoute.put(
-  "/updatePassword",
-  auth,
-  userValidator.updateValidator,
-  userController.updatePassword
-);
+
+// To delete [implemented in reset password]
+// // to update password
+// userRoute.put(
+//   "/updatePassword",
+//   auth,
+//   userValidator.updateValidator,
+//   userController.updatePassword
+// );
 
 //route test for authentication
 // userRoute.get("/welcome", auth, (req, res) => {

@@ -11,7 +11,7 @@ const isAdmin = require("../MiddleWare/adminAuth");
 
 // add department
 departmentRoute.post(
-  ["/add", "/add/:name"],
+  ["/", "/:name"],
   isAdmin,
   departmentValidator.nameValidator,
   departmentController.addDepartment
@@ -19,7 +19,7 @@ departmentRoute.post(
 
 // delete department
 departmentRoute.delete(
-  ["/delete", "/delete/:id"],
+  ["/", "/:id"],
   isAdmin,
   departmentValidator.idValidator,
   departmentController.deleteDepartment
@@ -27,7 +27,7 @@ departmentRoute.delete(
 
 // update department
 departmentRoute.put(
-  ["/update", "/update/:id/:name"],
+  ["/", "/:id/:name"],
   isAdmin,
   departmentValidator.updateValidator,
   departmentController.updateDepartment
