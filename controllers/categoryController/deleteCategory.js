@@ -9,11 +9,11 @@ exports.deleteCategory = async (req, res, next) => {
       if(category) {
         res.status(200).send(`Category ${category.name} deleted`);
       } else {
-        res.status(404).send(`Invlaid category id`);
+        res.status(400).send(`No such category`);
       }
     })
     .catch((err) => {
-      err.statusCode = 404;
+      err.statusCode = 400;
       next(err);
     });
 };

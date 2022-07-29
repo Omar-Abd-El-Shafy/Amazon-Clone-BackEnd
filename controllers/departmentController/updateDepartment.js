@@ -12,7 +12,7 @@ exports.updateDepartment = async (req, res, next) => {
       res.status(200).send(dept);
     })
     .catch((err) => {
-      err.statusCode = 404;
+      err.statusCode = 400;
       next(err);
     });
 };

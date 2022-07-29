@@ -6,6 +6,7 @@ const {
   phone,
   password,
   confirmPassword,
+  loginPassword
 } = require("./userInputVaildators");
 const validationResults = require("./validationResults");
 
@@ -22,7 +23,7 @@ const registerValidator = [
   validationResults,
 ];
 
-const loginValidator = [oneOf([email, phone]), password, validationResults];
+const loginValidator = [oneOf([email, phone]), loginPassword, validationResults];
 
 // in amazon, user can update only one field at a time, so we validate using oneOf
 // oneOf Creates a middleware instance that will ensure at least one of the given chains

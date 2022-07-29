@@ -17,7 +17,6 @@ userRoute.post(
   userValidator.registerValidator,
   userController.register
 );
-userRoute.post("/login", userValidator.loginValidator, userController.login);
 
 userRoute.post(
   "/forgotPassword",
@@ -33,14 +32,6 @@ userRoute.post(
   userController.resetPassword
 );
 
-userRoute.get("/profile", auth, userController.getUserProfile);
-userRoute.put(
-  "/profile",
-  auth,
-  userValidator.updateValidator,
-  userController.updateProfile
-);
-
 // route for login
 userRoute.post("/login", userValidator.loginValidator, userController.login);
 
@@ -49,6 +40,13 @@ userRoute.get("/profile", auth, userController.getUserProfile);
 
 // route for delete user
 userRoute.delete("/profile", auth, userController.deleteAccount);
+
+// userRoute.put(
+//   "/profile",
+//   auth,
+//   userValidator.updateValidator,
+//   userController.updateProfile
+// );
 
 // routes for update user profile
 // to update name or email or phone
@@ -67,8 +65,8 @@ userRoute.put(
 );
 
 //route test for authentication
-userRoute.get("/welcome", auth, (req, res) => {
-  res.status(200).send("Welcome");
-});
+// userRoute.get("/welcome", auth, (req, res) => {
+//   res.status(200).send("Welcome");
+// });
 
 module.exports = userRoute;

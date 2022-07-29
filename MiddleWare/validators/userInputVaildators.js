@@ -68,6 +68,12 @@ const password = body("password")
   .withMessage("Weak password")
   .bail();
 
+const loginPassword = body("password")
+  .exists()
+  .notEmpty()
+  .withMessage("Password is required")
+  .bail();
+
 const confirmPassword = body("confirm_password")
   .exists()
   .notEmpty()
@@ -85,4 +91,5 @@ module.exports = {
   phone,
   password,
   confirmPassword,
+  loginPassword
 };

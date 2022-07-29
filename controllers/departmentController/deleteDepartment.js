@@ -6,10 +6,14 @@ exports.deleteDepartment = async (req, res, next) => {
   const department_id = req.body.id || req.params.id;
   await Department.findOneAndDelete({ department_id })
     .then((dept) => {
-      res.status(200).send(`Department ${dept.name} deleted`);
+      if (dept) {
+        res.status(200).send(`Department ${dept.name} deleted`);
+      } else {
+        res.status(400).send(`No such department`);
+      }
     })
     .catch((err) => {
-      err.statusCode = 404;
+      err.statusCode = 400;
       next(err);
     });
 };

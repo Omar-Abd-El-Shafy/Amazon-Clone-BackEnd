@@ -7,28 +7,28 @@ const departmentController = require("../controllers/departmentController");
 const {
   departmentValidator,
 } = require("../MiddleWare/validators/departmentValidator");
-const auth = require("../MiddleWare/auth");
+const isAdmin = require("../MiddleWare/adminAuth");
 
-// TO DO: admin auth
 // add department
 departmentRoute.post(
   ["/add", "/add/:name"],
+  isAdmin,
   departmentValidator.nameValidator,
   departmentController.addDepartment
 );
 
-// TO DO: admin auth
 // delete department
 departmentRoute.delete(
   ["/delete", "/delete/:id"],
+  isAdmin,
   departmentValidator.idValidator,
   departmentController.deleteDepartment
 );
 
-// TO DO: admin auth
 // update department
 departmentRoute.put(
   ["/update", "/update/:id/:name"],
+  isAdmin,
   departmentValidator.updateValidator,
   departmentController.updateDepartment
 );
