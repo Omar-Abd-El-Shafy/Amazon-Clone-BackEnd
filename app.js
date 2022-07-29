@@ -4,7 +4,7 @@ require("./DataSource/database").connect();
 const error = require("./MiddleWare/error");
 const userRoute = require("./Routes/userRoute");
 
-const productRoute = require("./routes/productsRoute");
+const productRoute = require("./Routes/productsRoute");
 // const upload = require("./MiddleWare/S3uploadImages");
 const departmentRoute = require("./Routes/departmentRoute");
 const categoryRoute = require("./Routes/categoryRoute");
@@ -19,14 +19,15 @@ app.use(express.json());
 app.use(cors());
 
 app.use(express.static("public"));
-app.use("/product", productRoute);
-//dummy route for checking add products
-// app.use("/upload", express.static("public"));
+
 //error handler [MUST be the last middleware]
 // routes
+
+app.use("/product", productRoute);
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);
 app.use("/category", categoryRoute);
+
 app.use("/", (req, res) => {
   res.send(
     "<h1>Hello Amazing Team , Super Abdallah , heroine Enas, amazing Radwa , king Diaa</h1>"
