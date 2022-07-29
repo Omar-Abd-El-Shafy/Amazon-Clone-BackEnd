@@ -14,7 +14,7 @@ const s3 = new S3Client({
   },
 });
 
-const upload = multer({
+const getData = multer({
   storage: multerS3({
     s3,
     bucket: "productsprojectimages",
@@ -22,11 +22,28 @@ const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: (req, file, cb) => {
-      
       const ext = path.extname(file.originalname);
       cb(null, `${uuid()}${ext}`);
     },
   }),
 });
 
+const fileFilter = (req, file, cb) => {
+  if (
+
+    
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    const error = new Error("only png,jpg,jpeg formats allowed");
+    error.status = 400;
+    cb(error);
+  }
+};
+
+
+const upload = multer({ getData, fileFilter });
 module.exports = upload;
