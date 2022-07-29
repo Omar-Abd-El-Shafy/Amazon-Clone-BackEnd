@@ -48,7 +48,7 @@ exports.register = async (req, res, next) => {
         );
 
         res.header("x-access-token", token);
-        res.status(200).send("register success");
+        res.status(201).send("register success");
       })
       .catch((err) => {
         err.statusCode = 400;

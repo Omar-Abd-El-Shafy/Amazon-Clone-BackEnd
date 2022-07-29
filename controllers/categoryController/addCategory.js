@@ -17,7 +17,7 @@ exports.addCategory = async (req, res, next) => {
     });
 
     if (!department) {
-      return res.status(404).send("Invalid department");
+      return res.status(400).send("Invalid department");
     }
 
     // save dept in db
