@@ -6,16 +6,21 @@ const productSchema = mongoose.Schema(
     name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     price: { type: String, required: true },
-    quantity: { type: Number, required: true },
+    stock: { type: Number, required: true },
     image_path: { type: [String], required: true },
+
     department: {
-      department_id: { type: String, required: true },
-      department_name: { type: String, required: true },
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Department",
     },
+
     category: {
-      category_id: { type: String, required: true },
-      category_name: { type: String, required: true },
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Category",
     },
+
     //ratings
     rating: { type: Number, default: 0 },
     //COD true or false: cash on delivery

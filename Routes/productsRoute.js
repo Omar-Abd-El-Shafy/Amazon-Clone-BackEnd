@@ -14,7 +14,7 @@ productRoute.post(
   upload.array("img"),
   productController.addProduct
 );
-productRoute.post("/delete", isAdmin, productController.deleteProduct);
+productRoute.delete("/delete", isAdmin, productController.deleteProduct);
 productRoute.get("/getAllProducts", productController.getAllProducts);
 productRoute.get("/getProductById", productController.getProductById);
 productRoute.put("/updateProduct", isAdmin, productController.updateProduct);
