@@ -9,12 +9,11 @@ const productSchema = mongoose.Schema(
     stock: { type: Number, required: true },
     image_path: { type: [String], required: true },
 
-    // category has  department ids
-
-    // department: {
-    //   department_id: { type: String, required: true },
-    //   department_name: { type: String, required: true },
-    // },
+    department: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Department",
+    },
 
     category: {
       type: mongoose.Schema.Types.ObjectId,
