@@ -11,5 +11,7 @@ exports.createCart = async (req, res, next) => {
     product.product_id != product_id;
   });
 
+  cart.products.push(newProductArr);
+
   await cart.save();
 };
