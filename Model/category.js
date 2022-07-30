@@ -12,8 +12,8 @@ const categorySchema = mongoose.Schema(
       minLength: 3,
     },
     department: {
-      department_id: { type: Number, required: true },
-      department_name: { type: String, required: true },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Department"
     },
   },
   { timestamps: true }

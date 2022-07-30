@@ -14,15 +14,15 @@ const name = check("name")
   .withMessage("Name min length is 3")
   .bail();
 
-const department_name = check("department_name")
-  .exists()
-  .notEmpty()
-  .withMessage("Name is required")
-  .bail() //to stop validation if the previous condition didn't pass
-  .trim() // remove spaces from start & end
-  .isLength({ min: 3 })
-  .withMessage("Name min length is 3")
-  .bail();
+// const department_name = check("department_name")
+//   .exists()
+//   .notEmpty()
+//   .withMessage("Name is required")
+//   .bail() //to stop validation if the previous condition didn't pass
+//   .trim() // remove spaces from start & end
+//   .isLength({ min: 3 })
+//   .withMessage("Name min length is 3")
+//   .bail();
 
 // validation chain for depat id
 const id = check("id")
@@ -37,10 +37,9 @@ const department_id = check("department_id")
   .exists()
   .withMessage("ID is required")
   .bail()
-  .isInt()
-  .withMessage("ID must be integer")
+  .isMongoId()
+  .withMessage("ID must be MongoDB ObjectId.")
   .bail();
-
 
 // validators used in Route
 // IMPORTANT
@@ -51,16 +50,16 @@ const idValidator = [id, validationResults];
 const updateValidator = [id, name, validationResults];
 
 // category validators
-const addCategoryValidator = [name, department_id, department_name, validationResults];
-const updateCategoryValidator = [id, name, department_id, department_name, validationResults];
-
+const addCategoryValidator = [name, department_id, validationResults];
+const updateCategoryValidator = [id, name, department_id, validationResults];
+const departmentIdValidator = [department_id, validationResults];
 
 //combine all validators in one obj
 exports.departmentValidator = {
-  // addValidator,
   idValidator,
   nameValidator,
   updateValidator,
   addCategoryValidator,
-  updateCategoryValidator
+  updateCategoryValidator,
+  departmentIdValidator
 };
