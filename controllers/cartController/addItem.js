@@ -1,7 +1,7 @@
 const Cart = require("../../Model/cart");
 const Product = require("../../Model/product");
 
-exports.createCart = async (req, res, next) => {
+exports.addItem = async (req, res, next) => {
   // const productsArr=req.body.products
   // const stock = productsArr.map((product)=>{
   //     await Product.findOne( {"product_id": product.product_id},{stock:1} )
