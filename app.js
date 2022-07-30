@@ -1,9 +1,11 @@
 const cors = require("cors");
 require("dotenv").config();
 require("./DataSource/database").connect();
+// middlewares
 const error = require("./MiddleWare/error");
+const morgan = require("./MiddleWare/morgan");
+// routes
 const userRoute = require("./Routes/userRoute");
-
 const productRoute = require("./Routes/productsRoute");
 // const upload = require("./MiddleWare/S3uploadImages");
 const departmentRoute = require("./Routes/departmentRoute");
@@ -17,12 +19,10 @@ const port = process.env.PORT || 3333;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-
 app.use(express.static("public"));
+app.use(morgan);
 
-//error handler [MUST be the last middleware]
 // routes
-
 app.use("/product", productRoute);
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);
