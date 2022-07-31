@@ -21,7 +21,9 @@ const validaiton = (req, file, cb) => {
   if (req.body.name != "m100") {
     console.log("validation done");
   } else {
-    cb(new Error("not valid "));
+    const error = new Error("only png,jpg,jpeg formats allowed");
+    error.status = 400;
+    cb(error);
   }
 };
 
