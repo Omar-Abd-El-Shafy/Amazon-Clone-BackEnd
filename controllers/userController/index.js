@@ -6,7 +6,8 @@ const { deleteAccount } = require("./deleteAccount");
 const { forgotPassword } = require("./forgotPassword");
 const { resetPassword } = require("./resetPassword");
 const { updateProfile } = require("./updateProfile");
-const { updatePassword } = require("./updatePassword");
+const { getAllUsers } = require("./getAllUsers");
+// const { updatePassword } = require("./updatePassword");
 
 //combine methods in userController obj
 const userController = {
@@ -17,7 +18,8 @@ const userController = {
   deleteAccount,
   forgotPassword,
   resetPassword,
-  updatePassword,
+  getAllUsers,
+  // updatePassword,
 };
 
 //to use in userRoute
