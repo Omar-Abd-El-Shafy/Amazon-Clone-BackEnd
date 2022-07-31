@@ -1,7 +1,4 @@
 //validation
-const { check } = require("express-validator");
-const validationResults = require("./validators/validationResults");
-const productValidator = require("./validators/productValidator");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const uuid = require("uuid").v4;
