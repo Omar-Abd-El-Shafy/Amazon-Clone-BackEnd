@@ -34,6 +34,9 @@ const upload = multer({
   }),
 
   fileFilter: (req, file, cb) => {
+    
+    validaiton(req, file, cb);
+
     if (
       file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||
@@ -45,8 +48,6 @@ const upload = multer({
       error.status = 400;
       cb(error);
     }
-
-    validaiton(req, file, cb);
   },
 });
 
