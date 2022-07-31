@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
-
+const Cart = require("./cart");
 const userSchema = new mongoose.Schema(
   {
     user_id: {
@@ -60,6 +60,10 @@ userSchema.pre("save", async function (next) {
   const user = this;
   user.password = await bcrypt.hash(user.password, 10);
   next();
+});
+
+userSchema.post("save", async function (user) {
+  await Cart.create({ user: user._id });
 });
 
 module.exports = mongoose.model("User", userSchema);
