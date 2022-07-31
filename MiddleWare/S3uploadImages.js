@@ -17,7 +17,9 @@ const s3 = new S3Client({
 const validaiton = (req, file, cb) => {
   if (req.body.name != "m100") {
     console.log("validation done");
-  } 
+  } else {
+    return false;
+  }
 };
 
 const upload = multer({
@@ -34,7 +36,11 @@ const upload = multer({
   }),
 
   fileFilter: (req, file, cb) => {
-    validaiton(req, file, cb);
+    if (!validaiton(req, file, cb)) {
+      const error = new Error("only png,jpg,jpeg formats allowed");
+      error.status = 400;
+      cb(error);
+    }
 
     if (
       file.mimetype === "image/png" ||
