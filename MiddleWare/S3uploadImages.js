@@ -37,9 +37,7 @@ const upload = multer({
 
   fileFilter: (req, file, cb) => {
     if (!validaiton(req, file, cb)) {
-      const error = new Error("only png,jpg,jpeg formats allowed");
-      error.status = 400;
-      cb(error);
+      cb(null, false);
     }
 
     if (
