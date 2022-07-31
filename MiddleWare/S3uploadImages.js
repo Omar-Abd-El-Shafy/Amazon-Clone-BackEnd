@@ -16,7 +16,7 @@ const s3 = new S3Client({
 });
 const validaiton = (req, file, cb) => {
   if (req.body.name != "m100") {
-    cb(null, true);
+    // cb(null, true);
   } else {
     const error = new Error("xxxxxxxxx");
     error.status = 404;
