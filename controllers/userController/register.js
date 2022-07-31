@@ -18,13 +18,9 @@ exports.register = async (req, res, next) => {
     // Get user input
     const { name, email, phone, password } = req.body;
 
-    let oldUser, emailOrPhone;
-    if (email) {
-      oldUser = await User.findOne({ email });
-      emailOrPhone = "email";
-    } else if (phone) {
+    let oldUser = await User.findOne({ email });
+    if (!oldUser) {
       oldUser = await User.findOne({ phone });
-      emailOrPhone = "phone";
     }
 
     if (oldUser) {
@@ -34,7 +30,8 @@ exports.register = async (req, res, next) => {
     // Create user in our database
     await User.create({
       name,
-      [emailOrPhone]: email ? email : phone,
+      email,
+      phone,
       password,
     })
       .then((user) => {
