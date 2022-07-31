@@ -12,10 +12,8 @@ exports.addProduct = async (req, res, next) => {
       description,
       price,
       quantity,
-      department_id,
-      department_name,
-      category_id,
-      category_name,
+      department,
+      category,
       brand,
       weight,
       
@@ -36,14 +34,8 @@ exports.addProduct = async (req, res, next) => {
       price, // convert email to lowercase
       quantity,
       image_path,
-      department: {
-        department_id,
-        department_name,
-      },
-      category: {
-        category_id,
-        category_name,
-      },
+      department,
+      category,
       brand,
       weight,
     })
