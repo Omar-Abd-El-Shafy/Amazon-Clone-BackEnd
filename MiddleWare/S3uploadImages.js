@@ -14,13 +14,15 @@ const s3 = new S3Client({
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
   },
 });
-// const validaiton = (req, file, cb) => {
-//   if (req.body.name != "m100") {
-//     console.log("validation done");
-//   } else {
-//     return false;
-//   }
-// };
+const validaiton = (req, file, cb) => {
+  if (req.body.name != "m100") {
+    cb(null, true);
+  } else {
+    const error = new Error("xxxxxxxxx");
+    error.status = 404;
+    cb(error);
+  }
+};
 
 const upload = multer({
   storage: multerS3({
@@ -36,13 +38,7 @@ const upload = multer({
   }),
 
   fileFilter: (req, file, cb) => {
-    if (req.body.name != "m100") {
-      cb(null, true);
-    } else {
-      const error = new Error("xxxxxxxxx");
-      error.status = 404;
-      cb(error);
-    }
+    validaiton(req, file, cb);
 
     if (
       file.mimetype === "image/png" ||
