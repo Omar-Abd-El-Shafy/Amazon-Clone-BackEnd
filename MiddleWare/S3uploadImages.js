@@ -18,7 +18,9 @@ const validaiton = (req, file, cb) => {
   if (req.body.name != "m100") {
     cb(null, true);
   } else {
-    cb(null, false);
+    const error = new Error("xxxxxxxxx");
+    error.status = 404;
+    cb(error);
   }
 };
 
