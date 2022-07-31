@@ -5,7 +5,7 @@ exports.addProduct = async (req, res, next) => {
     let image_path = req.files.map((file) => {
       return file.location;
     });
-    // console.log(image_path);
+     console.log(image_path);
     // res.json({ status: "OK", uploaded: req.files.length });
     const {
       name,
@@ -19,7 +19,6 @@ exports.addProduct = async (req, res, next) => {
       stock,
     } = req.body;
 
-    console.log(req.body);
     let oldProduct;
     if (name) {
       oldProduct = await Product.findOne({ name });

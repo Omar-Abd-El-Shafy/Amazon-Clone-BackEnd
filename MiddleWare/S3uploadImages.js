@@ -1,3 +1,7 @@
+//validation
+const { check } = require("express-validator");
+const validationResults = require("./validators/validationResults");
+
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const uuid = require("uuid").v4;
@@ -13,8 +17,13 @@ const s3 = new S3Client({
     secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
   },
 });
+const validaiton = (req, file, cb) => {
+  if (req.body.name == "m100") {
+    console.log("validation done");
+  }
+};
 
-const getData = multer({
+const upload = multer({
   storage: multerS3({
     s3,
     bucket: "productsprojectimages",
@@ -26,24 +35,21 @@ const getData = multer({
       cb(null, `${uuid()}${ext}`);
     },
   }),
+
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg"
+    ) {
+      cb(null, true);
+    } else {
+      const error = new Error("only png,jpg,jpeg formats allowed");
+      error.status = 400;
+      cb(error);
+    }
+    validaiton(req, file, cb);
+  },
 });
 
-const fileFilter = (req, file, cb) => {
-  if (
-
-    
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
-  ) {
-    cb(null, true);
-  } else {
-    const error = new Error("only png,jpg,jpeg formats allowed");
-    error.status = 400;
-    cb(error);
-  }
-};
-
-
-const upload = multer({ getData, fileFilter });
 module.exports = upload;
