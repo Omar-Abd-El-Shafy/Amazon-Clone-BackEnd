@@ -1,7 +1,7 @@
 //validation
 const { check } = require("express-validator");
 const validationResults = require("./validators/validationResults");
-
+const productValidator = require("./validators/productValidator");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const uuid = require("uuid").v4;
@@ -18,8 +18,10 @@ const s3 = new S3Client({
   },
 });
 const validaiton = (req, file, cb) => {
-  if (req.body.name == "m100") {
+  if (req.body.name != "m100") {
     console.log("validation done");
+  } else {
+    cb(new Error("not valid "));
   }
 };
 
@@ -37,6 +39,8 @@ const upload = multer({
   }),
 
   fileFilter: (req, file, cb) => {
+    validaiton(req, file, cb);
+
     if (
       file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||
@@ -48,7 +52,6 @@ const upload = multer({
       error.status = 400;
       cb(error);
     }
-    validaiton(req, file, cb);
   },
 });
 
