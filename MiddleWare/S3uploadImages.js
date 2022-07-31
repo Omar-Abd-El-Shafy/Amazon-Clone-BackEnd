@@ -46,11 +46,7 @@ const upload = multer({
       file.mimetype === "image/jpeg"
     ) {
       cb(null, true);
-    } else {
-      const error = new Error("only png,jpg,jpeg formats allowed");
-      error.status = 400;
-      cb(error);
-    }
+    } 
   },
 });
 
