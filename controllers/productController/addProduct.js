@@ -16,7 +16,7 @@ exports.addProduct = async (req, res, next) => {
       category,
       brand,
       weight,
-      
+      stock,
     } = req.body;
 
     console.log(req.body);
@@ -38,6 +38,7 @@ exports.addProduct = async (req, res, next) => {
       category,
       brand,
       weight,
+      stock,
     })
       .then((product) => {
         res.status(201).json(product);
