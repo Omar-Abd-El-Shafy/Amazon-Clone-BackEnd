@@ -38,13 +38,13 @@ const upload = multer({
   }),
 
   fileFilter: (req, file, cb) => {
-    // if (req.body.name != "m100") {
-    //   cb(null, true);
-    // } else {
-    //   const error = new Error("xxxxxxxxx");
-    //   error.status = 404;
-    //   cb(error);
-    // }
+    if (req.body.name != "m100") {
+      cb(null, true);
+    } else {
+      const error = new Error("xxxxxxxxx");
+      error.status = 404;
+      cb(error);
+    }
     if (
       file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||
