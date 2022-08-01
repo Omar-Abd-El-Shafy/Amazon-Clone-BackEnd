@@ -42,7 +42,7 @@ const upload = multer({
       cb(null, true);
     } else {
       const error = new Error("xxxxxxxxx");
-      error.status = 404;
+      error.status = 400;
       cb(error);
     }
     // if (
