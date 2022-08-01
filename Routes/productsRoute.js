@@ -17,6 +17,10 @@ productRoute.post(
 productRoute.delete("/delete", isAdmin, productController.deleteProduct);
 productRoute.get("/getAllProducts", productController.getAllProducts);
 productRoute.get("/getProductById", productController.getProductById);
+productRoute.get(
+  ["/getAllProductsInCategory", "/getAllProductsInCategory/:category_id"],
+  productController.getAllProductsInCategory
+);
 productRoute.put("/updateProduct", isAdmin, productController.updateProduct);
 
 //http methods
