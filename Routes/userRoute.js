@@ -8,6 +8,7 @@ const userController = require("../controllers/userController");
 const { userValidator } = require("../MiddleWare/validators/userValidator");
 const auth = require("../MiddleWare/auth");
 const isAdmin = require("../MiddleWare/adminAuth");
+const { commonValidator } = require("../MiddleWare/validators/commonValidator");
 
 //http methods
 // we do check validaiton in request before  we register
@@ -39,7 +40,8 @@ userRoute.post("/login", userValidator.loginValidator, userController.login);
 userRoute.get("/", auth, userController.getUserProfile);
 
 // route for get all users data [only for admin]
-userRoute.get("/allUsers/:page", isAdmin, userController.getAllUsers);
+// page is passed in query params [?page=]
+userRoute.get("/allUsers", isAdmin, commonValidator.pageValidator, userController.getAllUsers);
 
 // route for delete user
 userRoute.delete("/", auth, userController.deleteAccount);
