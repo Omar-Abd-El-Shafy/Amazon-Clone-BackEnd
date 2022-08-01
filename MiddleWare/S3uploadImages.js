@@ -45,17 +45,17 @@ const upload = multer({
       error.status = 404;
       cb(error);
     }
-    if (
-      file.mimetype === "image/png" ||
-      file.mimetype === "image/jpg" ||
-      file.mimetype === "image/jpeg"
-    ) {
-      cb(null, true);
-    } else {
-      const error = new Error("only png,jpg,jpeg formats allowed");
-      error.status = 400;
-      cb(error);
-    }
+    // if (
+    //   file.mimetype === "image/png" ||
+    //   file.mimetype === "image/jpg" ||
+    //   file.mimetype === "image/jpeg" 
+    // ) {
+    //   cb(null, true);
+    // } else {
+    //   const error = new Error("only png,jpg,jpeg formats allowed");
+    //   error.status = 400;
+    //   cb(error);
+    // }
   },
 });
 
