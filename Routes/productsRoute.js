@@ -10,7 +10,7 @@ const productController = require("../controllers/productController");
 const upload = require("../MiddleWare/S3uploadImages");
 productRoute.post(
   "/add",
-  isAdmin,
+
   upload.array("img"),
   productController.addProduct
 );

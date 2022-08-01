@@ -10,6 +10,7 @@ const productRoute = require("./Routes/productsRoute");
 // const upload = require("./MiddleWare/S3uploadImages");
 const departmentRoute = require("./Routes/departmentRoute");
 const categoryRoute = require("./Routes/categoryRoute");
+const cartRoute = require("./Routes/cartRoute");
 
 //server
 const express = require("express");
@@ -27,6 +28,7 @@ app.use("/product", productRoute);
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);
 app.use("/category", categoryRoute);
+app.use("./cart", cartRoute);
 
 app.use("/", (req, res) => {
   res.send(
