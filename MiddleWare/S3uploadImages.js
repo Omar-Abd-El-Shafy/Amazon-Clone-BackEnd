@@ -38,7 +38,7 @@ const upload = multer({
   }),
 
   fileFilter: (req, file, cb) => {
-    if (req.body.name != "m100" && file.mimetype === true) {
+    if (req.body.name != "m100" && file.mimetype === "image/jpg") {
       cb(null, true);
     } else {
       const error = new Error("xxxxxxxxx");
