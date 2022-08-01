@@ -38,24 +38,24 @@ const upload = multer({
   }),
 
   fileFilter: (req, file, cb) => {
-    if ( file.mimetype === "image/jpg") {
+    // if (req.body.name != "m100") {
+    //   cb(null, true);
+    // } else {
+    //   const error = new Error("xxxxxxxxx");
+    //   error.status = 404;
+    //   cb(error);
+    // }
+    if (
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg"
+    ) {
       cb(null, true);
     } else {
-      const error = new Error("xxxxxxxxx");
+      const error = new Error("only png,jpg,jpeg formats allowed");
       error.status = 400;
       cb(error);
     }
-    // if (
-    //   file.mimetype === "image/png" ||
-    //   file.mimetype === "image/jpg" ||
-    //   file.mimetype === "image/jpeg"
-    // ) {
-    //   cb(null, true);
-    // } else {
-    //   const error = new Error("only png,jpg,jpeg formats allowed");
-    //   error.status = 400;
-    //   cb(error);
-    // }
   },
 });
 
