@@ -4,8 +4,8 @@ const newError = require("../../utils/newError");
 
 exports.getCategoryById = async (req, res, next) => {
   const category_id = req.body.id || req.params.id;
-  await Category.findOne({ category_id })
-    .populate("department", "department_id name")
+  await Category.findById(category_id)
+    .populate("department", "name")
     .then((category) => {
       if (category) {
         res.status(200).json(category);

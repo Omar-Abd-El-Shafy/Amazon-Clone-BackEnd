@@ -2,7 +2,7 @@ const User = require("../../Model/user");
 
 exports.resetPassword = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.params.id });
+    const user = await User.findById(req.params.id);
     if (!user) return User.status(400).send({ message: "Invalid link" });
 
     if (req.body.password) {
