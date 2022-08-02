@@ -20,7 +20,7 @@ const isAdmin = async (req, res, next) => {
     const user_id = decoded.user_id;
 
     // req.user_id = decoded.user_id;
-    const userProfile = await User.findOne({ user_id });
+    const userProfile = await User.findById(user_id);
     if (userProfile) {
       const { role } = userProfile;
 

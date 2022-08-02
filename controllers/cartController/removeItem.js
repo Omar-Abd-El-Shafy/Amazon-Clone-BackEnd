@@ -6,7 +6,7 @@ exports.removeItem = async (req, res, next) => {
   const { cart_id, product_id, quantity } = req.body;
   //I'm working here on _id not on id trigger
   // let cart = await Cart.findOne({ _id: cart_id });
-  let cart = await Cart.findOne({ _id: cart_id });
+  let cart = await Cart.findById(cart_id);
   let newProductArr = cart.products.filter((product) => {
     product.product_id != product_id;
   });

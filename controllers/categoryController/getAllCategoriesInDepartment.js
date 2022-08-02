@@ -5,7 +5,7 @@ const Category = require("../../Model/category");
 exports.getAllCategoriesInDepartment = async (req, res, next) => {
   const department = req.body.department_id || req.params.department_id;
   await Category.find({ department })
-    .populate("department", "department_id name")
+    .populate("department", "name")
     .then((categories) => res.status(200).json(categories))
     .catch((err) => {
       next(err);

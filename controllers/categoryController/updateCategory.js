@@ -21,8 +21,8 @@ exports.updateCategory = async (req, res, next) => {
     }
 
     // update in db
-    await Category.findOneAndUpdate(
-      { category_id },
+    await Category.findByIdAndUpdate(
+      category_id,
       { name, department: department_id },
       { new: true }
     )
