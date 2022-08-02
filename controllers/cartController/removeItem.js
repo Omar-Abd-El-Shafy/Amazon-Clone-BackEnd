@@ -3,15 +3,18 @@ const Product = require("../../Model/product");
 
 exports.removeItem = async (req, res, next) => {
   // you check first if product exists but this is overLOAD as extra query will be done on each request مش عارف اعمل ايه والله
-  const { cart_id, product_id, quantity } = req.body;
+  const { user_id, product_id } = req.body;
   //I'm working here on _id not on id trigger
   // let cart = await Cart.findOne({ _id: cart_id });
-  let cart = await Cart.findById(cart_id);
+  let cart = await Cart.findOne({ user: user_id });
   let newProductArr = cart.products.filter((product) => {
-    product.product_id != product_id;
+    return product.product_id != product_id;
   });
 
-  cart.products.push(newProductArr);
 
-  await cart.save();
+  cart.products = newProductArr;
+  await cart
+    .save()
+    .then((cart) => res.status(200).send(cart))
+    .catch((err) => next(err));
 };

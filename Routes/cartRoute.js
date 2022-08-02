@@ -7,8 +7,8 @@ const auth = require("../MiddleWare/auth");
 const cartController = require("../controllers/cartController");
 
 productRoute.get("/getCart", auth, cartController.getCart);
-productRoute.put("/getProductById", auth, cartController.addItem);
-productRoute.put("/updateProduct", auth, cartController.removeItem);
+productRoute.put("/addItem", auth, cartController.addItem);
+productRoute.put("/removeItem", auth, cartController.removeItem);
 
 //http methods
 
