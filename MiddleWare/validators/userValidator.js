@@ -17,7 +17,8 @@ const validationResults = require("./validationResults");
 
 const registerValidator = [
   name,
-  oneOf([email, phone]),
+  email,
+  phone,
   password,
   confirmPassword,
   validationResults,

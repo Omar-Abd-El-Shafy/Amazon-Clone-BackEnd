@@ -5,26 +5,19 @@ exports.addProduct = async (req, res, next) => {
     let image_path = req.files.map((file) => {
       return file.location;
     });
-    console.log(image_path);
-    // res.json({ status: "OK", uploaded: req.files.length });
+     console.log(image_path);
     const {
       name,
       description,
       price,
       quantity,
-      department_id,
-      department_name,
-      category_id,
-      category_name,
+      department,
+      category,
       brand,
       weight,
-
-      // category,
-      // brand,
-      // weight,
+      stock,
     } = req.body;
 
-    console.log(req.body);
     let oldProduct;
     if (name) {
       oldProduct = await Product.findOne({ name });
@@ -39,16 +32,11 @@ exports.addProduct = async (req, res, next) => {
       price, // convert email to lowercase
       quantity,
       image_path,
-      department: {
-        department_id,
-        department_name,
-      },
-      category: {
-        category_id,
-        category_name,
-      },
+      department,
+      category,
       brand,
       weight,
+      stock,
     })
       .then((product) => {
         res.status(201).json(product);

@@ -8,7 +8,7 @@ exports.updateDepartment = async (req, res, next) => {
   const name = req.body.name || req.params.name;
 
   // update in db
-  await Department.findOneAndUpdate({ department_id }, { name }, { new: true })
+  await Department.findByIdAndUpdate(department_id, { name }, { new: true })
     .then((dept) => {
       if (dept) {
         res.status(200).json(dept);

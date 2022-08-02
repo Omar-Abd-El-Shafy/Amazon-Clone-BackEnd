@@ -9,14 +9,11 @@ exports.updateCategory = async (req, res, next) => {
     const category_id = req.body.id || req.params.id;
     const name = req.body.name || req.params.name;
     const department_id = req.body.department_id || req.params.department_id;
-    const department_name =
-      req.body.department_name || req.params.department_name;
+    // const department_name =
+    //   req.body.department_name || req.params.department_name;
 
     // check if valid department
-    const department = await Department.findOne({
-      department_id,
-      name: department_name,
-    });
+    const department = await Department.findById(department_id);
 
     if (!department) {
       // return res.status(400).send("Invalid department");
@@ -24,9 +21,9 @@ exports.updateCategory = async (req, res, next) => {
     }
 
     // update in db
-    await Category.findOneAndUpdate(
-      { category_id },
-      { name, department: { department_id, department_name } },
+    await Category.findByIdAndUpdate(
+      category_id,
+      { name, department: department_id },
       { new: true }
     )
       .then((category) => {

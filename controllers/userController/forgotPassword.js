@@ -14,7 +14,7 @@ exports.forgotPassword = async (req, res) => {
 
     const token = jwt.sign(
       {
-        user_id: user.user_id,
+        user_id: user._id,
         email: user.email,
         user_role: user.role,
       },

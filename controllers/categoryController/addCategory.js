@@ -8,14 +8,11 @@ exports.addCategory = async (req, res, next) => {
     // Get user input
     const name = req.body.name || req.params.name;
     const department_id = req.body.department_id || req.params.department_id;
-    const department_name =
-      req.body.department_name || req.params.department_name;
+    // const department_name =
+    //   req.body.department_name || req.params.department_name;
 
     // check if valid department
-    const department = await Department.findOne({
-      department_id,
-      name: department_name,
-    });
+    const department = await Department.findById(department_id);
 
     if (!department) {
       throw newError(404, "Department not found");
@@ -25,7 +22,7 @@ exports.addCategory = async (req, res, next) => {
     // save dept in db
     await Category.create({
       name,
-      department: { department_id, department_name },
+      department: department_id,
     })
       .then((category) => {
         res.status(201).json(category);

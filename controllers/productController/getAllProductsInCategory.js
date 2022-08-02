@@ -1,11 +1,12 @@
 const Product = require("../../Model/product");
 
-exports.getAllProducts = async (req, res, next) => {
+
+exports.getAllProductsInCategory = async (req, res, next) => {
   try {
+    const category = req.body.category_id || req.params.category_id;
     const itemsPerPage = 10,
-      page = req.query.page || 0;
-    await Product.find()
-      .populate("department", "name")
+      page = req.query.page - 1 || 0;
+    await Product.find({category})
       .populate("category", "name")
       .limit(itemsPerPage)
       .skip(page * itemsPerPage)
