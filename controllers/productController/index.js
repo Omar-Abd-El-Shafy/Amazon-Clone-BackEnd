@@ -4,8 +4,9 @@ const { deleteProduct } = require("./deleteProduct");
 const { getAllProducts } = require("./getAllProducts");
 const { getProductById } = require("./getProductById");
 const { updateProduct } = require("./updateProduct");
-const { getAllProductsInCategory} = require("./getAllProductsInCategory")
-
+const { getAllProductsInCategory } = require("./getAllProductsInCategory");
+const { getAllProductsInDepartment } = require("./getAllProductsInDepartment");
+const { search } = require("./search");
 
 //combine methods in productController obj
 const productController = {
@@ -14,7 +15,9 @@ const productController = {
   getAllProducts,
   getProductById,
   updateProduct,
-  getAllProductsInCategory
+  getAllProductsInCategory,
+  getAllProductsInDepartment,
+  search,
 };
 
 //to use in productRoute

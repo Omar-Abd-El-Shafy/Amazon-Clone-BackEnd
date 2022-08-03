@@ -29,19 +29,6 @@ const productSchema = mongoose.Schema(
     brand: { type: String, required: true },
     //weight
     weight: { type: Number, required: true },
-
-    // reviews : will have its own collection
-
-    // To Do in controller
-
-    //sorting:
-    //ratings// rating number
-    //price    //low to high //high to low
-
-    //filter:
-    //department
-    //brand
-    //avilabilty
   },
   { timestamps: true }
 );

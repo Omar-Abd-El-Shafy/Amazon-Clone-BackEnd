@@ -75,3 +75,10 @@ exports.getAllProductsInCategoryValidator = [
   page,
   validationResults,
 ];
+
+exports.getAllProductsInDepartmentValidator = [
+  id(["department_id"]),
+  page,
+  validationResults,
+];
+
