@@ -28,7 +28,7 @@ app.use("/product", productRoute);
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);
 app.use("/category", categoryRoute);
-app.use("./cart", cartRoute);
+app.use("/cart", cartRoute);
 
 app.use("/", (req, res) => {
   res.send(

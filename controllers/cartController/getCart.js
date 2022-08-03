@@ -3,7 +3,7 @@ exports.getCart = async (req, res, next) => {
   const user = req.body.user_id;
 
   try {
-    const cart = await Cart.findOne({ user }).populate("products.productId");
+    const cart = await Cart.findOne({ user }).populate("products.product_id");
 
     if (cart && cart.products.length > 0) {
       res.status(200).send(cart);

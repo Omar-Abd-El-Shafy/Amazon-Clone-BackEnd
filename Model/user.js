@@ -63,7 +63,12 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.post("save", async function (user) {
-  await Cart.create({ user: user._id });
+  let cartExist = findOne({ user: user._id });
+  if (cartExist) {
+    res.send("done");
+  } else {
+    await Cart.create({ user: user._id });
+  }
 });
 
 module.exports = mongoose.model("User", userSchema);
