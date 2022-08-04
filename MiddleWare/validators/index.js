@@ -77,6 +77,8 @@ exports.addReviewValidator = [
   validationResults,
 ];
 
+exports.getReviewsValidator = [id(), page, validationResults];
+
 // ################################### common validators #####################################
 
 exports.idValidator = [id(), validationResults];

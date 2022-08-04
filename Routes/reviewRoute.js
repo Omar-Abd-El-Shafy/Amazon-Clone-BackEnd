@@ -6,7 +6,11 @@ const reviewController = require("../controllers/reviewController");
 //midllewares
 const auth = require("../MiddleWare/auth");
 const isAdmin = require("../MiddleWare/adminAuth");
-const { addReviewValidator, idValidator } = require("../MiddleWare/validators");
+const {
+  addReviewValidator,
+  idValidator,
+  getReviewsValidator,
+} = require("../MiddleWare/validators");
 
 // add review
 reviewRoute.post("/", auth, addReviewValidator, reviewController.addReview);
@@ -25,14 +29,14 @@ reviewRoute.get(["/", "/:id"], idValidator, reviewController.getReviewById);
 // get all reviews on product by product _id
 reviewRoute.get(
   "/product/:id",
-  idValidator,
+  getReviewsValidator,
   reviewController.getReviewsOnProduct
 );
 
 // get user reviews by user _id: admin only
 reviewRoute.get(
   "/user/:id",
-  idValidator,
+  getReviewsValidator,
   isAdmin,
   reviewController.getReviewsByUser
 );

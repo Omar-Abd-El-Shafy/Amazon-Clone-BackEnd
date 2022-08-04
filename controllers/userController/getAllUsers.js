@@ -7,7 +7,7 @@ exports.getAllUsers = async (req, res, next) => {
     .select("name email phone")
     .limit(itemsPerPage)
     .skip(page * itemsPerPage)
-    .sort({ createdAt: "ascending" })
+    // .sort({ createdAt: "ascending" })
     .then((users) => res.status(200).json(users))
     .catch((err) => {
       next(err);
