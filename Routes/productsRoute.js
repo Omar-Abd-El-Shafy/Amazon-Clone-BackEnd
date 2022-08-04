@@ -6,6 +6,7 @@ const productController = require("../controllers/productController");
 //midllewares
 const isAdmin = require("../MiddleWare/adminAuth");
 const upload = require("../MiddleWare/S3uploadImages");
+
 productRoute.post("/add", upload.array("img"), productController.addProduct);
 productRoute.delete("/delete", isAdmin, productController.deleteProduct);
 productRoute.get("/getAllProducts", productController.getAllProducts);
