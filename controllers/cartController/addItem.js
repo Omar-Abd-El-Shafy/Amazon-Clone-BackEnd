@@ -14,10 +14,20 @@ exports.addItem = async (req, res, next) => {
   const productIsThere = cart.products.findIndex((product) => {
     return product.product_id == product_id;
   });
-  console.log("is product there");
-  console.log(productIsThere);
-  if (productIsThere != -1) {
+  // console.log("is product there");
+  // console.log(productIsThere);
+  if (productIsThere > -1) {
     cart.products[productIsThere].quantity = quantity;
+
+    cart.bill = cart.products.reduce((acc, curr) => {
+      return (
+        acc + curr.quantity * curr.price
+        // (async () => {
+        //   Number(await Product.findById(product_id).select("price -_id"));
+        // })()
+      );
+    }, 0);
+
     await cart
       .save()
       .then((cart) => res.status(200).send(cart))
@@ -25,6 +35,15 @@ exports.addItem = async (req, res, next) => {
   } else {
     let product = { product_id, quantity };
     cart.products.push(product);
+    cart.bill = cart.products.reduce((acc, curr) => {
+      return (
+        acc + curr.quantity * curr.price
+        // (async () => {
+        //   Number(await Product.findById(product_id).select("price -_id"));
+        // })()
+      );
+    }, 0);
+
     await cart
       .save()
       .then((cart) => res.status(200).send(cart))

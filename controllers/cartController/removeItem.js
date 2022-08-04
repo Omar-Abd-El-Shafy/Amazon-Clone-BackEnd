@@ -11,7 +11,7 @@ exports.removeItem = async (req, res, next) => {
     return product.product_id != product_id;
   });
 
-
+  
   cart.products = newProductArr;
   await cart
     .save()
