@@ -6,6 +6,7 @@ const productController = require("../controllers/productController");
 //midllewares
 const isAdmin = require("../MiddleWare/adminAuth");
 const upload = require("../MiddleWare/S3uploadImages");
+
 const {
   pageValidator,
   getAllProductsInCategoryValidator,
