@@ -14,39 +14,38 @@ const {
 } = require("../MiddleWare/validators");
 
 //http methods
-// to do: enhance end-points
 
 // add product
 // to do: admin auth
-productRoute.post("/add", upload.array("img"), productController.addProduct);
+productRoute.post("/", upload.array("img"), productController.addProduct);
 
 // update product
-productRoute.put("/updateProduct", isAdmin, productController.updateProduct);
+productRoute.put("/", isAdmin, productController.updateProduct);
 
 // delete product
-productRoute.delete("/delete", isAdmin, productController.deleteProduct);
+productRoute.delete("/", isAdmin, productController.deleteProduct);
 
-// get one product by id
-productRoute.get("/getProductById", productController.getProductById);
+// get one product by _id
+productRoute.get("/one", productController.getProductById);
 
 // get all products
 //  page is passed in query params [?page=]
 productRoute.get(
-  "/getAllProducts",
+  "/",
   pageValidator,
   productController.getAllProducts
 );
 
-// get all products in one category by category id
+// get all products in one category by category _id
 productRoute.get(
-  ["/getAllProductsInCategory", "/getAllProductsInCategory/:category_id"],
+  ["/category", "/category/:category_id"],
   getAllProductsInCategoryValidator,
   productController.getAllProductsInCategory
 );
 
-// get all products in one department by department id
+// get all products in one department by department _id
 productRoute.get(
-  ["/getAllProductsInDepartment", "/getAllProductsInDepartment/:department_id"],
+  ["/department", "/department/:department_id"],
   getAllProductsInDepartmentValidator,
   productController.getAllProductsInDepartment
 );
