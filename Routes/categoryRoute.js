@@ -4,16 +4,19 @@ const categoryRoute = express.Router();
 //controller
 const categoryController = require("../controllers/categoryController");
 //midllewares
-const {
-  departmentValidator,
-} = require("../MiddleWare/validators/departmentValidator");
 const isAdmin = require("../MiddleWare/adminAuth");
+const {
+  addCategoryValidator,
+  idValidator,
+  departmentIdValidator,
+  updateCategoryValidator,
+} = require("../MiddleWare/validators");
 
 // add category [requires: category name, department _id]
 categoryRoute.post(
   ["/", "/:name/:department_id"],
   isAdmin,
-  departmentValidator.addCategoryValidator,
+  addCategoryValidator,
   categoryController.addCategory
 );
 
@@ -21,21 +24,21 @@ categoryRoute.post(
 categoryRoute.delete(
   ["/", "/:id"],
   isAdmin,
-  departmentValidator.idValidator,
+  idValidator,
   categoryController.deleteCategory
 );
 
 // get all Categories In Department by dept _id
 categoryRoute.get(
-  ["/", "/id"],
-  departmentValidator.departmentIdValidator,
+  ["/", "/department_id"],
+  departmentIdValidator,
   categoryController.getAllCategoriesInDepartment
 );
 
 // get category by id
 categoryRoute.get(
   ["/oneCategory", "/oneCategory/:id"],
-  departmentValidator.idValidator,
+  idValidator,
   categoryController.getCategoryById
 );
 
@@ -43,7 +46,7 @@ categoryRoute.get(
 categoryRoute.put(
   ["/", "/:id/:name/:department_id"],
   isAdmin,
-  departmentValidator.updateCategoryValidator,
+  updateCategoryValidator,
   categoryController.updateCategory
 );
 
