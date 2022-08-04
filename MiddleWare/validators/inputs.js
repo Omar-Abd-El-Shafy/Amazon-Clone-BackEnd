@@ -75,6 +75,35 @@ exports.confirmPassword = body("confirm_password")
   .withMessage("Passwords did not match")
   .bail();
 
+// ################################### review input #####################################
+
+exports.rating = check("rating")
+  .exists()
+  .notEmpty()
+  .withMessage("Rating is required")
+  .bail()
+  .isInt({ min: 1, max: 5 })
+  .withMessage("Invalid rating value")
+  .bail();
+
+exports.title = body("title")
+  .exists()
+  .notEmpty()
+  .withMessage("Title is required")
+  .bail()
+  .isLength({ min: 3, max: 20 })
+  .withMessage("Title max length is in range 3 and 20")
+  .bail();
+
+exports.comment = body("comment")
+  .exists()
+  .notEmpty()
+  .withMessage("Comment is required")
+  .bail()
+  .isLength({ min: 3 })
+  .withMessage("Comment min length is 3")
+  .bail();
+
 // ################################### common input #####################################
 
 // validation chain for id

@@ -11,6 +11,7 @@ const productRoute = require("./Routes/productsRoute");
 const departmentRoute = require("./Routes/departmentRoute");
 const categoryRoute = require("./Routes/categoryRoute");
 const cartRoute = require("./Routes/cartRoute");
+const reviewRoute = require("./Routes/reviewRoute");
 
 //server
 const express = require("express");
@@ -29,6 +30,7 @@ app.use("/user", userRoute);
 app.use("/department", departmentRoute);
 app.use("/category", categoryRoute);
 app.use("/cart", cartRoute);
+app.use("/review", reviewRoute);
 
 app.use("/", (req, res) => {
   res.send(
