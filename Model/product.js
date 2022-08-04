@@ -5,7 +5,7 @@ const productSchema = mongoose.Schema(
     product_id: { type: Number, unique: true },
     name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
-    price: { type: String, required: true },
+    price: { type: Number, required: true },
     stock: { type: Number, required: true },
     image_path: { type: [String], required: true },
 
@@ -29,19 +29,6 @@ const productSchema = mongoose.Schema(
     brand: { type: String, required: true },
     //weight
     weight: { type: Number, required: true },
-
-    // reviews : will have its own collection
-
-    // To Do in controller
-
-    //sorting:
-    //ratings// rating number
-    //price    //low to high //high to low
-
-    //filter:
-    //department
-    //brand
-    //avilabilty
   },
   { timestamps: true }
 );

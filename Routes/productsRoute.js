@@ -6,12 +6,12 @@ const productController = require("../controllers/productController");
 //midllewares
 const isAdmin = require("../MiddleWare/adminAuth");
 const upload = require("../MiddleWare/S3uploadImages");
-productRoute.post("/add", upload.array("img"), productController.addProduct);
-productRoute.delete("/delete", isAdmin, productController.deleteProduct);
-productRoute.get("/getAllProducts", productController.getAllProducts);
-productRoute.get("/getProductById", productController.getProductById);
-productRoute.put("/updateProduct", isAdmin, productController.updateProduct);
-const { commonValidator } = require("../MiddleWare/validators/commonValidator");
+
+const {
+  pageValidator,
+  getAllProductsInCategoryValidator,
+  getAllProductsInDepartmentValidator,
+} = require("../MiddleWare/validators");
 
 //http methods
 // to do: enhance end-points
@@ -33,15 +33,26 @@ productRoute.get("/getProductById", productController.getProductById);
 //  page is passed in query params [?page=]
 productRoute.get(
   "/getAllProducts",
-  commonValidator.pageValidator,
+  pageValidator,
   productController.getAllProducts
 );
 
 // get all products in one category by category id
-// to do VALIDATION
 productRoute.get(
   ["/getAllProductsInCategory", "/getAllProductsInCategory/:category_id"],
+  getAllProductsInCategoryValidator,
   productController.getAllProductsInCategory
 );
+
+// get all products in one department by department id
+productRoute.get(
+  ["/getAllProductsInDepartment", "/getAllProductsInDepartment/:department_id"],
+  getAllProductsInDepartmentValidator,
+  productController.getAllProductsInDepartment
+);
+
+// to do VALIDATION???
+// search products
+productRoute.get("/search", productController.search);
 
 module.exports = productRoute;

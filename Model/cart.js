@@ -17,16 +17,17 @@ const cartSchema = mongoose.Schema(
           required: true,
         },
         quantity: {
-          type: String,
+          type: Number,
           required: true,
           min: 1,
           default: 1,
         },
+        price: Number,
       },
     ],
 
     bill: {
-      type: String,
+      type: Number,
       required: true,
       default: 0,
     },

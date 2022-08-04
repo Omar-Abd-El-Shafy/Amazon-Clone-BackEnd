@@ -18,7 +18,7 @@ exports.forgotPassword = async (req, res) => {
         email: user.email,
         user_role: user.role,
       },
-      process.env.TOKEN_KEY_FORGOT_PASSWORD,
+      process.env.TOKEN_KEY,
       {
         expiresIn: "2h",
       }
