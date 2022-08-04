@@ -2,7 +2,7 @@ const Product = require("../../Model/product");
 
 exports.getAllProducts = async (req, res, next) => {
   try {
-    const itemsPerPage = 8,
+    const itemsPerPage = req.query.itemsPerPage || 8,
       page = req.query.page - 1 || 0;
     await Product.find()
       .populate("department", "name")

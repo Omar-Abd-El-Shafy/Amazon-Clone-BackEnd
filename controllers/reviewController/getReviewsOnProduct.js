@@ -4,7 +4,7 @@ const newError = require("../../utils/newError");
 exports.getReviewsOnProduct = async (req, res, next) => {
   try {
     const product = req.body.id || req.params.id;
-    const itemsPerPage = 5,
+    const itemsPerPage = req.query.itemsPerPage || 5,
       page = req.query.page - 1 || 0;
       
     await Review.find({ product })

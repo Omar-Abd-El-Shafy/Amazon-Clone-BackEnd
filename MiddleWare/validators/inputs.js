@@ -128,12 +128,12 @@ exports.name = check("name")
   .withMessage("Name min length is 3")
   .bail();
 
-// validation chain for page number
-exports.page = check("page")
+// validation chain for page number & itemsPerPage
+exports.page = check(["page", "itemsPerPage"])
   .optional()
   .isInt()
-  .withMessage("Page must be integer")
+  .withMessage("Page and itemsPerPage must be integer")
   .bail()
   .custom((value) => value > 0)
-  .withMessage("Page must be greater than 0")
+  .withMessage("Page and itemsPerPage must be greater than 0")
   .bail();

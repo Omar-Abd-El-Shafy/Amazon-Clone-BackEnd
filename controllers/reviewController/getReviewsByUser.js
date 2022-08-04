@@ -5,7 +5,7 @@ const newError = require("../../utils/newError");
 exports.getReviewsByUser = async (req, res, next) => {
   try {
     const user = req.body.id || req.params.id;
-    const itemsPerPage = 10,
+    const itemsPerPage = req.query.itemsPerPage || 10,
       page = req.query.page - 1 || 0;
 
     // check if user exists
