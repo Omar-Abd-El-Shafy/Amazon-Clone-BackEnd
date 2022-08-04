@@ -7,11 +7,6 @@ const productController = require("../controllers/productController");
 const isAdmin = require("../MiddleWare/adminAuth");
 const upload = require("../MiddleWare/S3uploadImages");
 
-productRoute.post("/add", upload.array("img"), productController.addProduct);
-productRoute.delete("/delete", isAdmin, productController.deleteProduct);
-productRoute.get("/getAllProducts", productController.getAllProducts);
-productRoute.get("/getProductById", productController.getProductById);
-productRoute.put("/updateProduct", isAdmin, productController.updateProduct);
 const { commonValidator } = require("../MiddleWare/validators/commonValidator");
 const {
   pageValidator,
