@@ -7,7 +7,6 @@ const productController = require("../controllers/productController");
 const isAdmin = require("../MiddleWare/adminAuth");
 const upload = require("../MiddleWare/S3uploadImages");
 
-const { commonValidator } = require("../MiddleWare/validators/commonValidator");
 const {
   pageValidator,
   getAllProductsInCategoryValidator,
