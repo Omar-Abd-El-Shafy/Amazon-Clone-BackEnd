@@ -10,7 +10,6 @@ exports.removeItem = async (req, res, next) => {
   let newProductArr = cart.products.filter((product) => {
     return product.product_id != product_id;
   });
-
   
   cart.products = newProductArr;
   await cart
