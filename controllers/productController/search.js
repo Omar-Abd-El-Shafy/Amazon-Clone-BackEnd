@@ -3,7 +3,7 @@ const Product = require("../../Model/product");
 exports.search = async (req, res, next) => {
   try {
     // get user inputs
-    const itemsPerPage = 10,
+    const itemsPerPage = req.query.itemsPerPage || 8,
       page = req.query.page - 1 || 0;
 
     const {
