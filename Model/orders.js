@@ -52,6 +52,7 @@ const orderSchema = mongoose.Schema(
     ],
 
     bill: {
+      // must be calcualated to be sure
       type: Number,
       required: true,
       default: 0,

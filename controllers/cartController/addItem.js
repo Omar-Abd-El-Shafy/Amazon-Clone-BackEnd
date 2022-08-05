@@ -19,31 +19,35 @@ exports.addItem = async (req, res, next) => {
 
   if (productIsThere > -1) {
     cart.products[productIsThere].quantity = quantity;
-    cart.products[productIsThere].price = price;
-    cart.bill = cart.products.reduce((acc, curr) => {
-      return (
-        acc + curr.quantity * curr.price
-        // (async () => {
-        //   (await Product.findById(product_id).select("price -_id"));
-        // })()
-      );
-    }, 0);
+    // cart.products[productIsThere].price = price;
+    // cart.bill = cart.products.reduce((acc, curr) => {
+    //   return (
+    //     acc + curr.quantity * curr.price
+    //     // .......................... IIFE pattern maybe used
+    //     // (async () => {
+    //     //   (await Product.findById(product_id).select("price -_id"));
+    //     // })()
+    //     // .......................... IIFE pattern maybe used
+    //   );
+    // }, 0);
 
     await cart
       .save()
       .then((cart) => res.status(200).send(cart))
       .catch((err) => next(err));
   } else {
-    let product = { product_id, quantity, price };
+    let product = { product_id, quantity };
     cart.products.push(product);
-    cart.bill = cart.products.reduce((acc, curr) => {
-      return (
-        acc + curr.quantity * curr.price
-        // (async () => {
-        //   Number(await Product.findById(product_id).select("price -_id"));
-        // })()
-      );
-    }, 0);
+    // cart.bill = cart.products.reduce((acc, curr) => {
+    //   return (
+    //     acc + curr.quantity * curr.price
+    //    // .......................... IIFE pattern maybe used
+    //    // (async () => {
+    //     //   (await Product.findById(product_id).select("price -_id"));
+    //     // })()
+    //   // .......................... IIFE pattern maybe used
+    //   );
+    // }, 0);
 
     await cart
       .save()
