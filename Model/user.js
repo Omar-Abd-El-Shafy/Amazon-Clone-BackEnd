@@ -64,17 +64,15 @@ userSchema.pre("save", async function (next) {
 
 userSchema.post("save", async function (user) {
   let cartExist = await Cart.findOne({ user: user._id });
-  if (cartExist) {
-    res.send("done");
-  } else {
+  if (!cartExist) {
     await Cart.create({ user: user._id });
   }
 });
 
-userSchema.post("deleteOne", { document: true }, function (user) {
-  // const cartRemove = await Cart.remove({ user: user._id }).then(() => {
-  //   res.send("cart deleted");
-  // });
-  console.log("post remove test");
-});
+// userSchema.post("remove", function (user) {
+//   // const cartRemove = await Cart.remove({ user: user._id }).then(() => {
+//   //   res.send("cart deleted");
+//   // });
+//   console.log("post remove test");
+// });
 module.exports = mongoose.model("User", userSchema);

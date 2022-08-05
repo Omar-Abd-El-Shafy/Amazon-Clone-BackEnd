@@ -8,12 +8,16 @@ exports.addItem = async (req, res, next) => {
   // }).then(res.send(stock))
 
   // you check first if product exists but this is overLOAD as extra query will be done on each request مش عارف اعمل ايه والله
-  const { product_id, quantity, user_id } = req.body;
+  const { product_id, quantity } = req.body;
   //I'm working here on _id not on id trigger
-  let cart = await Cart.findOne({ user: user_id });
+  console.log(req.user_id);
+  let cart = await Cart.findOne({ user: req.user_id });
+  // console.log(product_id);
+  // console.log(cart);
   const productIsThere = cart.products.findIndex((product) => {
     return product.product_id == product_id;
   });
+
   // console.log("is product there");
   // console.log(productIsThere);
   if (productIsThere > -1) {
@@ -23,7 +27,7 @@ exports.addItem = async (req, res, next) => {
       return (
         acc + curr.quantity * curr.price
         // (async () => {
-        //   Number(await Product.findById(product_id).select("price -_id"));
+        //   (await Product.findById(product_id).select("price -_id"));
         // })()
       );
     }, 0);
