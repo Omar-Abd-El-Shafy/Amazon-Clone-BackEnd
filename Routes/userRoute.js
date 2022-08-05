@@ -26,12 +26,14 @@ userRoute.post(
   userController.forgotPassword
 );
 
-userRoute.post(
-  "/password-reset/:id/:token",
-  auth,
-  resetPasswordValidator,
-  userController.resetPassword
-);
+// userRoute.post(
+//   "/password-reset/:id/:token",
+//   auth,
+//   resetPasswordValidator,
+//   userController.resetPassword
+// );
+
+userRoute.put("/", auth, resetPasswordValidator, userController.updatePassword);
 
 // route for login
 userRoute.post("/login", loginValidator, userController.login);
@@ -41,12 +43,7 @@ userRoute.get("/", auth, userController.getUserProfile);
 
 // route for get all users data [only for admin]
 // page is passed in query params [?page=]
-userRoute.get(
-  "/allUsers",
-  isAdmin,
-  pageValidator,
-  userController.getAllUsers
-);
+userRoute.get("/allUsers", isAdmin, pageValidator, userController.getAllUsers);
 
 // route for delete user
 userRoute.delete("/", auth, userController.deleteAccount);
