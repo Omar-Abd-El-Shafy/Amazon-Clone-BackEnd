@@ -75,6 +75,35 @@ exports.confirmPassword = body("confirm_password")
   .withMessage("Passwords did not match")
   .bail();
 
+// ################################### review input #####################################
+
+exports.rating = check("rating")
+  .exists()
+  .notEmpty()
+  .withMessage("Rating is required")
+  .bail()
+  .isInt({ min: 1, max: 5 })
+  .withMessage("Invalid rating value")
+  .bail();
+
+exports.title = body("title")
+  .exists()
+  .notEmpty()
+  .withMessage("Title is required")
+  .bail()
+  .isLength({ min: 3, max: 20 })
+  .withMessage("Title max length is in range 3 and 20")
+  .bail();
+
+exports.comment = body("comment")
+  .exists()
+  .notEmpty()
+  .withMessage("Comment is required")
+  .bail()
+  .isLength({ min: 3 })
+  .withMessage("Comment min length is 3")
+  .bail();
+
 // ################################### common input #####################################
 
 // validation chain for id
@@ -99,12 +128,12 @@ exports.name = check("name")
   .withMessage("Name min length is 3")
   .bail();
 
-// validation chain for page number
-exports.page = check("page")
+// validation chain for page number & itemsPerPage
+exports.page = check(["page", "itemsPerPage"])
   .optional()
   .isInt()
-  .withMessage("Page must be integer")
+  .withMessage("Page and itemsPerPage must be integer")
   .bail()
   .custom((value) => value > 0)
-  .withMessage("Page must be greater than 0")
+  .withMessage("Page and itemsPerPage must be greater than 0")
   .bail();

@@ -8,6 +8,9 @@ const {
   name,
   id,
   page,
+  rating,
+  title,
+  comment,
 } = require("./inputs");
 const validationResults = require("./validationResults");
 const { oneOf } = require("express-validator");
@@ -50,8 +53,6 @@ exports.resetPasswordValidator = [password, confirmPassword, validationResults];
 
 exports.nameValidator = [name, validationResults];
 
-exports.idValidator = [id(), validationResults];
-
 exports.updateDepartmentValidator = [id(), name, validationResults];
 
 // ################################### category validators #####################################
@@ -66,7 +67,21 @@ exports.updateCategoryValidator = [
 
 exports.departmentIdValidator = [id(["department_id"]), validationResults];
 
+// ################################### review validators #####################################
+
+exports.addReviewValidator = [
+  id(["product"]),
+  rating,
+  title,
+  comment,
+  validationResults,
+];
+
+exports.getReviewsValidator = [id(), page, validationResults];
+
 // ################################### common validators #####################################
+
+exports.idValidator = [id(), validationResults];
 
 exports.pageValidator = [page, validationResults];
 
@@ -81,4 +96,3 @@ exports.getAllProductsInDepartmentValidator = [
   page,
   validationResults,
 ];
-
