@@ -3,7 +3,7 @@ const Category = require("../../Model/category");
 const newError = require("../../utils/newError");
 
 exports.getCategoryById = async (req, res, next) => {
-  const category_id = req.body.id || req.params.id;
+  const category_id = req.params.id;
   await Category.findById(category_id)
     .populate("department", "name")
     .then((category) => {

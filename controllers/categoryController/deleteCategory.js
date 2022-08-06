@@ -4,7 +4,7 @@ const newError = require("../../utils/newError");
 
 exports.deleteCategory = async (req, res, next) => {
   // get category _id from user
-  const category_id = req.body.id || req.params.id;
+  const category_id = req.params.id;
   await Category.findByIdAndDelete(category_id)
     .then((category) => {
       if (category) {

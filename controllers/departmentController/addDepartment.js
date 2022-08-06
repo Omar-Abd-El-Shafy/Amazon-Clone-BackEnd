@@ -3,7 +3,7 @@ const Department = require("../../Model/department");
 
 exports.addDepartment = async (req, res, next) => {
   // Get user input
-  const name = req.body.name || req.params.name;
+  const name = req.body.name;
 
   // save dept in db
   await Department.create({

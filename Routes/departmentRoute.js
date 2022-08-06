@@ -13,7 +13,7 @@ const {
 
 // add department
 departmentRoute.post(
-  ["/", "/:name"],
+  "/",
   isAdmin,
   nameValidator,
   departmentController.addDepartment
@@ -21,7 +21,7 @@ departmentRoute.post(
 
 // delete department
 departmentRoute.delete(
-  ["/", "/:id"],
+  "/:id",
   isAdmin,
   idValidator,
   departmentController.deleteDepartment
@@ -29,7 +29,7 @@ departmentRoute.delete(
 
 // update department
 departmentRoute.put(
-  ["/", "/:id/:name"],
+  "/",
   isAdmin,
   updateDepartmentValidator,
   departmentController.updateDepartment
@@ -40,7 +40,7 @@ departmentRoute.get("/", departmentController.getAllDepartments);
 
 // get dept by id
 departmentRoute.get(
-  ["/onedept", "/onedept/:id"],
+  "/one/:id",
   idValidator,
   departmentController.getDepartmentById
 );

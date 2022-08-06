@@ -4,7 +4,7 @@ const newError = require("../../utils/newError");
 
 exports.deleteDepartment = async (req, res, next) => {
   // get department _id from user
-  const department_id = req.body.id || req.params.id;
+  const department_id = req.params.id;
   await Department.findByIdAndDelete(department_id)
     .then((dept) => {
       if (dept) {

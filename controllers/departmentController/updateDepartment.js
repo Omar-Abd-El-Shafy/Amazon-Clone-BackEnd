@@ -4,8 +4,8 @@ const newError = require("../../utils/newError");
 
 exports.updateDepartment = async (req, res, next) => {
   // get department_id and name from user
-  const department_id = req.body.id || req.params.id;
-  const name = req.body.name || req.params.name;
+  const department_id = req.body.id;
+  const name = req.body.name;
 
   // update in db
   await Department.findByIdAndUpdate(department_id, { name }, { new: true })

@@ -6,10 +6,8 @@ const newError = require("../../utils/newError");
 exports.addCategory = async (req, res, next) => {
   try {
     // Get user input
-    const name = req.body.name || req.params.name;
-    const department_id = req.body.department_id || req.params.department_id;
-    // const department_name =
-    //   req.body.department_name || req.params.department_name;
+    const name = req.body.name;
+    const department_id = req.body.department_id;
 
     // check if valid department
     const department = await Department.findById(department_id);

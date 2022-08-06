@@ -77,22 +77,10 @@ exports.addReviewValidator = [
   validationResults,
 ];
 
-exports.getReviewsValidator = [id(), page, validationResults];
+exports.getAllValidator = [id(), page, validationResults];
 
 // ################################### common validators #####################################
 
 exports.idValidator = [id(), validationResults];
 
 exports.pageValidator = [page, validationResults];
-
-exports.getAllProductsInCategoryValidator = [
-  id(["category_id"]),
-  page,
-  validationResults,
-];
-
-exports.getAllProductsInDepartmentValidator = [
-  id(["department_id"]),
-  page,
-  validationResults,
-];
