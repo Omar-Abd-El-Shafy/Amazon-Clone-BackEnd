@@ -9,7 +9,8 @@ const upload = require("../MiddleWare/S3uploadImages");
 
 const {
   idValidator,
-  getAllValidator
+  getAllValidator,
+  pageValidator
 } = require("../MiddleWare/validators");
 
 //http methods
@@ -34,7 +35,7 @@ productRoute.get("/one/:id", idValidator, productController.getProductById);
 
 // get all products
 //  page is passed in query params [?page=]
-productRoute.get("/", getAllValidator, productController.getAllProducts);
+productRoute.get("/", pageValidator, productController.getAllProducts);
 
 // get all products in one category by category _id
 productRoute.get(
