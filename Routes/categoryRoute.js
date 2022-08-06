@@ -8,13 +8,12 @@ const isAdmin = require("../MiddleWare/adminAuth");
 const {
   addCategoryValidator,
   idValidator,
-  departmentIdValidator,
   updateCategoryValidator,
 } = require("../MiddleWare/validators");
 
 // add category [requires: category name, department _id]
 categoryRoute.post(
-  ["/", "/:name/:department_id"],
+  "/",
   isAdmin,
   addCategoryValidator,
   categoryController.addCategory
@@ -22,7 +21,7 @@ categoryRoute.post(
 
 // delete category
 categoryRoute.delete(
-  ["/", "/:id"],
+  "/:id",
   isAdmin,
   idValidator,
   categoryController.deleteCategory
@@ -30,21 +29,21 @@ categoryRoute.delete(
 
 // get all Categories In Department by dept _id
 categoryRoute.get(
-  ["/", "/department_id"],
-  departmentIdValidator,
+  "/:id",
+  idValidator,
   categoryController.getAllCategoriesInDepartment
 );
 
 // get category by id
 categoryRoute.get(
-  ["/oneCategory", "/oneCategory/:id"],
+  "/one/:id",
   idValidator,
   categoryController.getCategoryById
 );
 
 // update category
 categoryRoute.put(
-  ["/", "/:id/:name/:department_id"],
+  "/",
   isAdmin,
   updateCategoryValidator,
   categoryController.updateCategory

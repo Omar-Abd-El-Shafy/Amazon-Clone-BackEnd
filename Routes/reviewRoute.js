@@ -9,7 +9,7 @@ const isAdmin = require("../MiddleWare/adminAuth");
 const {
   addReviewValidator,
   idValidator,
-  getReviewsValidator,
+  getAllValidator,
 } = require("../MiddleWare/validators");
 
 // add review
@@ -29,14 +29,14 @@ reviewRoute.get(["/", "/:id"], idValidator, reviewController.getReviewById);
 // get all reviews on product by product _id
 reviewRoute.get(
   "/product/:id",
-  getReviewsValidator,
+  getAllValidator,
   reviewController.getReviewsOnProduct
 );
 
 // get user reviews by user _id: admin only
 reviewRoute.get(
   "/user/:id",
-  getReviewsValidator,
+  getAllValidator,
   isAdmin,
   reviewController.getReviewsByUser
 );

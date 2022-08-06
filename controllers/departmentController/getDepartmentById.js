@@ -3,7 +3,7 @@ const Department = require("../../Model/department");
 const newError = require("../../utils/newError");
 
 exports.getDepartmentById = async (req, res, next) => {
-  const department_id = req.body.id || req.params.id;
+  const department_id = req.params.id;
   await Department.findById(department_id)
     .then((dept) => {
       if (dept) {

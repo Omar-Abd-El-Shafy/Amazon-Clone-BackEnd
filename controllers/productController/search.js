@@ -22,7 +22,7 @@ exports.search = async (req, res, next) => {
     const filter = {};
 
     if (name) {
-      filter.name = { $regex: ".*" + name + ".*", $options: "i" };
+      filter.name = { $regex:  name , $options: "i" };
     }
 
     if (department_id) {
