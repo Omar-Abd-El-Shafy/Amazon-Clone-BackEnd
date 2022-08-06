@@ -5,18 +5,20 @@ exports.addProduct = async (req, res, next) => {
     let image_path = req.files.map((file) => {
       return file.location;
     });
-     console.log(image_path);
-    const {
+    console.log(image_path);
+    let {
       name,
       description,
       price,
-      quantity,
       department,
       category,
       brand,
       weight,
       stock,
     } = req.body;
+    price = Number(price);
+    stock = Number(stock);
+    weight = Number(weight);
 
     let oldProduct;
     if (name) {
@@ -30,7 +32,6 @@ exports.addProduct = async (req, res, next) => {
       name,
       description,
       price, // convert email to lowercase
-      quantity,
       image_path,
       department,
       category,

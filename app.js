@@ -12,7 +12,7 @@ const departmentRoute = require("./Routes/departmentRoute");
 const categoryRoute = require("./Routes/categoryRoute");
 const cartRoute = require("./Routes/cartRoute");
 const reviewRoute = require("./Routes/reviewRoute");
-
+const orderRoute = require("./Routes/ordersRoute");
 //server
 const express = require("express");
 const app = express();
@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
+
 app.use(morgan);
 
 // routes
@@ -31,6 +32,7 @@ app.use("/department", departmentRoute);
 app.use("/category", categoryRoute);
 app.use("/cart", cartRoute);
 app.use("/review", reviewRoute);
+app.use("/order", orderRoute);
 
 app.use("/", (req, res) => {
   res.send(

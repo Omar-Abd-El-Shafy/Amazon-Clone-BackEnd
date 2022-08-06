@@ -26,7 +26,7 @@ const orderSchema = mongoose.Schema(
         type: String,
       },
       phone: {
-        type: Number,
+        type: String,
       },
     },
 
@@ -34,20 +34,19 @@ const orderSchema = mongoose.Schema(
     deliveryDate: { type: Date },
     status: { type: String },
     products: [
-      // get them from cart
       {
-        product_id: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-          required: true,
+        productBrief: {
+          name: { type: String },
+          price: { type: Number },
+          image_path: { type: String },
         },
+
         quantity: {
           type: String,
           required: true,
           min: 1,
           default: 1,
         },
-        price: Number,
       },
     ],
 
