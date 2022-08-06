@@ -8,29 +8,28 @@ exports.addItem = async (req, res, next) => {
   // }).then(res.send(stock))
 
   // you check first if product exists but this is overLOAD as extra query will be done on each request مش عارف اعمل ايه والله
-  const { product_id, quantity } = req.body;
+  const { product_id, quantity, price } = req.body;
   //I'm working here on _id not on id trigger
   console.log(req.user_id);
   let cart = await Cart.findOne({ user: req.user_id });
-  // console.log(product_id);
-  // console.log(cart);
+  console.log(cart);
   const productIsThere = cart.products.findIndex((product) => {
     return product.product_id == product_id;
   });
 
-  // console.log("is product there");
-  // console.log(productIsThere);
   if (productIsThere > -1) {
     cart.products[productIsThere].quantity = quantity;
-
-    cart.bill = cart.products.reduce((acc, curr) => {
-      return (
-        acc + curr.quantity * curr.price
-        // (async () => {
-        //   (await Product.findById(product_id).select("price -_id"));
-        // })()
-      );
-    }, 0);
+    // cart.products[productIsThere].price = price;
+    // cart.bill = cart.products.reduce((acc, curr) => {
+    //   return (
+    //     acc + curr.quantity * curr.price
+    //     // .......................... IIFE pattern maybe used
+    //     // (async () => {
+    //     //   (await Product.findById(product_id).select("price -_id"));
+    //     // })()
+    //     // .......................... IIFE pattern maybe used
+    //   );
+    // }, 0);
 
     await cart
       .save()
@@ -39,14 +38,16 @@ exports.addItem = async (req, res, next) => {
   } else {
     let product = { product_id, quantity };
     cart.products.push(product);
-    cart.bill = cart.products.reduce((acc, curr) => {
-      return (
-        acc + curr.quantity * curr.price
-        // (async () => {
-        //   Number(await Product.findById(product_id).select("price -_id"));
-        // })()
-      );
-    }, 0);
+    // cart.bill = cart.products.reduce((acc, curr) => {
+    //   return (
+    //     acc + curr.quantity * curr.price
+    //    // .......................... IIFE pattern maybe used
+    //    // (async () => {
+    //     //   (await Product.findById(product_id).select("price -_id"));
+    //     // })()
+    //   // .......................... IIFE pattern maybe used
+    //   );
+    // }, 0);
 
     await cart
       .save()
