@@ -1,10 +1,9 @@
 const Cart = require("../../Model/cart");
 exports.getCart = async (req, res, next) => {
-  const user = req.user_id;
-
   try {
+    const user = req.user_id;
     const cart = await Cart.findOne({ user }).populate("products.product_id");
-
+    // console.log(cart.products[0].product_id.price);
     if (cart.products.length > 0) {
       //looping on each product price to get total  bill
       cart.bill = cart.products.reduce((acc, curr) => {
