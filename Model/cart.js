@@ -30,11 +30,11 @@ const cartSchema = mongoose.Schema(
       },
     ],
 
-    // bill: {
-    //   type: Number,
-    //   required: true,
-    //   default: 0,
-    // },
+    bill: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
 
   { timestamps: true }

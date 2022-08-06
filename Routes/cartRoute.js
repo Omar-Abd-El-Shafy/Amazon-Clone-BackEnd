@@ -9,6 +9,7 @@ const cartController = require("../controllers/cartController");
 productRoute.get("/getCart", auth, cartController.getCart);
 productRoute.put("/addItem", auth, cartController.addItem);
 productRoute.put("/removeItem", auth, cartController.removeItem);
+productRoute.put("/emptyCart", auth, cartController.emptyCart);
 
 //http methods
 
