@@ -30,11 +30,12 @@ exports.paymentCheck = async (request, response) => {
     response.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
-
+  console.log("hello");
   // Handle the event
+  let paymentIntent = null;
   switch (event.type) {
     case "payment_intent.payment_failed":
-      const paymentIntent = event.data.object;
+      paymentIntent = event.data.object;
       console.log(paymentIntent);
 
       // Then define and call a function to handle the event payment_intent.payment_failed
@@ -49,5 +50,5 @@ exports.paymentCheck = async (request, response) => {
       console.log(`Unhandled event type ${event.type}`);
   }
   // Return a 200 response to acknowledge receipt of the event
-  response.send();
+  response.sendStatus(200);
 };
