@@ -1,7 +1,5 @@
 const Product = require("../../Model/product");
 
-// method to update user name or email or phone
-// update password has its own method
 exports.updateProduct = async (req, res, next) => {
   await Product.findByIdAndUpdate(req.body.id, req.body, {
     new: true,

@@ -1,8 +1,8 @@
 const Cart = require("../../Model/cart");
 const Product = require("../../Model/product");
 const Order = require("../../Model/orders");
-
-exports.makeOrder = async (req, res, next) => {
+let bill = 0;
+const makeOrder = async (req, res, next) => {
   try {
     const user = req.user_id;
     const cart = await Cart.findOne({ user }, "-bill -_id").populate(
@@ -20,16 +20,22 @@ exports.makeOrder = async (req, res, next) => {
     });
 
     if (noStockProducts.length > 0) {
-      res.status(404).send(noStockProducts);
+      // I have to remove the error items from cart before responding
+      // const inStockProducts = cart.products.filter((product) => {
+      //   return product.quantity <= product.product_id.stock;
+      // });
+
+      res.status(400).send(noStockProducts);
     } else {
       //looping on each product price to get total  bill
-      exports.bill = cart.products.reduce((acc, curr) => {
+      bill = cart.products.reduce((acc, curr) => {
         return acc + curr.quantity * curr.product_id.price;
       }, 0);
 
       const products = cart.products.map((product) => {
         return {
           productBrief: {
+            product_id: product.product_id,
             name: product.product_id.name,
             price: product.product_id.price,
             image_path: product.product_id.image_path[0],
@@ -46,16 +52,16 @@ exports.makeOrder = async (req, res, next) => {
 
       await Order.create({
         user,
-        products: products,
+        products,
         deliveryAddress,
         deliveryNote,
         status,
         deliveryDate,
         bill,
       }).then((order) => {
-        res.status(200).json(order);
+        res.status(200).send(order);
       });
-      //  res.send(productsBreifArr);
+      // res.send(productsBreifArr);
       // res.status(200).send(OrderBill.toString());
     }
 
@@ -67,3 +73,4 @@ exports.makeOrder = async (req, res, next) => {
     next(err);
   }
 };
+module.exports = { makeOrder };

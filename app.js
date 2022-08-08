@@ -13,6 +13,7 @@ const categoryRoute = require("./Routes/categoryRoute");
 const cartRoute = require("./Routes/cartRoute");
 const reviewRoute = require("./Routes/reviewRoute");
 const orderRoute = require("./Routes/ordersRoute");
+const paymentRoute = require("./Routes/paymentRoute");
 //server
 const express = require("express");
 const app = express();
@@ -33,6 +34,7 @@ app.use("/category", categoryRoute);
 app.use("/cart", cartRoute);
 app.use("/review", reviewRoute);
 app.use("/order", orderRoute);
+app.use("/payment", paymentRoute);
 
 app.use("/", (req, res) => {
   res.send(
