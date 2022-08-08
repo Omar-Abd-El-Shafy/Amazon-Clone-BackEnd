@@ -7,7 +7,6 @@ const paymentController = require("../controllers/paymentController/index");
 paymentRoute.post("/create-payment-intent", auth, paymentController.payment);
 paymentRoute.post(
   "/webhook",
-  express.raw({ type: "application/json" }),
   paymentController.paymentCheck
 );
 module.exports = paymentRoute;
