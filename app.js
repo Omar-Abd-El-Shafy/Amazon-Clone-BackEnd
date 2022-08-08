@@ -4,6 +4,7 @@ require("./DataSource/database").connect();
 // middlewares
 const error = require("./MiddleWare/error");
 const morgan = require("./MiddleWare/morgan");
+const { apiDoc } = require("./MiddleWare/apiDoc");
 // routes
 const userRoute = require("./Routes/userRoute");
 const productRoute = require("./Routes/productsRoute");
@@ -22,8 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
-
 app.use(morgan);
+app.use("/api-doc", apiDoc);
 
 // routes
 app.use("/product", productRoute);
