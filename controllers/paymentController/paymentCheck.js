@@ -32,8 +32,22 @@ exports.paymentCheck = async (request, response) => {
   }
 
   // Handle the event
-  console.log(`Unhandled event type ${event.type}`);
+  switch (event.type) {
+    case "payment_intent.payment_failed":
+      const paymentIntent = event.data.object;
+      console.log(paymentIntent);
 
+      // Then define and call a function to handle the event payment_intent.payment_failed
+      break;
+    case "payment_intent.succeeded":
+      paymentIntent = event.data.object;
+      console.log(paymentIntent);
+      // Then define and call a function to handle the event payment_intent.succeeded
+      break;
+    // ... handle other event types
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
   // Return a 200 response to acknowledge receipt of the event
   response.send();
 };
