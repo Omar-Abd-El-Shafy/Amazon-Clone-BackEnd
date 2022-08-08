@@ -11,15 +11,17 @@
 // 3) Run the server on http://localhost:4242
 //   node server.js
 
-const stripe = require("stripe");
+const stripe = require("stripe")(
+  "sk_test_51LTllPFwhSEkFDCIq8x9nTSaTw616bbHe9Sg7KKIOO6HpWs4QshU2SdPqGWE3KL9vPw9fTbfOU4iDg9FeciXJIJo00yPwCTY5T"
+);
 const express = require("express");
 const app = express();
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret =
-  "whsec_51365522ca85698dcd84dc6158ee1d8fc11af9db243f05c23974c5de63c709ee";
+  "whsec_C1iyXwYMLycLTrCnBFaXhBAOM470Zylo";
 
-exports.paymentCheck =  (request, response) => {
+exports.paymentCheck = (request, response) => {
   const sig = request.headers["stripe-signature"];
 
   let event;
