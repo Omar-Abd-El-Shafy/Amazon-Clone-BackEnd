@@ -32,7 +32,7 @@ exports.paymentCheck = (request, response) => {
     response.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
-  console.log("hello");
+  console.log("after erro msg");
   // Handle the event
   let paymentIntent = null;
   switch (event.type) {
