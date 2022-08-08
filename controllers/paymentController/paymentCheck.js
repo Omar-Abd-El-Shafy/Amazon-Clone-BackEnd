@@ -19,7 +19,7 @@ const app = express();
 const endpointSecret =
   "whsec_51365522ca85698dcd84dc6158ee1d8fc11af9db243f05c23974c5de63c709ee";
 
-exports.paymentCheck = async (request, response) => {
+exports.paymentCheck =  (request, response) => {
   const sig = request.headers["stripe-signature"];
 
   let event;
