@@ -21,6 +21,7 @@ const app = express();
 const endpointSecret = "whsec_C1iyXwYMLycLTrCnBFaXhBAOM470Zylo";
 
 exports.paymentCheck = (request, response) => {
+  console.log("hello");
   const sig = request.headers["stripe-signature"];
 
   let event;
