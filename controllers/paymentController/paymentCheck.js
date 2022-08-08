@@ -42,7 +42,7 @@ exports.paymentCheck = async (request, response) => {
       break;
     case "payment_intent.succeeded":
       paymentIntent = event.data.object;
-      console.log(paymentIntent);
+      console.log("success");
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
     // ... handle other event types
