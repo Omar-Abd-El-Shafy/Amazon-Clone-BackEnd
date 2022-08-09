@@ -18,6 +18,9 @@ const {
  *     Category:
  *       type: object
  *       properties:
+ *         id:
+ *           type: string
+ *           description: The category _id
  *         name:
  *           type: string
  *         department:
@@ -48,7 +51,16 @@ const {
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#components/schemas/Category'
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               department:
+ *                 type: string
+ *                 description: _id of department
+ *             required:
+ *               - name
+ *               - department
  *           example:
  *             name: category name
  *             department: 62eec448f79362e81627dfe1
@@ -168,15 +180,7 @@ categoryRoute.get("/:id", idValidator, categoryController.getCategoryById);
  *       content:
  *         application/json:
  *           schema:
- *             allOf:
- *               - type: object
- *                 properties:
- *                   id:
- *                     type: string
- *                     description: The category _id
- *                 required:
- *                   - id
- *               - $ref: '#components/schemas/Category'
+ *             $ref: '#components/schemas/Category'
  *           example:
  *             id: 62eec448f79362e81627dfe1
  *             name: new name for category
