@@ -37,7 +37,7 @@ exports.search = async (req, res, next) => {
         if (Products.length) {
           res.status(200).json(Products);
         } else {
-          res.status(404).send("No products found");
+          res.status(404).send("Products not found");
         }
       });
   } catch (err) {

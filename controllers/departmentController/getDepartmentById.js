@@ -3,8 +3,7 @@ const Department = require("../../Model/department");
 const newError = require("../../utils/newError");
 
 exports.getDepartmentById = async (req, res, next) => {
-  const department_id = req.params.id;
-  await Department.findById(department_id)
+  await Department.findById(req.params.id)
     .then((dept) => {
       if (dept) {
         res.status(200).json(dept);
