@@ -3,6 +3,7 @@ const Product = require("../../Model/product");
 exports.addProduct = async (req, res, next) => {
   try {
     let image_path = req.files.map((file) => {
+      console.log(image_path);
       return file.location;
     });
     console.log(image_path);
@@ -44,9 +45,11 @@ exports.addProduct = async (req, res, next) => {
       })
       .catch((err) => {
         err.statusCode = 400;
+
         next(err);
       });
   } catch (err) {
+    err.message = image_path;
     next(err);
   }
 };
