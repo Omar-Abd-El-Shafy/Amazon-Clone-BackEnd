@@ -21,7 +21,6 @@ const app = express();
 const { API_PORT } = process.env;
 const port = process.env.PORT || 3333;
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
 app.use(morgan);
@@ -30,6 +29,7 @@ app.use("/api-doc", apiDoc);
 // routes
 app.use((req, res, next) => {
   if (req.originalUrl === "/payment") {
+    console.log("original URL");
     console.log(req.originalUrl);
     next(); // Do nothing with the body because I need it in a raw state.
   } else {

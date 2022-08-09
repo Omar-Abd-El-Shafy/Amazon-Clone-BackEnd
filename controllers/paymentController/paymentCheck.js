@@ -53,5 +53,5 @@ exports.paymentCheck = (request, response) => {
       console.log(`Unhandled event type ${event.type}`);
   }
   // Return a 200 response to acknowledge receipt of the event
-  response.sendStatus(200);
+  response.send();
 };
