@@ -6,17 +6,14 @@ const newError = require("../../utils/newError");
 exports.addCategory = async (req, res, next) => {
   try {
     // Get user input
-    const name = req.body.name || req.params.name;
-    const department_id = req.body.department_id || req.params.department_id;
-    // const department_name =
-    //   req.body.department_name || req.params.department_name;
+    const name = req.body.name;
+    const department_id = req.body.department;
 
     // check if valid department
     const department = await Department.findById(department_id);
 
     if (!department) {
       throw newError(404, "Department not found");
-      // return res.status(400).send("Invalid department");
     }
 
     // save dept in db

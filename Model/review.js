@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const reviewSchema = mongoose.Schema(
   {
-    user_id: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    product_id: {
+    product: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
       required: true,
@@ -16,6 +16,10 @@ const reviewSchema = mongoose.Schema(
       type: Number,
       required: true,
       enum: [1, 2, 3, 4, 5],
+    },
+    title: {
+      type: String,
+      required: true,
     },
     comment: {
       type: String,

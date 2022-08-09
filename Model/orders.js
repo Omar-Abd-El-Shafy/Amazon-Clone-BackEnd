@@ -26,32 +26,37 @@ const orderSchema = mongoose.Schema(
         type: String,
       },
       phone: {
-        type: Number,
+        type: String,
       },
     },
 
     deliveryNotes: { type: String },
     deliveryDate: { type: Date },
-    status: { type: String },
+    status: {
+      type: String,
+      enum: ["pendingPayment", "canceled", "delivered", "shipped"],
+      default: "pendingPayment",
+    },
     products: [
-      // get them from cart
       {
-        product_id: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-          required: true,
+        productBrief: {
+          product_id: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+          name: { type: String },
+          price: { type: Number },
+          image_path: { type: String },
         },
+
         quantity: {
-          type: String,
+          type: Number,
           required: true,
           min: 1,
           default: 1,
         },
-        price: Number,
       },
     ],
 
     bill: {
+      // must be calcualated to be sure
       type: Number,
       required: true,
       default: 0,

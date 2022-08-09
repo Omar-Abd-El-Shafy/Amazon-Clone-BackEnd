@@ -39,6 +39,8 @@ userRoute.post(
   userController.resetPasswordSubmit
 );
 
+userRoute.put("/", auth, resetPasswordValidator, userController.updatePassword);
+
 // route for login
 userRoute.post("/login", loginValidator, userController.login);
 

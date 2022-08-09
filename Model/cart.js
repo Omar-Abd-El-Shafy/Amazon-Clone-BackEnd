@@ -22,7 +22,11 @@ const cartSchema = mongoose.Schema(
           min: 1,
           default: 1,
         },
-        price: Number,
+        // price: {
+        //   type: Number,
+        //   required: true,
+        //   default: 0,
+        // },
       },
     ],
 
