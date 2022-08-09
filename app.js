@@ -22,7 +22,6 @@ const { API_PORT } = process.env;
 const port = process.env.PORT || 3333;
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.static("public"));
 app.use(morgan);
 app.use("/api-doc", apiDoc);
 
@@ -38,6 +37,7 @@ app.use((req, res, next) => {
     express.json()(req, res, next); // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
   }
 });
+app.use(express.static("public"));
 
 app.use("/payment", paymentRoute);
 app.use("/product", productRoute);
