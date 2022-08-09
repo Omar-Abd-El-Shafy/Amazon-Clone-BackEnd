@@ -48,7 +48,12 @@ const {
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#components/schemas/Department'
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *             required:
+ *               - name   
  *           example:
  *             name: department name
  *     responses:
