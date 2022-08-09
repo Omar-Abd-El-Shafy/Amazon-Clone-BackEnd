@@ -28,12 +28,12 @@ app.use("/api-doc", apiDoc);
 
 // routes
 app.use((req, res, next) => {
-  if (req.originalUrl === "/payment") {
-    console.log("original URL");
+  if (req.originalUrl === "/payment/webhook") {
+    console.log("original URL in ignoring wehook");
     console.log(req.originalUrl);
     next(); // Do nothing with the body because I need it in a raw state.
   } else {
-    console.log("original URL");
+    console.log("original URL in else");
     console.log(req.originalUrl);
     express.json()(req, res, next); // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
   }
