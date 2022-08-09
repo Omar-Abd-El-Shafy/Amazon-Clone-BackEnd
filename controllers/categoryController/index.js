@@ -6,6 +6,7 @@ const {
 const { deleteCategory } = require("./deleteCategory");
 const { updateCategory } = require("./updateCategory");
 const { getCategoryById } = require("./getCategoryById");
+const { getAllCategories } = require("./getAllCategories");
 
 //combine methods in obj
 // category CRUD operations
@@ -14,7 +15,8 @@ const categoryController = {
   getAllCategoriesInDepartment,
   deleteCategory,
   getCategoryById,
-  updateCategory
+  updateCategory,
+  getAllCategories
 };
 
 //to use in Route
