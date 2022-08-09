@@ -20,7 +20,8 @@ const express = require("express");
 const app = express();
 const { API_PORT } = process.env;
 const port = process.env.PORT || 3333;
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
 app.use(morgan);
@@ -36,8 +37,6 @@ app.use((req, res, next) => {
   }
 });
 app.use("/payment", paymentRoute);
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use("/product", productRoute);
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);

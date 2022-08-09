@@ -19,8 +19,11 @@ const stripe = require("stripe")(
 const endpointSecret = "whsec_9Vq69tH5I98gDU33sl6OoinYWmAOHWF2";
 
 exports.paymentCheck = (request, response) => {
-  console.log("hello");
+  console.log("sig");
   const sig = request.headers["stripe-signature"];
+  console.log(sig);
+  console.log("req body");
+  console.log(req.body);
 
   let event;
 
