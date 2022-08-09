@@ -15,7 +15,7 @@ const stripe = require("stripe");
 const express = require("express");
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-const endpointSecret = "whsec_C1iyXwYMLycLTrCnBFaXhBAOM470Zylo";
+const endpointSecret = "whsec_9Vq69tH5I98gDU33sl6OoinYWmAOHWF2";
 
 exports.paymentCheck = (request, response) => {
   console.log("hello");
