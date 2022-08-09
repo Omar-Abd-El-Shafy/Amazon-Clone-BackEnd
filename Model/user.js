@@ -65,7 +65,7 @@ userSchema.pre("save", async function (next) {
 userSchema.post("save", async function (user) {
   let cartExist = await Cart.findOne({ user: user._id });
   if (cartExist) {
-    res.send("done");
+    // res.send("done");
   } else {
     await Cart.create({ user: user._id });
   }
