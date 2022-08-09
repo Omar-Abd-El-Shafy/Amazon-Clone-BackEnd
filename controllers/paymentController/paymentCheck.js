@@ -23,7 +23,7 @@ exports.paymentCheck = (request, response) => {
   const sig = request.headers["stripe-signature"];
   console.log(sig);
   console.log("req body");
-  console.log(req.body);
+  console.log(request.body);
 
   let event;
 
