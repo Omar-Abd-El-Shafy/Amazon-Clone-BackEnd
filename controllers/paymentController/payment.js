@@ -1,4 +1,5 @@
 const express = require("express");
+// const { Context } = require("../../DataSource/context");
 const app = express();
 // This is your test secret API key.
 const stripe = require("stripe")(
@@ -25,6 +26,11 @@ exports.payment = async (req, res) => {
       enabled: true,
     },
   });
+
+  // Context.addService(`${req.user_id}.${req.body.order_id}`, {
+  //   user_id: req.user_id,
+  //   order_id: req.body.order_id,
+  // });
 
   res.send({
     clientSecret: paymentIntent.client_secret,

@@ -10,6 +10,7 @@
 //
 // 3) Run the server on http://localhost:4242
 //   node server.js
+// const { Context } = require("../../DataSource/context");
 
 const stripe = require("stripe")(
   "sk_test_51LTllPFwhSEkFDCIq8x9nTSaTw616bbHe9Sg7KKIOO6HpWs4QshU2SdPqGWE3KL9vPw9fTbfOU4iDg9FeciXJIJo00yPwCTY5T"
@@ -44,6 +45,9 @@ exports.paymentCheck = (request, response) => {
       // Then define and call a function to handle the event payment_intent.payment_failed
       break;
     case "payment_intent.succeeded":
+      // Context.hasService()
+
+
       paymentIntent = event.data.object;
       console.log("success");
       // Then define and call a function to handle the event payment_intent.succeeded
