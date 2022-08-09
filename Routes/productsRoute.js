@@ -35,6 +35,7 @@ const {
  *           type: array
  *           items: 
  *             type: string
+ *           description: Array containing the pathes of images after being uploaded on aws
  *         department:
  *           type: string
  *           description: _id of department
@@ -222,8 +223,8 @@ productRoute.put("/", isAdmin, productController.updateProduct);
  *     responses:
  *       '200' :
  *         description: Deleted
- *       '400' :
- *         description: Bad request
+ *       '404' :
+ *         description: Product not found
  */
 productRoute.delete(
   "/:id",
@@ -253,8 +254,8 @@ productRoute.delete(
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Product'
- *       '400' :
- *         description: Bad request
+ *       '404' :
+ *         description: Product not found
  */
 productRoute.get("/:id", idValidator, productController.getProductById);
 
@@ -276,6 +277,9 @@ productRoute.get("/:id", idValidator, productController.getProductById);
  *       - $ref: '#/components/parameters/minPrice'
  *       - $ref: '#/components/parameters/maxPrice'
  *       - $ref: '#/components/parameters/includeOutOfStock'
+ *     responses:
+ *       '200' :
+ *         description: The product list
  */
 productRoute.get("/", pageValidator, productController.getAllProducts);
 
@@ -310,6 +314,11 @@ productRoute.get("/", pageValidator, productController.getAllProducts);
  *       - $ref: '#/components/parameters/minPrice'
  *       - $ref: '#/components/parameters/maxPrice'
  *       - $ref: '#/components/parameters/includeOutOfStock'
+ *     responses:
+ *       '200' :
+ *         description: The product list
+ *       '404' :
+ *         description: Products not found
  */
 productRoute.get("/search", productController.search);
 

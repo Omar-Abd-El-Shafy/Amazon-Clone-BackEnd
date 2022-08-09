@@ -8,7 +8,7 @@ exports.updateCategory = async (req, res, next) => {
     // Get user input
     const category_id = req.body.id;
     const name = req.body.name;
-    const department_id = req.body.department_id;
+    const department_id = req.body.department;
 
     // check if valid department
     const department = await Department.findById(department_id);
