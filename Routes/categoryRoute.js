@@ -112,6 +112,22 @@ categoryRoute.delete(
 
 /**
  * @swagger
+ * /category:
+ *   get:
+ *     summary: Returns a list of all categories
+ *     tags:
+ *       - Category
+ *     responses:
+ *       '200' :
+ *         description: The category list
+ */
+ categoryRoute.get(
+  "/",
+  categoryController.getAllCategories
+);
+
+/**
+ * @swagger
  * /category/dept/{id}:
  *   get:
  *     summary: Returns a list of all categories in one department

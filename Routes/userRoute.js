@@ -65,7 +65,6 @@ userRoute.post(
   userController.resetPasswordSubmit
 );
 
-
 // route for login
 userRoute.post("/login", loginValidator, userController.login);
 
@@ -83,7 +82,11 @@ userRoute.delete("/", auth, userController.deleteAccount);
 // to update name or email or phone
 userRoute.put("/", auth, updateUserValidator, userController.updateProfile);
 
-userRoute.put("/password", auth, resetPasswordValidator, userController.updatePassword);
-
+userRoute.put(
+  "/password",
+  auth,
+  resetPasswordValidator,
+  userController.updatePassword
+);
 
 module.exports = userRoute;
