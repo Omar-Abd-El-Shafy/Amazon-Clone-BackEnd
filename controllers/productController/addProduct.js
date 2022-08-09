@@ -49,7 +49,6 @@ exports.addProduct = async (req, res, next) => {
         next(err);
       });
   } catch (err) {
-    err.message = image_path;
     next(err);
   }
 };
