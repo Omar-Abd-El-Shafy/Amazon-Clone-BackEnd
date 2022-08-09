@@ -3,7 +3,6 @@ const Product = require("../../Model/product");
 exports.addProduct = async (req, res, next) => {
   try {
     let image_path = req.files.map((file) => {
-      console.log(image_path);
       return file.location;
     });
     console.log(image_path);
