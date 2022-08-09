@@ -17,7 +17,7 @@ exports.getAllProducts = async (req, res, next) => {
       .skip(page * itemsPerPage)
       // .sort({ name: "ascending" })
       .then((Products) => {
-        res.status(200).json(Products);
+        res.status(200).send(Products);
       });
   } catch (err) {
     next(err);
