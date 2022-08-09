@@ -33,9 +33,12 @@ app.use((req, res, next) => {
     console.log(req.originalUrl);
     next(); // Do nothing with the body because I need it in a raw state.
   } else {
+    console.log("original URL");
+    console.log(req.originalUrl);
     express.json()(req, res, next); // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
   }
 });
+
 app.use("/payment", paymentRoute);
 app.use("/product", productRoute);
 app.use("/user", userRoute);
