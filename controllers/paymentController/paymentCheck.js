@@ -47,9 +47,10 @@ exports.paymentCheck = (request, response) => {
     case "payment_intent.succeeded":
       // Context.hasService()
 
-
       paymentIntent = event.data.object;
-      console.log("success");
+      console.log("paymentIntent")
+      console.log(paymentIntent);
+
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
     // ... handle other event types

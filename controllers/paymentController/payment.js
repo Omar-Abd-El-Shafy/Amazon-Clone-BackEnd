@@ -27,6 +27,8 @@ exports.payment = async (req, res) => {
     },
   });
 
+  console.log("paymentIntent from ceate payment");
+  console.log(paymentIntent);
   // Context.addService(`${req.user_id}.${req.body.order_id}`, {
   //   user_id: req.user_id,
   //   order_id: req.body.order_id,
