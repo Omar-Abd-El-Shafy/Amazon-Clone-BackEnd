@@ -123,7 +123,6 @@ categoryRoute.delete(
  */
  categoryRoute.get(
   "/",
-  idValidator,
   categoryController.getAllCategories
 );
 
