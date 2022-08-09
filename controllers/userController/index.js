@@ -4,7 +4,9 @@ const { register } = require("./register");
 const { getUserProfile } = require("./getUserProfile");
 const { deleteAccount } = require("./deleteAccount");
 const { forgotPassword } = require("./forgotPassword");
-const { resetPassword } = require("./resetPassword");
+const { resetPasswordStart } = require("./resetPasswordStart");
+const { resetPasswordSubmit } = require("./resetPasswordSubmit");
+
 const { updateProfile } = require("./updateProfile");
 const { getAllUsers } = require("./getAllUsers");
 const { updatePassword } = require("./updatePassword");
@@ -17,7 +19,8 @@ const userController = {
   updateProfile,
   deleteAccount,
   forgotPassword,
-  resetPassword,
+  resetPasswordStart,
+  resetPasswordSubmit,
   getAllUsers,
   updatePassword,
 };

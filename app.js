@@ -20,21 +20,23 @@ const express = require("express");
 const app = express();
 const { API_PORT } = process.env;
 const port = process.env.PORT || 3333;
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors());
-// app.use(express.static("public"));
+app.use(express.static("public"));
 app.use(morgan);
 app.use("/api-doc", apiDoc);
 
 // routes
 app.use((req, res, next) => {
   if (req.originalUrl === "/payment") {
+    console.log(req.originalUrl);
     next(); // Do nothing with the body because I need it in a raw state.
   } else {
     express.json()(req, res, next); // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
   }
 });
+app.use("/payment", paymentRoute);
 app.use("/product", productRoute);
 app.use("/user", userRoute);
 app.use("/department", departmentRoute);
@@ -42,7 +44,6 @@ app.use("/category", categoryRoute);
 app.use("/cart", cartRoute);
 app.use("/review", reviewRoute);
 app.use("/order", orderRoute);
-app.use("/payment", paymentRoute);
 
 app.use("/", (req, res) => {
   res.send(
