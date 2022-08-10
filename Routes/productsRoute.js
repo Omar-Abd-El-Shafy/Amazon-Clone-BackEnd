@@ -141,7 +141,7 @@ const {
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -153,11 +153,12 @@ const {
  *                 type: number
  *               description:
  *                 type: string
- *               image_path:
+ *               img:
  *                 type: array
- *                 items: 
+ *                 items:
  *                   type: string
- *                 description: Array containing the pathes of images after being uploaded on aws
+ *                   format: binary
+ *                 description: The product images
  *               department:
  *                 type: string
  *                 description: _id of department
@@ -177,7 +178,10 @@ const {
  *               - category   
  *               - brand   
  *               - weight  
- *               - image_path  
+ *               - img 
+ *             encoding: 
+ *               img: 
+ *                 contentType: image/png, image/jpeg, image/jpg
  *           example:
  *             name: product name
  *             price: 500

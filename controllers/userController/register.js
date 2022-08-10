@@ -24,7 +24,7 @@ exports.register = async (req, res, next) => {
     }
 
     if (oldUser) {
-      return res.status(409).send("User Already Exist. Please Login");
+      return res.status(409).send("Email or Phone already exists.");
     }
 
     // Create user in our database
@@ -33,25 +33,20 @@ exports.register = async (req, res, next) => {
       email,
       phone,
       password,
-    })
-      .then((user) => {
-        // Create token
-        const token = jwt.sign(
-          { user_id: user._id, email },
-          process.env.TOKEN_KEY,
-          {
-            expiresIn: "10d",
-          }
-        );
+    }).then((user) => {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "10d",
+        }
+      );
 
-        res.header("x-access-token", token);
-        res.status(201).send("register success");
-      })
-      .catch((err) => {
-        err.statusCode = 400;
-        next(err);
-      });
+      res.header("x-access-token", token);
+      res.status(201).send("register success");
+    });
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };

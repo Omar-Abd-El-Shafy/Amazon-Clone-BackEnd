@@ -224,6 +224,12 @@ reviewRoute.get("/:id", idValidator, reviewController.getReviewById);
  *         description: The user _id
  *         schema:
  *           type: string
+ *       - in: header      
+ *         name: x-access-token
+ *         required: true   
+ *         description: The admin token
+ *         schema:
+ *           type: string
  *       - in: query
  *         name: page
  *         schema:

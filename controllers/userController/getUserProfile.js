@@ -9,6 +9,6 @@ exports.getUserProfile = async (req, res) => {
     const { name, email, phone } = userProfile;
     res.status(200).json({ name, email, phone });
   } else {
-    res.status(400).send("User not found ");
+    res.status(404).send("User not found ");
   }
 };
