@@ -120,6 +120,12 @@ categoryRoute.delete(
  *     responses:
  *       '200' :
  *         description: The category list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Category'
  */
  categoryRoute.get(
   "/",
@@ -143,6 +149,12 @@ categoryRoute.delete(
  *     responses:
  *       '200' :
  *         description: The category list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Category'
  */
 categoryRoute.get(
   "/dept/:id",

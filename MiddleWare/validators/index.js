@@ -41,7 +41,7 @@ exports.loginValidator = [
 // oneOf Creates a middleware instance that will ensure at least one of the given chains
 // passes the validation
 exports.updateUserValidator = [
-  oneOf([userName, email, phone, [password, confirmPassword]]),
+  oneOf([userName, email, phone]),
   validationResults,
 ];
 

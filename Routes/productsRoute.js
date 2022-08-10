@@ -141,9 +141,47 @@ const {
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#components/schemas/Product'
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *               img:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
+ *                 description: The product images
+ *               department:
+ *                 type: string
+ *                 description: _id of department
+ *               category:
+ *                 type: string
+ *                 description: _id of category
+ *               brand:
+ *                 type: string
+ *               weight:
+ *                 type: number 
+ *             required:
+ *               - name   
+ *               - price   
+ *               - stock   
+ *               - description   
+ *               - department   
+ *               - category   
+ *               - brand   
+ *               - weight  
+ *               - img 
+ *             encoding: 
+ *               img: 
+ *                 contentType: image/png, image/jpeg, image/jpg
  *           example:
  *             name: product name
  *             price: 500
@@ -272,6 +310,12 @@ productRoute.get("/:id", idValidator, productController.getProductById);
  *     responses:
  *       '200' :
  *         description: The product list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
  */
 productRoute.get("/", pageValidator, productController.getAllProducts);
 
@@ -309,6 +353,12 @@ productRoute.get("/", pageValidator, productController.getAllProducts);
  *     responses:
  *       '200' :
  *         description: The product list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
  *       '404' :
  *         description: Products not found
  */

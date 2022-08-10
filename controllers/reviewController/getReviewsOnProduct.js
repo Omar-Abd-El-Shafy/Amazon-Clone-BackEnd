@@ -3,7 +3,7 @@ const newError = require("../../utils/newError");
 
 exports.getReviewsOnProduct = async (req, res, next) => {
   try {
-    const product = req.body.id || req.params.id;
+    const product = req.params.id;
     const itemsPerPage = req.query.itemsPerPage || 5,
       page = req.query.page - 1 || 0;
       
@@ -16,7 +16,7 @@ exports.getReviewsOnProduct = async (req, res, next) => {
         if (review) {
           res.status(200).json(review);
         } else {
-          throw newError(404, "Review not found");
+          throw newError(404, "Reviews not found");
         }
       });
   } catch (err) {

@@ -1,6 +1,5 @@
 const User = require("../../Model/user");
 
-// not used, use resetPassword instead
 exports.updatePassword = async (req, res, next) => {
   try {
     // Get user input
@@ -8,9 +7,6 @@ exports.updatePassword = async (req, res, next) => {
 
     // get user data from db
     let user = await User.findById( req.user_id);
-    console.log(password);
-    console.log(user);
-    console.log(req.user_id);
     // update password
     user.password = password;
 
@@ -23,7 +19,7 @@ exports.updatePassword = async (req, res, next) => {
     // Note that update(), updateMany(), findOneAndUpdate(), etc. do not execute save() middleware.
     // the pre() function used in user model is a middleware, so we use save() to execute it.
     await user.save().then((updatedUser) => {
-      res.status(200).send(updatedUser);
+      res.status(200).send("Password updated");
     });
   } catch (err) {
     next(err);

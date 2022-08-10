@@ -9,13 +9,9 @@ exports.updateProfile = async (req, res, next) => {
     // update in db
     await User.findByIdAndUpdate(req.user_id, req.body, {
       new: true,
-    })
-      .then((updatedUser) => {
-        res.status(200).send(updatedUser);
-      })
-      .catch((err) => {
-        next(err);
-      });
+    }).then((updatedUser) => {
+      res.status(200).send("Profile updated");
+    });
   } catch (err) {
     next(err);
   }
