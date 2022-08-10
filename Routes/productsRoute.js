@@ -12,7 +12,6 @@ const {
   pageValidator,
 } = require("../MiddleWare/validators");
 
-
 /**
  * @swagger
  * components:
@@ -33,7 +32,7 @@ const {
  *           type: string
  *         image_path:
  *           type: array
- *           items: 
+ *           items:
  *             type: string
  *           description: Array containing the pathes of images after being uploaded on aws
  *         department:
@@ -50,18 +49,18 @@ const {
  *         brand:
  *           type: string
  *         weight:
- *           type: number 
+ *           type: number
  *       required:
- *         - id   
- *         - name   
- *         - price   
- *         - stock   
- *         - description   
- *         - department   
- *         - category   
- *         - brand   
- *         - weight  
- *         - image_path  
+ *         - id
+ *         - name
+ *         - price
+ *         - stock
+ *         - description
+ *         - department
+ *         - category
+ *         - brand
+ *         - weight
+ *         - image_path
  *   parameters:
  *     page:
  *       in: query
@@ -123,8 +122,7 @@ const {
  *         type: boolean
  *         default: false
  *       description: Boolean to include out of stock products in filter products
- */ 
-
+ */
 
 /**
  * @swagger
@@ -134,9 +132,9 @@ const {
  *     tags:
  *       - Product
  *     parameters:
- *       - in: header      
+ *       - in: header
  *         name: x-access-token
- *         required: true   
+ *         required: true
  *         description: The admin token
  *         schema:
  *           type: string
@@ -195,12 +193,7 @@ const {
  *       '409' :
  *         description: A Product already Exist with Same Name
  */
-productRoute.post(
-  "/",
-  isAdmin,
-  upload.array("img"),
-  productController.addProduct
-);
+productRoute.post("/", upload.array("img"), productController.addProduct);
 
 /**
  * @swagger
@@ -210,9 +203,9 @@ productRoute.post(
  *     tags:
  *       - Product
  *     parameters:
- *       - in: header      
+ *       - in: header
  *         name: x-access-token
- *         required: true   
+ *         required: true
  *         description: The admin token
  *         schema:
  *           type: string
@@ -242,9 +235,9 @@ productRoute.put("/", isAdmin, productController.updateProduct);
  *     tags:
  *       - Product
  *     parameters:
- *       - in: header      
+ *       - in: header
  *         name: x-access-token
- *         required: true   
+ *         required: true
  *         description: The admin token
  *         schema:
  *           type: string
@@ -293,7 +286,6 @@ productRoute.delete(
  */
 productRoute.get("/:id", idValidator, productController.getProductById);
 
-
 /**
  * @swagger
  * /product:
@@ -340,10 +332,10 @@ productRoute.get("/", pageValidator, productController.getAllProducts);
  *         name: sortBy
  *         schema:
  *           type: string
- *         description: | 
- *           The sort by condition takes on of the values 
- *           * Price: Low to High 
- *           * Price: High to Low 
+ *         description: |
+ *           The sort by condition takes on of the values
+ *           * Price: Low to High
+ *           * Price: High to Low
  *           * Avg. Customer review
  *       - $ref: '#/components/parameters/page'
  *       - $ref: '#/components/parameters/itemsPerPage'
@@ -382,6 +374,5 @@ productRoute.get("/search", productController.search);
 //   getAllValidator,
 //   productController.getAllProductsInDepartment
 // );
-
 
 module.exports = productRoute;

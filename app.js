@@ -22,22 +22,22 @@ const { API_PORT } = process.env;
 const port = process.env.PORT || 3333;
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.static("public"));
 app.use(morgan);
 app.use("/api-doc", apiDoc);
 
 // routes
 app.use((req, res, next) => {
   if (req.originalUrl === "/payment/webhook") {
-    console.log("original URL in ignoring wehook");
-    console.log(req.originalUrl);
+    // console.log("original URL in ignoring wehook");
+    // console.log(req.originalUrl);
     next(); // Do nothing with the body because I need it in a raw state.
   } else {
-    console.log("original URL in else");
-    console.log(req.originalUrl);
+    // console.log("original URL in else");
+    // console.log(req.originalUrl);
     express.json()(req, res, next); // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
   }
 });
+app.use(express.static("public"));
 
 app.use("/payment", paymentRoute);
 app.use("/product", productRoute);

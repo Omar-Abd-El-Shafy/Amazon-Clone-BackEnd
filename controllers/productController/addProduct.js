@@ -5,6 +5,7 @@ exports.addProduct = async (req, res, next) => {
     let image_path = req.files.map((file) => {
       return file.location;
     });
+    console.log("image-Path");
     console.log(image_path);
     let {
       name,
@@ -44,6 +45,7 @@ exports.addProduct = async (req, res, next) => {
       })
       .catch((err) => {
         err.statusCode = 400;
+
         next(err);
       });
   } catch (err) {
