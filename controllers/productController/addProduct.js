@@ -5,8 +5,7 @@ exports.addProduct = async (req, res, next) => {
     let image_path = req.files.map((file) => {
       return file.location;
     });
-    console.log("req.files");
-    console.log(req.files);
+
     let {
       name,
       description,
