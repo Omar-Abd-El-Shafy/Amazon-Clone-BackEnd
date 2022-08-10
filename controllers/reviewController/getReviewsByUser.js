@@ -4,7 +4,7 @@ const newError = require("../../utils/newError");
 
 exports.getReviewsByUser = async (req, res, next) => {
   try {
-    const user = req.body.id || req.params.id;
+    const user = req.params.id;
     const itemsPerPage = req.query.itemsPerPage || 10,
       page = req.query.page - 1 || 0;
 
@@ -24,7 +24,7 @@ exports.getReviewsByUser = async (req, res, next) => {
         if (review) {
           res.status(200).json(review);
         } else {
-          throw newError(404, "Review not found");
+          throw newError(404, "Reviews not found");
         }
       });
   } catch (err) {

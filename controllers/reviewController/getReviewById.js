@@ -3,7 +3,7 @@ const newError = require("../../utils/newError");
 
 exports.getReviewById = async (req, res, next) => {
   try {
-    const review_id = req.body.id || req.params.id;
+    const review_id = req.params.id;
     await Review.findById(review_id)
       // .select("user rating title comment date")
       .populate("user", "name")

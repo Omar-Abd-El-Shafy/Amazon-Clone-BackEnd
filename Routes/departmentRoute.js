@@ -149,6 +149,12 @@ const {
  *     responses:
  *       '200' :
  *         description: The department list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Department'
  */
  departmentRoute.get("/", departmentController.getAllDepartments);
 

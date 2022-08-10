@@ -145,7 +145,41 @@ const {
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#components/schemas/Product'
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *               image_path:
+ *                 type: array
+ *                 items: 
+ *                   type: string
+ *                 description: Array containing the pathes of images after being uploaded on aws
+ *               department:
+ *                 type: string
+ *                 description: _id of department
+ *               category:
+ *                 type: string
+ *                 description: _id of category
+ *               brand:
+ *                 type: string
+ *               weight:
+ *                 type: number 
+ *             required:
+ *               - name   
+ *               - price   
+ *               - stock   
+ *               - description   
+ *               - department   
+ *               - category   
+ *               - brand   
+ *               - weight  
+ *               - image_path  
  *           example:
  *             name: product name
  *             price: 500
@@ -280,6 +314,12 @@ productRoute.get("/:id", idValidator, productController.getProductById);
  *     responses:
  *       '200' :
  *         description: The product list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
  */
 productRoute.get("/", pageValidator, productController.getAllProducts);
 
@@ -317,6 +357,12 @@ productRoute.get("/", pageValidator, productController.getAllProducts);
  *     responses:
  *       '200' :
  *         description: The product list
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
  *       '404' :
  *         description: Products not found
  */
