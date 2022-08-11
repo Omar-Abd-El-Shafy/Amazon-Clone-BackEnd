@@ -28,7 +28,7 @@ exports.register = async (req, res, next) => {
     }
 
     // Create user in our database
-    await User.create({
+    const user = await User.create({
       name,
       email,
       phone,
@@ -43,8 +43,8 @@ exports.register = async (req, res, next) => {
         }
       );
 
-      res.header("x-access-token", token);
-      res.status(201).send("register success");
+      // res.header("x-access-token", token);
+      res.status(201).send({ token: token, user });
     });
   } catch (err) {
     next(err);
