@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
       // user.token = token;
       // user
       // res.header("x-access-token", token);
-      res.status(200).send({ token: token, userName: user.name });
+      res.status(200).send({ token: token, user: user });
     } else {
       res.status(400).send("Invalid Credentials");
     }

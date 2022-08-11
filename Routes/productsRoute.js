@@ -266,7 +266,7 @@ productRoute.delete(
 
 /**
  * @swagger
- * /product/{id}:
+ * /product/one/{id}:
  *   get:
  *     summary: Returns one product
  *     tags:
@@ -288,7 +288,7 @@ productRoute.delete(
  *       '404' :
  *         description: Product not found
  */
-productRoute.get("/:id", idValidator, productController.getProductById);
+productRoute.get("/one/:id", idValidator, productController.getProductById);
 
 /**
  * @swagger

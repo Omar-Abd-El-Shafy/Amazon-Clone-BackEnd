@@ -57,10 +57,10 @@ exports.updateDepartmentValidator = [id(), name, validationResults];
 
 // ################################### category validators #####################################
 
-exports.addCategoryValidator = [name, id(["department_id"]), validationResults];
+exports.addCategoryValidator = [name, id(["department"]), validationResults];
 
 exports.updateCategoryValidator = [
-  id(["id", "department_id"]),
+  id(["id", "department"]),
   name,
   validationResults,
 ];

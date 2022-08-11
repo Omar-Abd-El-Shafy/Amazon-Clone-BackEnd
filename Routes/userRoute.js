@@ -265,6 +265,15 @@ userRoute.post(
  *             schema:
  *               type: string
  *             description: the user token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 userName:
+ *                   type: string
+ *                 role:
+ *                   type: boolean
  *       '400' :
  *         description: Invalid Credentials
  */
