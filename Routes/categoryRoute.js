@@ -108,7 +108,7 @@ categoryRoute.post(
  *               img:
  *                 type: string
  *                 format: binary
- *                 description: The product images
+ *                 description: The category image
  *             required:
  *               - img 
  *             encoding: 
