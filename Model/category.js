@@ -13,8 +13,9 @@ const categorySchema = mongoose.Schema(
     },
     department: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Department"
+      ref: "Department",
     },
+    image_path: { type: String },
   },
   { timestamps: true }
 );

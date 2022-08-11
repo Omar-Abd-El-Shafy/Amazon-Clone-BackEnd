@@ -5,6 +5,7 @@ const categoryRoute = express.Router();
 const categoryController = require("../controllers/categoryController");
 //midllewares
 const isAdmin = require("../MiddleWare/adminAuth");
+const upload = require("../MiddleWare/S3uploadImages");
 const {
   addCategoryValidator,
   idValidator,
@@ -75,6 +76,55 @@ categoryRoute.post(
   isAdmin,
   addCategoryValidator,
   categoryController.addCategory
+);
+
+/**
+ * @swagger
+ * /category/img/{id}:
+ *   post:
+ *     summary: Adds image to category
+ *     tags:
+ *       - Category
+ *     parameters:
+ *       - in: header
+ *         name: x-access-token
+ *         required: true
+ *         description: The admin token
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The category _id
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               img:
+ *                 type: string
+ *                 format: binary
+ *                 description: The product images
+ *             required:
+ *               - img 
+ *             encoding: 
+ *               img: 
+ *                 contentType: image/png, image/jpeg, image/jpg
+ *     responses:
+ *       '200' :
+ *         description: Image added
+ *       '404' :
+ *         description: Category not found
+ */
+ categoryRoute.post(
+  "/img/:id",
+  isAdmin,
+  upload.single("img"),
+  categoryController.addImg
 );
 
 /**

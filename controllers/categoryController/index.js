@@ -7,11 +7,13 @@ const { deleteCategory } = require("./deleteCategory");
 const { updateCategory } = require("./updateCategory");
 const { getCategoryById } = require("./getCategoryById");
 const { getAllCategories } = require("./getAllCategories");
+const { addImg } = require("./addImg");
 
 //combine methods in obj
 // category CRUD operations
 const categoryController = {
   addCategory,
+  addImg,
   getAllCategoriesInDepartment,
   deleteCategory,
   getCategoryById,
