@@ -47,7 +47,7 @@ const {
 
 /**
  * @swagger
- * /user:
+ * /user/register:
  *   post:
  *     summary: Creates new user
  *     tags:
