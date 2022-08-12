@@ -1,5 +1,6 @@
 const Order = require("../../Model/orders");
 const Product = require("../../Model/product");
+const updateStock = require("../../DataSource/stockUpdate");
 //shoudl check if order exist !
 exports.updateOrderStatus = async (req, res, next) => {
   const { order_id, status } = req.body;

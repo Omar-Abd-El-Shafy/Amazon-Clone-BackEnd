@@ -44,7 +44,7 @@ exports.register = async (req, res, next) => {
       );
 
       // res.header("x-access-token", token);
-      res.status(201).send({ token: token, user });
+      res.status(201).send({ token: token, user: user });
     });
   } catch (err) {
     next(err);

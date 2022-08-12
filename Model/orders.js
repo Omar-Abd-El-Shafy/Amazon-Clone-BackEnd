@@ -29,7 +29,8 @@ const orderSchema = mongoose.Schema(
         type: String,
       },
     },
-
+    transaction_id: { type: String },
+    
     deliveryNotes: { type: String },
     deliveryDate: { type: Date },
     status: {
