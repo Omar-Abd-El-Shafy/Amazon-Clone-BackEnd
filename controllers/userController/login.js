@@ -9,12 +9,6 @@ exports.login = async (req, res) => {
     // Get user input
     const { email, phone, password } = req.body;
 
-    // to DELETE [already implemented in validation]
-    // Validate user input
-    // if (!((email || phone) && password)) {
-    //   return res.status(400).send("All input is required");
-    // }
-
     // Validate if user exist in our database
     let user, emailOrPhone;
     if (email) {
@@ -42,7 +36,11 @@ exports.login = async (req, res) => {
       // user.token = token;
       // user
       // res.header("x-access-token", token);
-      res.status(200).send({ token: token, user: user });
+
+      // send user data without password
+      const sendUser = { ...user._doc };
+      delete sendUser.password;
+      res.status(200).send({ token: token, user: sendUser });
     } else {
       res.status(400).send("Invalid Credentials");
     }

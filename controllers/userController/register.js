@@ -33,19 +33,22 @@ exports.register = async (req, res, next) => {
       email,
       phone,
       password,
-    }).then((user) => {
-      // Create token
-      const token = jwt.sign(
-        { user_id: user._id, email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "10d",
-        }
-      );
-
-      // res.header("x-access-token", token);
-      res.status(201).send({ token: token, user: user });
     });
+    // Create token
+    const token = jwt.sign(
+      { user_id: user._id, email },
+      process.env.TOKEN_KEY,
+      {
+        expiresIn: "10d",
+      }
+    );
+
+    // res.header("x-access-token", token);
+
+    // send user data without password
+    const sendUser = { ...user._doc };
+    delete sendUser.password;
+    res.status(200).send({ token: token, user: sendUser });
   } catch (err) {
     next(err);
   }

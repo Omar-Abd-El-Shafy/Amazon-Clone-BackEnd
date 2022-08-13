@@ -24,6 +24,8 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       lowercase: true,
+      unique: true,
+      required: true,
       validate: {
         validator: (val) => {
           return validator.isEmail(val);
@@ -43,6 +45,8 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
+      unique: true,
+      required: true,
       validate: {
         validator: (val) => {
           return validator.isMobilePhone(val);
