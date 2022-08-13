@@ -1,6 +1,7 @@
 const Review = require("../../Model/review");
 const Product = require("../../Model/product");
 const newError = require("../../utils/newError");
+const orders = require("../../Model/orders");
 
 exports.addReview = async (req, res, next) => {
   try {
@@ -18,35 +19,44 @@ exports.addReview = async (req, res, next) => {
     // check if user already reviewed this product
     const oldReview = await Review.findOne({ product, user });
     if (oldReview) {
-      throw newError(403, "Already reviewed");
+      throw newError(409, "Already reviewed");
+    }
+
+    // check if user bought the product
+    const bought = await orders.findOne({
+      user,
+      status: "delivered",
+      "products.productBrief.product_id": product,
+    });
+    if (!bought) {
+      throw newError(403, "Product must be bought before review");
     }
 
     // save in db
-    await Review.create({
+    const review = await Review.create({
       user,
       product,
       rating,
       title,
       comment,
-    }).then(async function (review) {
-      // update rating in product
-      const newRating = await Review.aggregate([
-        // get all reviews for current product
-        { $match: { product: review.product } },
-        // group reviews into 1 group by product _id, calc avg, return it in average
-        { $group: { _id: "$product", average: { $avg: "$rating" } } },
-      ]);
-
-      // update rating to the new avg
-      await Product.findByIdAndUpdate(
-        product,
-        { rating: newRating[0].average },
-        { new: true }
-      ).then((productUpdated) => {
-        console.log(productUpdated.rating);
-        res.status(201).json(review);
-      });
     });
+
+    // update rating in product
+    const newRating = await Review.aggregate([
+      // get all reviews for current product
+      { $match: { product: review.product } },
+      // group reviews into 1 group by product _id, calc avg, return it in average
+      { $group: { _id: "$product", average: { $avg: "$rating" } } },
+    ]);
+
+    // update rating to the new avg
+    await Product.findByIdAndUpdate(
+      product,
+      { rating: newRating[0].average },
+      { new: true }
+    );
+
+    res.status(201).json(review);
   } catch (err) {
     next(err);
   }
