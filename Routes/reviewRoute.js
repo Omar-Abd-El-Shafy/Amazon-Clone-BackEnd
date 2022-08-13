@@ -101,8 +101,10 @@ const {
  *         description: Created
  *       '404' :
  *         description: Product not found
- *       '403' :
+ *       '409' :
  *         description: Already reviewed
+ *       '403' :
+ *         description: Product must be bought before review
  */
  reviewRoute.post("/", auth, addReviewValidator, reviewController.addReview);
 
