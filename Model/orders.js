@@ -6,7 +6,6 @@ const orderSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
-      unique: true,
     },
     // paymentDetails: {}
     deliveryAddress: {
@@ -30,7 +29,7 @@ const orderSchema = mongoose.Schema(
       },
     },
     transaction_id: { type: String },
-    
+
     deliveryNotes: { type: String },
     deliveryDate: { type: Date },
     status: {
