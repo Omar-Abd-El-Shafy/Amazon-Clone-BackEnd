@@ -1,5 +1,6 @@
 const cors = require("cors");
 require("dotenv").config();
+//databaseConnection
 require("./DataSource/database").connect();
 // middlewares
 const error = require("./MiddleWare/error");
