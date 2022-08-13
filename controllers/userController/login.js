@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
       // send user data without password
       const sendUser = { ...user._doc };
       delete sendUser.password;
-      res.status(200).send({ token: token, user: user });
+      res.status(200).send({ token: token, user: sendUser });
     } else {
       res.status(400).send("Invalid Credentials");
     }
