@@ -12,7 +12,7 @@
 //   node server.js
 // const { Context } = require("../../DataSource/context");
 
-const updateStock = require("../../DataSource/stockUpdateBasedOnORder");
+const { updateStock } = require("../../DataSource/stockUpdateBasedOnORder");
 const stripe = require("stripe")(
   "sk_test_51LTllPFwhSEkFDCIq8x9nTSaTw616bbHe9Sg7KKIOO6HpWs4QshU2SdPqGWE3KL9vPw9fTbfOU4iDg9FeciXJIJo00yPwCTY5T"
 );
@@ -38,7 +38,6 @@ exports.paymentCheck = (request, response) => {
     case "payment_intent.payment_failed":
       paymentIntent = event.data.object;
       console.log("-----pyament failed--------------");
-
       console.log(paymentIntent);
 
       // Then define and call a function to handle the event payment_intent.payment_failed
