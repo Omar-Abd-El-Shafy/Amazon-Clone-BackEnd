@@ -33,7 +33,8 @@ exports.search = async (req, res, next) => {
 
     // execute query
     const products = await Product.find(filter)
-      .select("name rating price image_path")
+      .populate("department", "name")
+      .populate("category", "name")
       .limit(itemsPerPage)
       .skip(page * itemsPerPage)
       .sort(sort);
