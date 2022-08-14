@@ -29,10 +29,6 @@ const makeOrder = async (req, res, next) => {
         });
 
         if (noStockProducts.length > 0) {
-          // I have to remove the error items from cart before responding
-          // const inStockProducts = cart.products.filter((product) => {
-          //   return product.quantity <= product.product_id.stock;
-          // });
           await session.abortTransaction();
           res.status(400).send(noStockProducts);
         } else {
@@ -76,7 +72,6 @@ const makeOrder = async (req, res, next) => {
             { session }
           );
 
-          //..........order creation part end .............................
 
           //..........update stock depending on cart start .....................
           for (const product of cart.products) {
@@ -86,8 +81,8 @@ const makeOrder = async (req, res, next) => {
               { session }
             );
           }
-
           //..........update stock depending on cart end .......................
+
         } // esle bracket
       },
       {

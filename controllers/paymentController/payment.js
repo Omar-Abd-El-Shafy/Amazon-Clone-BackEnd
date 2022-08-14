@@ -8,7 +8,7 @@ const stripe = require("stripe")(
 
 app.use(express.static("public"));
 app.use(express.json());
-const calculateOrderAmount = (items) => {
+const calculateOrderAmount = () => {
   // Replace this constant with a calculation of the order's amount
   // Calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
@@ -16,23 +16,24 @@ const calculateOrderAmount = (items) => {
 };
 
 exports.payment = async (req, res) => {
-  const { items } = req.body;
+  const { order_id } = req.body;
 
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(items),
+    amount: calculateOrderAmount(),
     currency: "eur",
     automatic_payment_methods: {
       enabled: true,
     },
   });
 
+  setTimeout(
+    await stripe.paymentIntents.cancel("pi_1DraTP2eZvKYlo2CtolXkJiH"),
+    10000
+  );
+
   console.log("paymentIntent from ceate payment");
   console.log(paymentIntent);
-  // Context.addService(`${req.user_id}.${req.body.order_id}`, {
-  //   user_id: req.user_id,
-  //   order_id: req.body.order_id,
-  // });
 
   res.send({
     clientSecret: paymentIntent.client_secret,

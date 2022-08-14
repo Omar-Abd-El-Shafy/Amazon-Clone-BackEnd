@@ -40,16 +40,23 @@ exports.paymentCheck = (request, response) => {
   switch (event.type) {
     case "payment_intent.payment_failed":
       paymentIntent = event.data.object;
-      console.log(paymentIntent);
+      // console.log(paymentIntent);
 
       // Then define and call a function to handle the event payment_intent.payment_failed
       break;
+
+    case "payment_intent.canceled":
+      const paymentIntent = event.data.object;
+      // Then define and call a function to handle the event payment_intent.canceled
+      break;
+
     case "payment_intent.succeeded":
       // Context.hasService()
+      console.log("................ payment canceled ...................");
 
       paymentIntent = event.data.object;
-      console.log("paymentIntent")
-      console.log(paymentIntent);
+      // console.log("paymentIntent");
+      // console.log(paymentIntent);
 
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
