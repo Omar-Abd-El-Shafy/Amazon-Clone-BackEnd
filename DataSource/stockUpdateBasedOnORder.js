@@ -25,5 +25,7 @@ exports.updateStock = async (transaction_id, status) => {
 
     order.status = status;
     await order.save();
-
+  } catch (err) {
+    console.log(error);
+  }
 };
