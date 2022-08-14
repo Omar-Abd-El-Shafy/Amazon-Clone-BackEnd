@@ -6,7 +6,7 @@ exports.updateOrderStatus = async (req, res, next) => {
   try {
     const order = await Order.findById(order_id).populate(
       "products.productBrief.product_id",
-      "id"
+      "_id"
     );
     order.status = status;
 

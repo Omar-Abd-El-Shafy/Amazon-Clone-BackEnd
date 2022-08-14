@@ -5,7 +5,7 @@ exports.updateStock = async (transaction_id, status) => {
   try {
     const order = await Order.findOne({
       transaction_id: transaction_id,
-    }).populate("products.productBrief.product_id", "id");
+    }).populate("products.productBrief.product_id", "_id");
 
     //if flag true then increase the stock to get back to original stock
     order.products.map(async (product) => {
