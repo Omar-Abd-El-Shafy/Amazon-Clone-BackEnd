@@ -17,7 +17,6 @@ exports.updateStock = async (transaction_id, status) => {
     //flag is false remove the stock as order is completed
 
     order.status = status;
-    await Product.save();
     await order.save();
   } catch (err) {
     next(err);
