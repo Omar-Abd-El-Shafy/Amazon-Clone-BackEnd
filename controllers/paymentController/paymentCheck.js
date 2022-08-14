@@ -43,6 +43,23 @@ exports.paymentCheck = (request, response) => {
       // Then define and call a function to handle the event payment_intent.payment_failed
       break;
 
+    case "payment_intent.created":
+      paymentIntent = event.data.object;
+
+      const trans_id = paymentIntent.id;
+      setTimeout(async function () {
+        console.log("in set time out");
+        console.log("paymentIntetn.--------statussssssssssss");
+        console.log(paymentIntent.status);
+
+        if (paymentIntent.status == "requires_payment_method") {
+          paymentIntent = await stripe.paymentIntents.cancel(trans_id);
+        }
+      }, 30000);
+      
+      // Then define and call a function to handle the event payment_intent.created
+      break;
+
     case "payment_intent.canceled":
       paymentIntent = event.data.object;
       console.log("-----pyament cancelledddd--------------");

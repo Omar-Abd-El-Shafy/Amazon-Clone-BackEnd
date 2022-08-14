@@ -26,10 +26,6 @@ exports.payment = async (req, res) => {
       enabled: true,
     },
   });
-  const trans_id = paymentIntent.id;
-  // setTimeout(async function () {
-  //   paymentIntent = await stripe.paymentIntents.cancel(trans_id);
-  // }, 10000);
 
   console.log("paymentIntent from ceate payment.............");
   // console.log(paymentIntent);
