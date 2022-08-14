@@ -1,5 +1,5 @@
 const Order = require("../Model/orders");
-const Product = require("../Model/orders");
+const Product = require("../Model/product");
 
 exports.updateStock = async (transaction_id, status) => {
   try {
