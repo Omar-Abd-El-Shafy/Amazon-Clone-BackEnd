@@ -19,21 +19,20 @@ exports.payment = async (req, res) => {
   const { order_id } = req.body;
 
   // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
+  let paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(),
     currency: "eur",
     automatic_payment_methods: {
       enabled: true,
     },
   });
+  const trans_id = paymentIntent.id;
+  // setTimeout(async function () {
+  //   paymentIntent = await stripe.paymentIntents.cancel(trans_id);
+  // }, 10000);
 
-  setTimeout(
-    await stripe.paymentIntents.cancel("pi_1DraTP2eZvKYlo2CtolXkJiH"),
-    10000
-  );
-
-  console.log("paymentIntent from ceate payment");
-  console.log(paymentIntent);
+  console.log("paymentIntent from ceate payment.............");
+  // console.log(paymentIntent);
 
   res.send({
     clientSecret: paymentIntent.client_secret,
