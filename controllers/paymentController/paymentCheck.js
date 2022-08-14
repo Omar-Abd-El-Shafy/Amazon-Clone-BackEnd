@@ -12,6 +12,7 @@
 //   node server.js
 // const { Context } = require("../../DataSource/context");
 
+const updateStock = require("../../DataSource/stockUpdateBasedOnORder");
 const stripe = require("stripe")(
   "sk_test_51LTllPFwhSEkFDCIq8x9nTSaTw616bbHe9Sg7KKIOO6HpWs4QshU2SdPqGWE3KL9vPw9fTbfOU4iDg9FeciXJIJo00yPwCTY5T"
 );
@@ -56,14 +57,14 @@ exports.paymentCheck = (request, response) => {
           paymentIntent = await stripe.paymentIntents.cancel(trans_id);
         }
       }, 30000);
-      
+
       // Then define and call a function to handle the event payment_intent.created
       break;
 
     case "payment_intent.canceled":
       paymentIntent = event.data.object;
       console.log("-----pyament cancelledddd--------------");
-
+      updateStock(paymentIntent.id, "canceled");
       // Then define and call a function to handle the event payment_intent.canceled
       break;
 
