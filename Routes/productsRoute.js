@@ -309,13 +309,20 @@ productRoute.get("/one/:id", idValidator, productController.getProductById);
  *       - $ref: '#/components/parameters/includeOutOfStock'
  *     responses:
  *       '200' :
- *         description: The product list
+ *         description: The number of pages and products list
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Product'
+ *               type: object
+ *               properties:
+ *                 pages:
+ *                   description: The number of pages
+ *                   type: integer
+ *                 products:
+ *                   description: The products list
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Product'
  */
 productRoute.get("/", pageValidator, productController.getAllProducts);
 
@@ -356,9 +363,16 @@ productRoute.get("/", pageValidator, productController.getAllProducts);
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Product'
+ *               type: object
+ *               properties:
+ *                 pages:
+ *                   description: The number of pages
+ *                   type: integer
+ *                 products:
+ *                   description: The products list
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Product'
  *       '404' :
  *         description: Products not found
  */

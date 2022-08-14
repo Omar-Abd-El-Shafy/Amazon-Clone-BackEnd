@@ -27,19 +27,23 @@ exports.search = async (req, res, next) => {
       sort.rating = "descending";
     }
 
+    // get number of pages
+    const productsNum = await Product.countDocuments(filter);
+    const pages = Math.ceil(productsNum / itemsPerPage);
+
     // execute query
-    await Product.find(filter)
-      .select("name rating price image_path")
+    const products = await Product.find(filter)
+      .populate("department", "name")
+      .populate("category", "name")
       .limit(itemsPerPage)
       .skip(page * itemsPerPage)
-      .sort(sort)
-      .then((Products) => {
-        if (Products.length) {
-          res.status(200).json(Products);
-        } else {
-          res.status(404).send("Products not found");
-        }
-      });
+      .sort(sort);
+
+    if (products.length) {
+      res.status(200).json({ pages, products });
+    } else {
+      res.status(404).send("Products not found");
+    }
   } catch (err) {
     next(err);
   }
