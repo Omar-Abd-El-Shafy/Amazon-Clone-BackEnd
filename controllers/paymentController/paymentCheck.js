@@ -43,7 +43,6 @@ exports.paymentCheck = (request, response) => {
 
     case "payment_intent.created":
       paymentIntent = event.data.object;
-      const trans_id = paymentIntent.id;
       setTimeout(async function () {
         console.log("in payment Created--------------");
         console.log("in set time out");
@@ -53,7 +52,7 @@ exports.paymentCheck = (request, response) => {
         if (paymentIntent.status == "requires_payment_method") {
           console.log("paymentIntetn --- status --- inside if condition ");
           console.log(paymentIntent.status);
-          paymentIntent = await stripe.paymentIntents.cancel(trans_id);
+          paymentIntent = await stripe.paymentIntents.cancel(paymentIntent.id);
         }
       }, 60000);
 
