@@ -83,7 +83,7 @@ exports.paymentCheck = (request, response) => {
       status = paymentIntent.status;
 
       console.log("Timout logg");
-      console.log(timeOut);
+      
       clearTimeout(timeOut);
 
       console.log(status);
