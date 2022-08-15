@@ -19,6 +19,7 @@ const stripe = require("stripe")(
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret = "whsec_9Vq69tH5I98gDU33sl6OoinYWmAOHWF2";
+let timeOut = "null";
 
 exports.paymentCheck = (request, response) => {
   const sig = request.headers["stripe-signature"];
@@ -34,7 +35,6 @@ exports.paymentCheck = (request, response) => {
   // Handle the event
   let paymentIntent = null;
   let status = "requires_payment_method";
-  let timeOut = "null";
   // const getStatus = () => status;
 
   switch (event.type) {
