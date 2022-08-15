@@ -50,7 +50,7 @@ exports.paymentCheck = (request, response) => {
 
       setTimeout(async function () {
         console.log("in set time out");
-        console.log("paymentIntetn.--------statussssssssssss");
+        console.log("paymentIntetn.--------statussssssssssss in timout");
         console.log(status);
 
         if (status == "requires_payment_method") {
@@ -76,6 +76,7 @@ exports.paymentCheck = (request, response) => {
       paymentIntent = event.data.object;
       console.log("-----pyament success--------------");
       status=paymentIntent.status
+      
       console.log(status);
       console.log("payment Intent  iddddddd inside SUCCESSS");
       console.log(paymentIntent.id);
