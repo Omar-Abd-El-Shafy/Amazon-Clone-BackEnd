@@ -20,12 +20,12 @@ app.use(express.json());
 
 exports.payment = async (req, res) => {
   const { order_id } = req.body;
-  console.log("ORDER ID --------- ,", order_id);
+  // console.log("ORDER ID --------- ,", order_id);
   const order = await Order.findById(order_id);
-  console.log("order--==-=-=", order);
+  // console.log("order--==-=-=", order);
   const bill = order.bill;
-  console.log("billlll----------");
-  console.log(bill);
+  // console.log("billlll----------");
+  // console.log(bill);
 
   // Create a PaymentIntent with the order amount and currency
   let paymentIntent = await stripe.paymentIntents.create({
@@ -36,7 +36,9 @@ exports.payment = async (req, res) => {
     },
   });
   order.transaction_id = paymentIntent.id;
+
   order.save();
+  
   console.log("paymentIntent from ceate payment.............");
   // console.log(paymentIntent);
 
