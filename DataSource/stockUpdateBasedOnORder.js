@@ -15,13 +15,13 @@ exports.updateStock = async (transaction_id, status) => {
         { $inc: { stock: product.quantity } }
       );
 
-      console.log("producttttttt)($#)@_");
-      console.log(product);
-      console.log(
-        "_id of product to get updated-------====)())()()",
-        product.productBrief.product_id._id
-      );
-      console.log("quantity .... of order  --------_++", product.quantity);
+      // console.log("producttttttt)($#)@_");
+      // console.log(product);
+      // console.log(
+      //   "_id of product to get updated-------====)())()()",
+      //   product.productBrief.product_id._id
+      // );
+      // console.log("quantity .... of order  --------_++", product.quantity);
     });
     //flag is false remove the stock as order is completed
 
