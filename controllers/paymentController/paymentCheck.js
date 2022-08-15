@@ -51,7 +51,7 @@ exports.paymentCheck = (request, response) => {
       console.log(paymentIntent.id);
 
       setTimeout(
-        async function (status) {
+        (async (status) => {
           console.log("in set time out");
           console.log("paymentIntetn.--------statussssssssssss in timout");
           console.log(status);
@@ -68,9 +68,8 @@ exports.paymentCheck = (request, response) => {
               paymentIntent.id
             );
           }
-        },
-        60000,
-        status
+        })(status),
+        60000
       );
 
       // Then define and call a function to handle the event payment_intent.created
