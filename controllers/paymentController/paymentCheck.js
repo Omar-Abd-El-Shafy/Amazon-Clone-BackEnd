@@ -34,7 +34,7 @@ exports.paymentCheck = (request, response) => {
   // Handle the event
   let paymentIntent = null;
   let status = "requires_payment_method";
-  let timeOut = null;
+  let timeOut = "null";
   // const getStatus = () => status;
 
   switch (event.type) {
@@ -81,6 +81,7 @@ exports.paymentCheck = (request, response) => {
       console.log("-----pyament success--------------");
 
       status = paymentIntent.status;
+
       console.log("Timout logg");
       console.log(timeOut);
       clearTimeout(timeOut);
