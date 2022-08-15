@@ -64,7 +64,12 @@ exports.paymentCheck = (request, response) => {
     case "payment_intent.canceled":
       paymentIntent = event.data.object;
       console.log("-----pyament cancelledddd--------------");
+
+      console.log("paymentInent.id ---++_---- inside web hook");
+      console.log(paymentIntent.id);
+
       const order = Order.findOne({ transaction_id: paymentIntent.id });
+
       console.log(".......................order  status ---------------");
       console.log(order);
 
