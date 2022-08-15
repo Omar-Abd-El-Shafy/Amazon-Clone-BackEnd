@@ -11,8 +11,9 @@
 // 3) Run the server on http://localhost:4242
 //   node server.js
 // const { Context } = require("../../DataSource/context");
-const Order = require("../../Model/orders");
 
+const Order = require("../../Model/orders");
+const Cart = require("../../Model/cart");
 const { updateStock } = require("../../DataSource/stockUpdateBasedOnORder");
 const stripe = require("stripe")(
   "sk_test_51LTllPFwhSEkFDCIq8x9nTSaTw616bbHe9Sg7KKIOO6HpWs4QshU2SdPqGWE3KL9vPw9fTbfOU4iDg9FeciXJIJo00yPwCTY5T"
@@ -38,7 +39,8 @@ exports.paymentCheck = (request, response) => {
   switch (event.type) {
     case "payment_intent.payment_failed":
       paymentIntent = event.data.object;
-      console.log("-----pyament failed--------------");
+
+      console.log("------pyament failed----------");
       console.log(paymentIntent);
 
       // Then define and call a function to handle the event payment_intent.payment_failed
@@ -80,11 +82,18 @@ exports.paymentCheck = (request, response) => {
       break;
 
     case "payment_intent.succeeded":
-      // Context.hasService()
-
       paymentIntent = event.data.object;
+
+      Order.findOne({ transaction_id: paymentIntent.id }).then((order) => {
+        order.status = "shipped";
+        Cart.findOne({ user: order.user }).then((cart) => {
+          cart.products = [];
+          cart.bill = 0;
+          cart.save();
+        });
+      });
+
       console.log("-----pyament success--------------");
-      console.log(paymentIntent);
 
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
