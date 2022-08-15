@@ -11,6 +11,7 @@
 // 3) Run the server on http://localhost:4242
 //   node server.js
 // const { Context } = require("../../DataSource/context");
+const Order = require("../../Model/orders");
 
 const { updateStock } = require("../../DataSource/stockUpdateBasedOnORder");
 const stripe = require("stripe")(
@@ -49,7 +50,7 @@ exports.paymentCheck = (request, response) => {
       const trans_id = paymentIntent.id;
       setTimeout(async function () {
         console.log("in set time out");
-        console.log("paymentIntetn.--------statussssssssssss");
+        console.log("paymentIntetn--------statussssssssssss");
         console.log(paymentIntent.status);
 
         if (paymentIntent.status == "requires_payment_method") {
@@ -63,7 +64,11 @@ exports.paymentCheck = (request, response) => {
     case "payment_intent.canceled":
       paymentIntent = event.data.object;
       console.log("-----pyament cancelledddd--------------");
-      updateStock(paymentIntent.id, "canceled");
+      const order = Order.findOne({ transaction_id: paymentIntent.id });
+
+      if (order.status != "canceled") {
+        updateStock(paymentIntent.id, "canceled");
+      }
       // Then define and call a function to handle the event payment_intent.canceled
       break;
 
