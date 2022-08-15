@@ -50,8 +50,8 @@ exports.paymentCheck = (request, response) => {
       console.log("  iddddddd inside paymentintent creation ");
       console.log(paymentIntent.id);
 
-      setTimeout(
-        (async (status) => {
+      (() => {
+        setTimeout(async (status) => {
           console.log("in set time out");
           console.log("paymentIntetn.--------statussssssssssss in timout");
           console.log(status);
@@ -59,18 +59,15 @@ exports.paymentCheck = (request, response) => {
           if (status == "requires_payment_method") {
             console.log("paymentIntetn --- status --- inside if condition ");
             console.log(status);
-            console.log(
-              "  iddddddd inside paymentintent creation in Timoutttt"
-            );
+            console.log(" iddddddd inside paymentintent creation in Timoutttt");
             console.log(paymentIntent.id);
 
             paymentIntent = await stripe.paymentIntents.cancel(
               paymentIntent.id
             );
           }
-        })(status),
-        60000
-      );
+        }, 60000);
+      })(status);
 
       // Then define and call a function to handle the event payment_intent.created
       break;
