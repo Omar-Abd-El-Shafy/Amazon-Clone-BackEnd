@@ -34,6 +34,8 @@ exports.paymentCheck = (request, response) => {
   // Handle the event
   let paymentIntent = null;
   let status = "requires_payment_method";
+  const getStatus = () => status;
+
   switch (event.type) {
     case "payment_intent.payment_failed":
       paymentIntent = event.data.object;
@@ -53,11 +55,12 @@ exports.paymentCheck = (request, response) => {
         console.log("paymentIntetn.--------statussssssssssss in timout");
         console.log(status);
 
-        if (status == "requires_payment_method") {
+        if (getStatus() == "requires_payment_method") {
           console.log("paymentIntetn --- status --- inside if condition ");
-          console.log(status);
+          console.log(getStatus());
           console.log("  iddddddd inside paymentintent creation in Timoutttt");
           console.log(paymentIntent.id);
+
           paymentIntent = await stripe.paymentIntents.cancel(paymentIntent.id);
         }
       }, 60000);
@@ -75,8 +78,9 @@ exports.paymentCheck = (request, response) => {
     case "payment_intent.succeeded":
       paymentIntent = event.data.object;
       console.log("-----pyament success--------------");
-      status=paymentIntent.status
-      
+
+      status = paymentIntent.status;
+
       console.log(status);
       console.log("payment Intent  iddddddd inside SUCCESSS");
       console.log(paymentIntent.id);
