@@ -45,7 +45,8 @@ exports.paymentCheck = (request, response) => {
     case "payment_intent.created":
       paymentIntent = event.data.object;
       console.log("in payment Created--------------");
-
+      console.log("  iddddddd inside paymentintent creation ");
+      console.log(paymentIntent.id);
 
       setTimeout(async function () {
         console.log("in set time out");
@@ -55,7 +56,7 @@ exports.paymentCheck = (request, response) => {
         if (paymentIntent.status == "requires_payment_method") {
           console.log("paymentIntetn --- status --- inside if condition ");
           console.log(paymentIntent.status);
-          console.log("payment Intent  iddddddd");
+          console.log("  iddddddd inside paymentintent creation in Timoutttt");
           console.log(paymentIntent.id);
           paymentIntent = await stripe.paymentIntents.cancel(paymentIntent.id);
         }
@@ -72,10 +73,11 @@ exports.paymentCheck = (request, response) => {
       break;
 
     case "payment_intent.succeeded":
-
       paymentIntent = event.data.object;
       console.log("-----pyament success--------------");
       console.log(paymentIntent.status);
+      console.log("payment Intent  iddddddd inside SUCCESSS");
+      console.log(paymentIntent.id);
 
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
