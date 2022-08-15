@@ -65,33 +65,33 @@ exports.paymentCheck = (request, response) => {
 
     case "payment_intent.canceled":
       paymentIntent = event.data.object;
-      console.log("-----pyament cancelledddd--------------");
 
+      console.log("-----pyament cancelledddd--------------");
       console.log("paymentInent.id ---++_---- inside web hook");
       console.log(paymentIntent.id);
 
       // const order = await Order.findOne({ transaction_id: paymentIntent.id });
-      Order.findOne({ transaction_id: paymentIntent.id }).then((order) => {
-        console.log(".......................order  status ---------------");
-        console.log(order);
-        if (order.status != "canceled") {
-          updateStock(paymentIntent.id, "canceled");
-        }
-        // Then define and call a function to handle the event payment_intent.canceled
-      });
+      // Order.findOne({ transaction_id: paymentIntent.id }).then((order) => {
+      //   console.log(".......................order  status ---------------");
+      //   console.log(order);
+      //   if (order.status != "canceled") {
+      //     updateStock(paymentIntent.id, "canceled");
+      //   }
+      //   // Then define and call a function to handle the event payment_intent.canceled
+      // });
       break;
 
     case "payment_intent.succeeded":
       paymentIntent = event.data.object;
 
-      Order.findOne({ transaction_id: paymentIntent.id }).then((order) => {
-        order.status = "shipped";
-        Cart.findOne({ user: order.user }).then((cart) => {
-          cart.products = [];
-          cart.bill = 0;
-          cart.save();
-        });
-      });
+      // Order.findOne({ transaction_id: paymentIntent.id }).then((order) => {
+      //   order.status = "shipped";
+      //   Cart.findOne({ user: order.user }).then((cart) => {
+      //     cart.products = [];
+      //     cart.bill = 0;
+      //     cart.save();
+      //   });
+      // });
 
       console.log("-----pyament success--------------");
 
