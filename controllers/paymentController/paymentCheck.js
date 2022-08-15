@@ -65,6 +65,8 @@ exports.paymentCheck = (request, response) => {
       paymentIntent = event.data.object;
       console.log("-----pyament cancelledddd--------------");
       const order = Order.findOne({ transaction_id: paymentIntent.id });
+      console.log(".......................order  status ---------------");
+      console.log(order.status);
 
       if (order.status != "canceled") {
         updateStock(paymentIntent.id, "canceled");
