@@ -33,15 +33,12 @@ exports.paymentCheck = (request, response) => {
     response.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
-  console.log("after erro msg");
   // Handle the event
   let paymentIntent = null;
   switch (event.type) {
     case "payment_intent.payment_failed":
       paymentIntent = event.data.object;
-
       console.log("------pyament failed----------");
-      console.log(paymentIntent);
 
       // Then define and call a function to handle the event payment_intent.payment_failed
       break;
@@ -55,7 +52,7 @@ exports.paymentCheck = (request, response) => {
         console.log("paymentIntetn--------statussssssssssss");
         console.log(paymentIntent.status);
 
-        if (paymentIntent.status == "requires_payment_method") {
+        if (paymentIntent.status === "requires_payment_method") {
           paymentIntent = await stripe.paymentIntents.cancel(trans_id);
         }
       }, 30000);
@@ -92,9 +89,7 @@ exports.paymentCheck = (request, response) => {
       //     cart.save();
       //   });
       // });
-
       console.log("-----pyament success--------------");
-
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
     // ... handle other event types
