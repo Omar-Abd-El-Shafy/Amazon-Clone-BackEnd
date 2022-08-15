@@ -31,31 +31,31 @@ exports.paymentCheck = (request, response) => {
     response.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
-  console.log("after erro msg");
   // Handle the event
   let paymentIntent = null;
   switch (event.type) {
     case "payment_intent.payment_failed":
       paymentIntent = event.data.object;
       console.log("-----pyament failed--------------");
-      console.log(paymentIntent);
 
       // Then define and call a function to handle the event payment_intent.payment_failed
       break;
 
     case "payment_intent.created":
       paymentIntent = event.data.object;
-
       const trans_id = paymentIntent.id;
       setTimeout(async function () {
+        console.log("in payment Created--------------");
         console.log("in set time out");
         console.log("paymentIntetn.--------statussssssssssss");
         console.log(paymentIntent.status);
 
         if (paymentIntent.status == "requires_payment_method") {
+          console.log("paymentIntetn --- status --- inside if condition ");
+          console.log(paymentIntent.status);
           paymentIntent = await stripe.paymentIntents.cancel(trans_id);
         }
-      }, 30000);
+      }, 60000);
 
       // Then define and call a function to handle the event payment_intent.created
       break;
@@ -72,7 +72,7 @@ exports.paymentCheck = (request, response) => {
 
       paymentIntent = event.data.object;
       console.log("-----pyament success--------------");
-      console.log(paymentIntent);
+      console.log(paymentIntent.status);
 
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
