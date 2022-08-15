@@ -34,6 +34,7 @@ exports.paymentCheck = (request, response) => {
   // Handle the event
   let paymentIntent = null;
   let status = "requires_payment_method";
+  let timeOut = null;
   // const getStatus = () => status;
 
   switch (event.type) {
@@ -50,24 +51,20 @@ exports.paymentCheck = (request, response) => {
       console.log("  iddddddd inside paymentintent creation ");
       console.log(paymentIntent.id);
 
-      (() => {
-        setTimeout(async (status) => {
-          console.log("in set time out");
-          console.log("paymentIntetn.--------statussssssssssss in timout");
+      timeOut = setTimeout(async (status) => {
+        console.log("in set time out");
+        console.log("paymentIntetn.--------statussssssssssss in timout");
+        console.log(status);
+
+        if (status == "requires_payment_method") {
+          console.log("paymentIntetn --- status --- inside if condition ");
           console.log(status);
+          console.log(" iddddddd inside paymentintent creation in Timoutttt");
+          console.log(paymentIntent.id);
 
-          if (status == "requires_payment_method") {
-            console.log("paymentIntetn --- status --- inside if condition ");
-            console.log(status);
-            console.log(" iddddddd inside paymentintent creation in Timoutttt");
-            console.log(paymentIntent.id);
-
-            paymentIntent = await stripe.paymentIntents.cancel(
-              paymentIntent.id
-            );
-          }
-        }, 60000);
-      })(status);
+          paymentIntent = await stripe.paymentIntents.cancel(paymentIntent.id);
+        }
+      }, 60000);
 
       // Then define and call a function to handle the event payment_intent.created
       break;
@@ -84,7 +81,8 @@ exports.paymentCheck = (request, response) => {
       console.log("-----pyament success--------------");
 
       status = paymentIntent.status;
-
+      
+      clearTimeout(timeOut);
       console.log(status);
       console.log("payment Intent  iddddddd inside SUCCESSS");
       console.log(paymentIntent.id);
