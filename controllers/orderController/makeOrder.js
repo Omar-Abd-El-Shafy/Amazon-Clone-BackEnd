@@ -72,7 +72,6 @@ const makeOrder = async (req, res, next) => {
             { session }
           );
 
-
           //..........update stock depending on cart start .....................
           for (const product of cart.products) {
             await Product.updateOne(
@@ -82,7 +81,6 @@ const makeOrder = async (req, res, next) => {
             );
           }
           //..........update stock depending on cart end .......................
-
         } // esle bracket
       },
       {
