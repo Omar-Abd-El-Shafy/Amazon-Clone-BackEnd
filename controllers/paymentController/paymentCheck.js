@@ -51,7 +51,7 @@ exports.paymentCheck = (request, response) => {
       console.log("  iddddddd inside paymentintent creation ");
       console.log(paymentIntent.id);
 
-      timeOut = setTimeout(async (status) => {
+      timeOut = setTimeout(async () => {
         console.log("in set time out");
         console.log("paymentIntetn.--------statussssssssssss in timout");
         console.log(status);
@@ -81,7 +81,7 @@ exports.paymentCheck = (request, response) => {
       console.log("-----pyament success--------------");
 
       status = paymentIntent.status;
-      
+
       clearTimeout(timeOut);
       console.log(status);
       console.log("payment Intent  iddddddd inside SUCCESSS");
