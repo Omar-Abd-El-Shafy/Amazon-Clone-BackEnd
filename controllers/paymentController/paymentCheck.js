@@ -20,6 +20,7 @@ const stripe = require("stripe")(
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret = "whsec_9Vq69tH5I98gDU33sl6OoinYWmAOHWF2";
 let timeOut = "null";
+let status = "requires_payment_method";
 
 exports.paymentCheck = (request, response) => {
   const sig = request.headers["stripe-signature"];
@@ -34,7 +35,6 @@ exports.paymentCheck = (request, response) => {
   }
   // Handle the event
   let paymentIntent = null;
-  let status = "requires_payment_method";
   // const getStatus = () => status;
 
   switch (event.type) {
@@ -55,21 +55,21 @@ exports.paymentCheck = (request, response) => {
         console.log("in set time out");
         console.log("paymentIntetn.--------statussssssssssss in timout");
         console.log(status);
-        // if (status == "requires_payment_method") {
-        console.log("paymentIntetn --- status --- inside if condition ");
-        console.log(status);
-        console.log(" iddddddd inside paymentintent creation in Timoutttt");
-        console.log(paymentIntent.id);
+        if (status == "requires_payment_method") {
+          console.log("paymentIntetn --- status --- inside if condition ");
+          console.log(status);
+          console.log(" iddddddd inside paymentintent creation in Timoutttt");
+          console.log(paymentIntent.id);
 
-        stripe.paymentIntents
-          .cancel(paymentIntent.id)
-          .then((result) => {
-            console.log("result from payment cancellation ", result);
-          })
-          .catch((err) => {
-            console.log("err from payment cancellation", err);
-          });
-        // }
+          stripe.paymentIntents
+            .cancel(paymentIntent.id)
+            .then((result) => {
+              console.log("result from payment cancellation ", result);
+            })
+            .catch((err) => {
+              console.log("err from payment cancellation", err);
+            });
+        }
       }, 60000);
 
       // Then define and call a function to handle the event payment_intent.created
@@ -86,7 +86,7 @@ exports.paymentCheck = (request, response) => {
       paymentIntent = event.data.object;
       console.log("-----pyament success--------------");
       status = paymentIntent.status;
-      console.log("Timout logg");
+      console.log("status in succession , ", status);
       clearTimeout(timeOut);
 
       console.log(status);
