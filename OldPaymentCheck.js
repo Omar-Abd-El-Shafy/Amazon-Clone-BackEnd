@@ -12,6 +12,8 @@
 //   node server.js
 // const { Context } = require("../../DataSource/context");
 
+const Order = require("../../Model/orders");
+const Cart = require("../../Model/cart");
 const { updateStock } = require("../../DataSource/stockUpdateBasedOnORder");
 const stripe = require("stripe")(
   "sk_test_51LTllPFwhSEkFDCIq8x9nTSaTw616bbHe9Sg7KKIOO6HpWs4QshU2SdPqGWE3KL9vPw9fTbfOU4iDg9FeciXJIJo00yPwCTY5T"
@@ -31,49 +33,62 @@ exports.paymentCheck = (request, response) => {
     response.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
-  console.log("after erro msg");
   // Handle the event
-  let paymentIntent = null;
+  const paymentIntent = null;
   switch (event.type) {
     case "payment_intent.payment_failed":
       paymentIntent = event.data.object;
-      console.log("-----pyament failed--------------");
-      console.log(paymentIntent);
-
+      console.log("------pyament failed----------");
       // Then define and call a function to handle the event payment_intent.payment_failed
       break;
 
     case "payment_intent.created":
       paymentIntent = event.data.object;
-
       const trans_id = paymentIntent.id;
+
       setTimeout(async function () {
         console.log("in set time out");
-        console.log("paymentIntetn.--------statussssssssssss");
+        console.log("paymentIntetn--------statussssssssssss  inside timout");
         console.log(paymentIntent.status);
 
         if (paymentIntent.status == "requires_payment_method") {
           paymentIntent = await stripe.paymentIntents.cancel(trans_id);
         }
-      }, 30000);
+      }, 60000);
 
       // Then define and call a function to handle the event payment_intent.created
       break;
 
     case "payment_intent.canceled":
       paymentIntent = event.data.object;
+
       console.log("-----pyament cancelledddd--------------");
-      updateStock(paymentIntent.id, "canceled");
-      // Then define and call a function to handle the event payment_intent.canceled
+      console.log("paymentInent.id ---++_---- inside web hook");
+      console.log(paymentIntent.id);
+
+      // const order = await Order.findOne({ transaction_id: paymentIntent.id });
+      // Order.findOne({ transaction_id: paymentIntent.id }).then((order) => {
+      //   console.log(".......................order  status ---------------");
+      //   console.log(order);
+      //   if (order.status != "canceled") {
+      //     updateStock(paymentIntent.id, "canceled");
+      //   }
+      //   // Then define and call a function to handle the event payment_intent.canceled
+      // });
       break;
 
     case "payment_intent.succeeded":
-      // Context.hasService()
-
       paymentIntent = event.data.object;
-      console.log("-----pyament success--------------");
-      console.log(paymentIntent);
 
+      // Order.findOne({ transaction_id: paymentIntent.id }).then((order) => {
+      //   order.status = "shipped";
+      //   Cart.findOne({ user: order.user }).then((cart) => {
+      //     cart.products = [];
+      //     cart.bill = 0;
+      //     cart.save();
+      //   });
+      // });
+      console.log("-----pyament success--------------");
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
     // ... handle other event types

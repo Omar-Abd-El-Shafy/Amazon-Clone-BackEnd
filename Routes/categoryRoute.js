@@ -64,7 +64,7 @@ const {
  *               - department
  *           example:
  *             name: category name
- *             department: 62eec448f79362e81627dfe1
+  *             department: 62eec448f79362e81627dfe1
  *     responses:
  *       '201' :
  *         description: Created
