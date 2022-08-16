@@ -80,13 +80,16 @@ exports.paymentCheck = async (request, response) => {
       console.log("-----pyament cancelledddd--------------");
       status = paymentIntent.status;
       // const order = Order.findOne({ transaction_id: paymentIntent.id });
+
       const order = await Order.findOne({ transaction_id: paymentIntent.id });
-      console.log(".......................order  status ---------------");
-      console.log(order.status);
-      if (order.status != "canceled") {
-        order.status = status;
-        await order.save();
-        await updateStock(paymentIntent.id, "canceled");
+      if (order) {
+        console.log(".......................order  status ---------------");
+        console.log(order);
+        if (order.status != "canceled") {
+          order.status = status;
+          await order.save();
+          await updateStock(paymentIntent.id, "canceled");
+        }
       }
       // Then define and call a function to handle the event payment_intent.canceled
       break;
