@@ -19,7 +19,8 @@ const stripe = require("stripe")(
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret = "whsec_9Vq69tH5I98gDU33sl6OoinYWmAOHWF2";
-let timeOut = "null";
+// let timeOut = "null";
+
 let status = "requires_payment_method";
 
 exports.paymentCheck = (request, response) => {
@@ -47,6 +48,7 @@ exports.paymentCheck = (request, response) => {
 
     case "payment_intent.created":
       paymentIntent = event.data.object;
+      status = "requires_payment_method"
       console.log("in payment Created--------------");
       console.log("  iddddddd inside paymentintent creation ");
       console.log(paymentIntent.id);
@@ -55,6 +57,7 @@ exports.paymentCheck = (request, response) => {
         console.log("in set time out");
         console.log("paymentIntetn.--------statussssssssssss in timout");
         console.log(status);
+
         if (status == "requires_payment_method") {
           console.log("paymentIntetn --- status --- inside if condition ");
           console.log(status);
@@ -83,11 +86,13 @@ exports.paymentCheck = (request, response) => {
       break;
 
     case "payment_intent.succeeded":
+
       paymentIntent = event.data.object;
       console.log("-----pyament success--------------");
       status = paymentIntent.status;
       console.log("status in succession , ", status);
-      clearTimeout(timeOut);
+
+      // clearTimeout(timeOut);
 
       console.log(status);
       console.log("payment Intent  iddddddd inside SUCCESSS");
