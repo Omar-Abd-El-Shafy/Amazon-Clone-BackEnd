@@ -98,6 +98,10 @@ exports.paymentCheck = async (request, response) => {
       paymentIntent = event.data.object;
       console.log("-----pyament success--------------");
       status = paymentIntent.status;
+
+
+
+      
       // console.log("status in succession , ", status);
 
       // clearTimeout(timeOut);

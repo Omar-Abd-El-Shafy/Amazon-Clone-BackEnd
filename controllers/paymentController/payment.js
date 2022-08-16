@@ -37,6 +37,10 @@ exports.payment = async (req, res) => {
   });
   if (order.status == "pendingPayment") {
     order.transaction_id = paymentIntent.id;
+  } else {
+    res
+      .status(409)
+      .send(`u can't pay for this order as status is ${order.status}`);
   }
   order.save();
 
