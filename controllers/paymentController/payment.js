@@ -35,10 +35,11 @@ exports.payment = async (req, res) => {
       enabled: true,
     },
   });
-  order.transaction_id = paymentIntent.id;
-
+  if (order.status == "pendingPayment") {
+    order.transaction_id = paymentIntent.id;
+  }
   order.save();
-  
+
   console.log("paymentIntent from ceate payment.............");
   // console.log(paymentIntent);
 
