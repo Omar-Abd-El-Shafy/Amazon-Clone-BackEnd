@@ -1,12 +1,13 @@
 const { makeOrder } = require("./makeOrder");
-const { updateOrderStatus } = require("./updateOrderStatus");
+const { cacnelOrder } = require("./cancelOrder");
 const { getOrderById } = require("./getOrderById");
-
+const { getAllOrders } = require("./getAllOrders");
 //combine methods in cartController in an obj
 const orderController = {
   makeOrder,
-  updateOrderStatus,
+  cacnelOrder,
   getOrderById,
+  getAllOrders,
 };
 
 //to use in productRoute

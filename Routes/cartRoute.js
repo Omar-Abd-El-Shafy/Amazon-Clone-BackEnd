@@ -10,6 +10,7 @@ cartRoute.get("/getCart", auth, cartController.getCart);
 cartRoute.put("/addItem", auth, cartController.addItem);
 cartRoute.put("/removeItem", auth, cartController.removeItem);
 cartRoute.put("/emptyCart", auth, cartController.emptyCart);
+cartRoute.put("/incItem", auth, cartController.incItemByOne);
 
 //http methods
 

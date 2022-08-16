@@ -103,12 +103,14 @@ exports.paymentCheck = async (request, response) => {
         transaction_id: paymentIntent.id,
       });
       if (orderSucc) {
-        orderSucc.status = "shipped";
-        const cart = await Cart.findOne({ user: orderSucc.user });
-        cart.products = [];
-        cart.bill = 0;
-        await cart.save();
-        await orderSucc.save();
+        if (orderSucc.status == "pendingPayment") {
+          orderSucc.status = "shipped";
+          const cart = await Cart.findOne({ user: orderSucc.user });
+          cart.products = [];
+          cart.bill = 0;
+          await cart.save();
+          await orderSucc.save();
+        }
       }
 
       // console.log("status in succession , ", status);

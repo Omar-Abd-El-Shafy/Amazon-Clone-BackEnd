@@ -5,8 +5,9 @@ const auth = require("../MiddleWare/auth");
 //controller
 const orderController = require("../controllers/orderController/index");
 
-orderRoute.post("/makeOrder", auth, orderController.makeOrder);
-orderRoute.put("/", auth, orderController.updateOrderStatus);
-orderRoute.get("/", auth, orderController.getOrderById);
+orderRoute.post("/", auth, orderController.makeOrder);
+orderRoute.put("/", auth, orderController.cacnelOrder);
+orderRoute.get("/:id", auth, orderController.getOrderById);
+orderRoute.get("/", auth, orderController.getAllOrders);
 
 module.exports = orderRoute;
