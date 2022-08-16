@@ -11,7 +11,8 @@
 // 3) Run the server on http://localhost:4242
 //   node server.js
 // const { Context } = require("../../DataSource/context");
-
+const Order = require("../../Model/orders");
+const Cart = require("../../Model/cart");
 const { updateStock } = require("../../DataSource/stockUpdateBasedOnORder");
 const stripe = require("stripe")(
   "sk_test_51LTllPFwhSEkFDCIq8x9nTSaTw616bbHe9Sg7KKIOO6HpWs4QshU2SdPqGWE3KL9vPw9fTbfOU4iDg9FeciXJIJo00yPwCTY5T"
@@ -22,11 +23,9 @@ const endpointSecret = "whsec_9Vq69tH5I98gDU33sl6OoinYWmAOHWF2";
 
 let status = "requires_payment_method";
 
-exports.paymentCheck = (request, response) => {
+exports.paymentCheck = async (request, response) => {
   const sig = request.headers["stripe-signature"];
-
   let event;
-
   try {
     event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
   } catch (err) {
@@ -51,13 +50,12 @@ exports.paymentCheck = (request, response) => {
       // console.log("  iddddddd inside paymentintent creation ");
       // console.log(paymentIntent.id);
 
-        setTimeout(() => {
+      setTimeout(() => {
         // console.log("in set time out");
         // console.log("paymentIntetn.--------statussssssssssss in timout");
         // console.log(status);
 
         if (status == "requires_payment_method") {
-
           // console.log("paymentIntetn --- status --- inside if condition ");
           // console.log(status);
           // console.log(" iddddddd inside paymentintent creation in Timoutttt");
@@ -80,7 +78,16 @@ exports.paymentCheck = (request, response) => {
     case "payment_intent.canceled":
       paymentIntent = event.data.object;
       console.log("-----pyament cancelledddd--------------");
-      updateStock(paymentIntent.id, "canceled");
+      status = paymentIntent.status;
+      // const order = Order.findOne({ transaction_id: paymentIntent.id });
+      const order = await Order.findOne({ transaction_id: paymentIntent.id });
+      console.log(".......................order  status ---------------");
+      console.log(order.status);
+      if (order.status != "canceled") {
+        order.status = status;
+        await order.save();
+        await updateStock(paymentIntent.id, "canceled");
+      }
       // Then define and call a function to handle the event payment_intent.canceled
       break;
 
