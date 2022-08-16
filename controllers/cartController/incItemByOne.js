@@ -15,7 +15,7 @@ exports.incItemByOne = async (req, res, next) => {
       //     { _id: product.productBrief.product_id._id },
       //     { $inc: { stock: product.quantity } }
       //   );
-      await cart.save().then((cart) => res.status(200).send(cart));
+      await cart.save().then((cart) => res.status(202).send("item added"));
     } else {
       let product = { product_id, quantity: 1 };
       cart.products.push(product);

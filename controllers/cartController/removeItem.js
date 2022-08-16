@@ -14,6 +14,6 @@ exports.removeItem = async (req, res, next) => {
   cart.products = newProductArr;
   await cart
     .save()
-    .then((cart) => res.status(200).send(cart))
+    .then((cart) => res.status(200).send("product removed"))
     .catch((err) => next(err));
 };

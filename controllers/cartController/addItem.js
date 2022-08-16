@@ -32,7 +32,7 @@ exports.addItem = async (req, res, next) => {
 
     await cart
       .save()
-      .then((cart) => res.status(200).send(cart))
+      .then((cart) => res.status(202).send("item added"))
       .catch((err) => next(err));
   } else {
     let product = { product_id, quantity };
@@ -50,7 +50,7 @@ exports.addItem = async (req, res, next) => {
 
     await cart
       .save()
-      .then((cart) => res.status(200).send(cart))
+      .then((cart) => res.status(202).send("item added"))
       .catch((err) => next(err));
   }
 };
