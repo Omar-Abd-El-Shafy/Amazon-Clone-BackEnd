@@ -25,7 +25,7 @@ exports.addReview = async (req, res, next) => {
     // check if user bought the product
     const bought = await orders.findOne({
       user,
-      status: "delivered",
+      status: { $in: ["delivered", "shipped"] },
       "products.productBrief.product_id": product,
     });
     if (!bought) {
