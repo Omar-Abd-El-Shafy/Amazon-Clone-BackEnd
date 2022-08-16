@@ -60,7 +60,6 @@ exports.paymentCheck = async (request, response) => {
           // console.log(status);
           // console.log(" iddddddd inside paymentintent creation in Timoutttt");
           // console.log(paymentIntent.id);
-
           stripe.paymentIntents
             .cancel(paymentIntent.id)
             .then((result) => {
@@ -81,13 +80,15 @@ exports.paymentCheck = async (request, response) => {
       status = paymentIntent.status;
       // const order = Order.findOne({ transaction_id: paymentIntent.id });
 
-      const order = await Order.findOne({ transaction_id: paymentIntent.id });
-      if (order) {
+      const orderCancel = await Order.findOne({
+        transaction_id: paymentIntent.id,
+      });
+      if (orderCancel) {
         console.log(".......................order  status ---------------");
-        console.log(order);
-        if (order.status != "canceled") {
-          order.status = status;
-          await order.save();
+        console.log(orderCancel);
+        if (orderCancel.status != "canceled") {
+          orderCancel.status = status;
+          await orderCancel.save();
           await updateStock(paymentIntent.id, "canceled");
         }
       }
@@ -98,14 +99,20 @@ exports.paymentCheck = async (request, response) => {
       paymentIntent = event.data.object;
       console.log("-----pyament success--------------");
       status = paymentIntent.status;
+      const orderSucc = await Order.findOne({
+        transaction_id: paymentIntent.id,
+      });
+      if (orderSucc) {
+        orderSucc.status = "shipped";
+        const cart = Cart.findOne({ user: orderSucc.user });
+        cart.products = [];
+        cart.bill = 0;
+        cart.save();
+        orderSucc.save();
+      }
 
-
-
-      
       // console.log("status in succession , ", status);
-
       // clearTimeout(timeOut);
-
       // console.log(status);
       // console.log("payment Intent  iddddddd inside SUCCESSS");
       // console.log(paymentIntent.id);
