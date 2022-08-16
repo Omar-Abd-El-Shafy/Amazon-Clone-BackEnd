@@ -104,11 +104,11 @@ exports.paymentCheck = async (request, response) => {
       });
       if (orderSucc) {
         orderSucc.status = "shipped";
-        const cart = Cart.findOne({ user: orderSucc.user });
+        const cart = await Cart.findOne({ user: orderSucc.user });
         cart.products = [];
         cart.bill = 0;
-        cart.save();
-        orderSucc.save();
+        await cart.save();
+        await orderSucc.save();
       }
 
       // console.log("status in succession , ", status);
