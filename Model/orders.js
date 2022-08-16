@@ -31,6 +31,7 @@ const orderSchema = mongoose.Schema(
 
     deliveryNotes: { type: String },
     deliveryDate: { type: Date },
+    
     status: {
       type: String,
       enum: ["pendingPayment", "canceled", "delivered", "shipped"],
