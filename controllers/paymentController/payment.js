@@ -39,9 +39,11 @@ exports.payment = async (req, res, next) => {
   if (order.status == "pendingPayment") {
     order.transaction_id = paymentIntent.id;
     await order.save();
+
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
+    
   } else {
     res
       .status(409)

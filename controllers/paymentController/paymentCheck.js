@@ -20,7 +20,6 @@ const stripe = require("stripe")(
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret = "whsec_9Vq69tH5I98gDU33sl6OoinYWmAOHWF2";
-
 let status = "requires_payment_method";
 
 exports.paymentCheck = async (request, response) => {
@@ -86,7 +85,7 @@ exports.paymentCheck = async (request, response) => {
       if (orderCancel) {
         console.log(".......................order  status ---------------");
         console.log(orderCancel);
-        if (orderCancel.status != "canceled") {
+        if (orderCancel.status == "pendingPayment") {
           orderCancel.status = status;
           await orderCancel.save();
           await updateStock(paymentIntent.id, "canceled");
