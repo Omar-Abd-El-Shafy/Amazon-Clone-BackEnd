@@ -29,8 +29,8 @@ const upload = multer({
     s3,
     bucket: "productsprojectimages",
     metadata: (req, file, cb) => {
-      console.log("req.body before uplaod function");
-      console.log(req.body);
+      // console.log("req.body before uplaod function");
+      // console.log(req.body);
 
       cb(null, { fieldName: file.fieldname });
     },

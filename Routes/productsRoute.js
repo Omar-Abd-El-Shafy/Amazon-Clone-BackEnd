@@ -197,7 +197,7 @@ const {
  *       '409' :
  *         description: A Product already Exist with Same Name
  */
-productRoute.post("/", upload.array("img"), productController.addProduct);
+productRoute.post("/", isAdmin, upload.array("img"), productController.addProduct);
 
 /**
  * @swagger
@@ -217,19 +217,60 @@ productRoute.post("/", upload.array("img"), productController.addProduct);
  *       required: true
  *       description: Requires the product _id and fields to be updated
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/Product'
- *           example:
- *             id: 62eec448f79362e81627dfe1
- *             name: new name for product
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 description: _id of the product to be updated
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *               img:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
+ *                 description: The product images
+ *               department:
+ *                 type: string
+ *                 description: _id of department
+ *               category:
+ *                 type: string
+ *                 description: _id of category
+ *               brand:
+ *                 type: string
+ *               weight:
+ *                 type: number 
+ *               cod:
+ *                 type: boolean 
+ *             required:
+ *               - id   
+ *               - name   
+ *               - price   
+ *               - stock   
+ *               - description   
+ *               - department   
+ *               - category   
+ *               - brand   
+ *               - weight  
+ *               - cod 
+ *             encoding: 
+ *               img: 
+ *                 contentType: image/png, image/jpeg, image/jpg
  *     responses:
  *       '200' :
  *         description: updated
  *       '404' :
  *         description: Product not found, Enter a valid id
  */
-productRoute.put("/", isAdmin, productController.updateProduct);
+productRoute.put("/", isAdmin, upload.array("img"), productController.updateProduct);
 
 /**
  * @swagger
