@@ -18,7 +18,7 @@ app.use(express.json());
 //   return 1400;
 // };
 
-exports.payment = async (req, res) => {
+exports.payment = async (req, res, next) => {
   const { order_id } = req.body;
   // console.log("ORDER ID --------- ,", order_id);
   const order = await Order.findById(order_id);
@@ -35,19 +35,21 @@ exports.payment = async (req, res) => {
       enabled: true,
     },
   });
+
   if (order.status == "pendingPayment") {
     order.transaction_id = paymentIntent.id;
+    await order.save();
+    res.send({
+      clientSecret: paymentIntent.client_secret,
+    });
   } else {
     res
       .status(409)
       .send(`u can't pay for this order as status is ${order.status}`);
   }
-  order.save();
-
   console.log("paymentIntent from ceate payment.............");
+
   // console.log(paymentIntent);
 
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
+
 };
