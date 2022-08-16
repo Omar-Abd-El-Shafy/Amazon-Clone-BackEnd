@@ -104,7 +104,22 @@ exports.comment = body("comment")
   .withMessage("Comment min length is 3")
   .bail();
 
+// ################################### address input #####################################
+
+exports.zipCode = check("zipCode")
+  .exists()
+  .notEmpty()
+  .withMessage("Zip Code is required")
+  .bail()
+  .isPostalCode("any")
+  .bail();
+
 // ################################### common input #####################################
+
+// validation chain for required fields
+// created as a function to allow for custmized fields name
+exports.requiredField = (field) =>
+  check(field).exists().notEmpty().withMessage(`${field} is required`).bail();
 
 // validation chain for id
 // created as a function to allow for custmized id names

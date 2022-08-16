@@ -11,6 +11,8 @@ const {
   rating,
   title,
   comment,
+  requiredField,
+  zipCode,
 } = require("./inputs");
 const validationResults = require("./validationResults");
 const { oneOf } = require("express-validator");
@@ -78,6 +80,18 @@ exports.addReviewValidator = [
 ];
 
 exports.getAllValidator = [id(), page, validationResults];
+
+// ################################### address validators #####################################
+
+exports.addressValidator = [
+  requiredField("building"),
+  requiredField("street"),
+  requiredField("city"),
+  requiredField("state"),
+  zipCode,
+  phone,
+  validationResults
+]
 
 // ################################### common validators #####################################
 
