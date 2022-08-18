@@ -2,7 +2,8 @@ const Cart = require("../../Model/cart");
 
 exports.incItemByOne = async (req, res, next) => {
   try {
-    const { product_id } = req.body;
+    //flag =0 means remove ,,, flag =1 means add
+    const { product_id, flag } = req.body;
     const cart = await Cart.findOne({ user: req.user_id });
     const productIsThere = cart.products.findIndex((product) => {
       return product.product_id == product_id;
@@ -10,12 +11,16 @@ exports.incItemByOne = async (req, res, next) => {
 
     if (productIsThere > -1) {
       // cart.products[productIsThere].quantity = quantity;
-      cart.products[productIsThere].quantity += 1;
+      if (flag == 1) {
+        cart.products[productIsThere].quantity += 1;
+      } else if (flag == 0) {
+        cart.products[productIsThere].quantity -= 1;
+      }
       // await cart.updateOne(
       //     { _id: product.productBrief.product_id._id },
       //     { $inc: { stock: product.quantity } }
       //   );
-      await cart.save().then((cart) => res.status(202).send("item added"));
+      await cart.save().then((cart) => res.status(202).send("quantity updated"));
     } else {
       let product = { product_id, quantity: 1 };
       cart.products.push(product);
