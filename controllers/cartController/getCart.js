@@ -13,7 +13,11 @@ exports.getCart = async (req, res, next) => {
         res.status(200).send(cart);
       });
     } else {
-      res.status(200).send([]);
+      cart.bill = 0;
+      await cart.save().then((cart)=>{
+        res.status(200).send([]);
+
+      })
     }
   } catch (err) {
     next(err);

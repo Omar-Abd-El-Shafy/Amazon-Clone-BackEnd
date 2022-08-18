@@ -21,9 +21,9 @@ exports.incItemByOne = async (req, res, next) => {
       //     { $inc: { stock: product.quantity } }
       //   );
       await cart.save().then((cart) => res.status(202).send("quantity updated"));
-      
+
     } else {
-      let product = { product_id, quantity: 1 };
+      const product = { product_id, quantity: 1 };
       cart.products.push(product);
       await cart.save().then((cart) => res.status(200).send(cart));
     }
