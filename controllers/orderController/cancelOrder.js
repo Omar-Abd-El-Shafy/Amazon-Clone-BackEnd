@@ -23,14 +23,12 @@ exports.cacnelOrder = async (req, res, next) => {
     );
     if (order) {
       order.status = status;
-      if (status === "canceled") {
-        order.products.map(async (product) => {
-          await Product.updateOne(
-            { _id: product.productBrief.product_id._id },
-            { $inc: { stock: product.quantity } }
-          );
-        });
-      }
+      order.products.map(async (product) => {
+        await Product.updateOne(
+          { _id: product.productBrief.product_id._id },
+          { $inc: { stock: product.quantity } }
+        );
+      });
 
       await order.save().then((updatedOrder) => {
         res.status(200).send(updatedOrder);
