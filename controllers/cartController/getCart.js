@@ -13,7 +13,7 @@ exports.getCart = async (req, res, next) => {
         res.status(200).send(cart);
       });
     } else {
-      res.status(404).send([]);
+      res.status(204).send([]);
     }
   } catch (err) {
     next(err);
