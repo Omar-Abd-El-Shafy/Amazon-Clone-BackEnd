@@ -9,8 +9,9 @@ exports.getCart = async (req, res, next) => {
       cart.bill = cart.products.reduce((acc, curr) => {
         return acc + curr.quantity * curr.product_id.price;
       }, 0);
-      await cart.save();
-      res.status(200).send(cart);
+      await cart.save().then((cart) => {
+        res.status(200).send(cart);
+      });
     } else {
       res.status(404).send("cart has no products");
     }
