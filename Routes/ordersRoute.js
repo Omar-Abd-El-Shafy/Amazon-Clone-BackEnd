@@ -30,13 +30,13 @@ const orderController = require("../controllers/orderController/index");
  *               type: string
  *             state:
  *               type: string
+ *             country:
+ *               type: string
  *             zipCode:
  *               type: string
  *             phone:
  *               type: string
  *         transaction_id:
- *           type: string
- *         deliveryNotes:
  *           type: string
  *         deliveryDate:
  *           type: string
@@ -105,12 +105,12 @@ const orderController = require("../controllers/orderController/index");
  *                     type: string
  *                   state:
  *                     type: string
+ *                   country:
+ *                     type: string
  *                   zipCode:
  *                     type: string
  *                   phone:
  *                     type: string
- *               deliveryNotes:
- *                 type: string
  *               paymentMethod:
  *                 type: string
  *                 enum: ["cash", "visa"]
@@ -124,9 +124,9 @@ const orderController = require("../controllers/orderController/index");
  *               street: 9
  *               city: El-Mokkattam
  *               state: Cairo
+ *               country: Egypt
  *               zipCode: 11571
  *               phone: 01012345678 
- *             deliveryNotes: "call before ringing"
  *             paymentMethod: visa
  *     responses:
  *       '201' :

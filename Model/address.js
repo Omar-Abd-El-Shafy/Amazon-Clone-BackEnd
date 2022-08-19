@@ -23,6 +23,10 @@ const addressSchema = mongoose.Schema(
       type: String,
       requied: true,
     },
+    country: {
+      type: String,
+      requied: true,
+    },
     zipCode: {
       type: String,
       requied: true,
@@ -37,7 +41,7 @@ const addressSchema = mongoose.Schema(
 
 // Create a virtual property `fullAddress` that's computed from address fields.
 addressSchema.virtual("fullAddress").get(function () {
-  return `${this.building}, ${this.street}, ${this.city}, ${this.state}, ${this.zipCode}`;
+  return `${this.building}, ${this.street}, ${this.city}, ${this.state}, ${this.country}, ${this.zipCode}`;
 });
 
 module.exports = mongoose.model("Address", addressSchema);

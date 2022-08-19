@@ -55,7 +55,7 @@ const makeOrder = async (req, res, next) => {
           const deliveryDate = new Date(myCurrentDate);
           deliveryDate.setDate(deliveryDate.getDate() + 7);
           // getting rest of data from req body
-          let { deliveryAddress, paymentMethod, deliveryNote } = req.body;
+          let { deliveryAddress, paymentMethod } = req.body;
           let status;
           if (paymentMethod == "cash") {
             status = "shipped";
@@ -69,7 +69,6 @@ const makeOrder = async (req, res, next) => {
                 user,
                 products,
                 deliveryAddress,
-                deliveryNote,
                 status,
                 deliveryDate,
                 bill,

@@ -20,6 +20,9 @@ const orderSchema = mongoose.Schema(
       state: {
         type: String,
       },
+      country: {
+        type: String,
+      },
       zipCode: {
         type: String,
       },
@@ -28,10 +31,7 @@ const orderSchema = mongoose.Schema(
       },
     },
     transaction_id: { type: String, default: "" },
-
-    deliveryNotes: { type: String },
     deliveryDate: { type: Date },
-
     status: {
       type: String,
       enum: ["pendingPayment", "canceled", "delivered", "shipped"],

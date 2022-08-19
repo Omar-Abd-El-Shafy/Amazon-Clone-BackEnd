@@ -3,7 +3,7 @@ const Address = require("../../Model/address");
 exports.addAddress = async (req, res, next) => {
   try {
     const user = req.user_id;
-    const { building, street, city, state, zipCode, phone } = req.body;
+    const { building, street, city, state, country, zipCode, phone } = req.body;
 
     // check if old address
     const oldAddress = await Address.find({
@@ -12,11 +12,12 @@ exports.addAddress = async (req, res, next) => {
       street,
       city,
       state,
+      country,
       zipCode,
     });
 
     if (oldAddress) {
-      res.status(409).send("Address already exists");
+      return res.status(409).send("Address already exists");
     }
 
     const address = await Address.create({
@@ -25,6 +26,7 @@ exports.addAddress = async (req, res, next) => {
       street,
       city,
       state,
+      country,
       zipCode,
       phone,
     });
