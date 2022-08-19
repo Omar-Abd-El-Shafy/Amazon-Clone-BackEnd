@@ -6,7 +6,7 @@ exports.addAddress = async (req, res, next) => {
     const { building, street, city, state, country, zipCode, phone } = req.body;
 
     // check if old address
-    const oldAddress = await Address.find({
+    const oldAddress = await Address.findOne({
       user,
       building,
       street,
@@ -14,8 +14,9 @@ exports.addAddress = async (req, res, next) => {
       state,
       country,
       zipCode,
+      phone,
     });
-
+    
     if (oldAddress) {
       return res.status(409).send("Address already exists");
     }
