@@ -7,7 +7,7 @@ const orderSchema = mongoose.Schema(
       ref: "User",
     },
     // paymentDetails: {}
-    deliveryAddress: { 
+    deliveryAddress: {
       building: {
         type: String,
       },
@@ -31,11 +31,15 @@ const orderSchema = mongoose.Schema(
 
     deliveryNotes: { type: String },
     deliveryDate: { type: Date },
-    
+
     status: {
       type: String,
       enum: ["pendingPayment", "canceled", "delivered", "shipped"],
       default: "pendingPayment",
+    },
+    paymentMethod: {
+      type: String,
+      enum: ["cash", "visa"],
     },
     products: [
       {
