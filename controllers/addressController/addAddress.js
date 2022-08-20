@@ -18,7 +18,7 @@ exports.addAddress = async (req, res, next) => {
     });
     
     if (oldAddress) {
-      return res.status(409).send("Address already exists");
+      return res.status(200).send("Address already exists");
     }
 
     const address = await Address.create({
