@@ -28,13 +28,15 @@ const { idValidator, addressValidator } = require("../MiddleWare/validators");
  *           type: string
  *         state:
  *           type: string
+ *         country:
+ *           type: string
  *         zipCode:
  *           type: string
  *         phone:
  *           type: string
  *         fullAddress:
  *           type: string
- *           description: Constructed from building, street, city ,state and zipCode
+ *           description: Constructed from building, street, city, state, country and zipCode
  */
 
 /**
@@ -66,6 +68,8 @@ const { idValidator, addressValidator } = require("../MiddleWare/validators");
  *                 type: string
  *               state:
  *                 type: string
+ *               country:
+ *                 type: string
  *               zipCode:
  *                 type: string
  *               phone:
@@ -75,6 +79,7 @@ const { idValidator, addressValidator } = require("../MiddleWare/validators");
  *               - street
  *               - city
  *               - state
+ *               - country
  *               - zipCode
  *               - phone
  *           example:
@@ -82,6 +87,7 @@ const { idValidator, addressValidator } = require("../MiddleWare/validators");
  *             street: 9
  *             city: El-Mokkattam
  *             state: Cairo
+ *             country: Egypt
  *             zipCode: 11571
  *             phone: 01012345678
  *     responses:

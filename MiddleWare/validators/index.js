@@ -88,6 +88,7 @@ exports.addressValidator = [
   requiredField("street"),
   requiredField("city"),
   requiredField("state"),
+  requiredField("country"),
   zipCode,
   phone,
   validationResults

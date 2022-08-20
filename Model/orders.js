@@ -7,7 +7,7 @@ const orderSchema = mongoose.Schema(
       ref: "User",
     },
     // paymentDetails: {}
-    deliveryAddress: { 
+    deliveryAddress: {
       building: {
         type: String,
       },
@@ -20,6 +20,9 @@ const orderSchema = mongoose.Schema(
       state: {
         type: String,
       },
+      country: {
+        type: String,
+      },
       zipCode: {
         type: String,
       },
@@ -28,14 +31,15 @@ const orderSchema = mongoose.Schema(
       },
     },
     transaction_id: { type: String, default: "" },
-
-    deliveryNotes: { type: String },
     deliveryDate: { type: Date },
-    
     status: {
       type: String,
       enum: ["pendingPayment", "canceled", "delivered", "shipped"],
       default: "pendingPayment",
+    },
+    paymentMethod: {
+      type: String,
+      enum: ["cash", "visa"],
     },
     products: [
       {
@@ -54,7 +58,10 @@ const orderSchema = mongoose.Schema(
         },
       },
     ],
-
+    shippingFee: {
+      type: Number,
+      required: true,
+    },
     bill: {
       // must be calcualated to be sure
       type: Number,
