@@ -37,9 +37,7 @@ exports.payment = async (req, res, next) => {
     let paymentIntent = await stripe.paymentIntents.create({
       amount: bill,
       currency: "egp",
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      automatic_payment_methods:  ['card']
     });
 
     if (order.status == "pendingPayment") {
