@@ -67,6 +67,8 @@ const orderController = require("../controllers/orderController/index");
  *                 type: number
  *                 default: 1
  *                 minimum: 1
+ *         shippingFee:
+ *           type: number
  *         bill:
  *           type: number
  *           default: 0
