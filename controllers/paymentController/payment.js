@@ -28,9 +28,10 @@ exports.payment = async (req, res, next) => {
   // console.log(bill);
   // Create a PaymentIntent with the order amount and currency
 
-  // if (bill == 0) {
-  //   return res.status(409).send("you can't pay for a free order");
-  // }
+  if (bill == 0) {
+     res.status(409).send("you can't pay for a free order");
+  }
+  else{
 
   try {
     let paymentIntent = await stripe.paymentIntents.create({
@@ -59,4 +60,5 @@ exports.payment = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+}
 };
