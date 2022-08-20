@@ -5,7 +5,7 @@ exports.getAllOrders = async (req, res, next) => {
   try {
     const user_id = req.user_id;
     Order.find({ user: user_id })
-      .populate("products.productBrief.product_id", "stock -_id")
+      // .populate("products.productBrief.product_id", "stock -_id")
       .then((order) => {
         res.status(200).send(order);
       });
