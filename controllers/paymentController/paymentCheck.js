@@ -68,7 +68,7 @@ exports.paymentCheck = async (request, response) => {
               console.log("err from payment cancellation", err);
             });
         }
-      }, 60000);
+      }, 600000 * 10);
 
       // Then define and call a function to handle the event payment_intent.created
       break;

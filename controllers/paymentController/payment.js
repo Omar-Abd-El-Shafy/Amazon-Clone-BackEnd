@@ -23,35 +23,42 @@ exports.payment = async (req, res, next) => {
   // console.log("ORDER ID --------- ,", order_id);
   const order = await Order.findById(order_id);
   // console.log("order--==-=-=", order);
-  const bill = order.bill;
+  const bill = Math.ceil(order.bill);
   // console.log("billlll----------");
   // console.log(bill);
-
   // Create a PaymentIntent with the order amount and currency
-  let paymentIntent = await stripe.paymentIntents.create({
-    amount: bill,
-    currency: "egp",
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
 
-  if (order.status == "pendingPayment") {
-    order.transaction_id = paymentIntent.id;
-    await order.save();
-
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    });
-    
-  } else {
-    res
-      .status(409)
-      .send(`u can't pay for this order as status is ${order.status}`);
+  if (bill == 0) {
+     res.status(409).send("you can't pay for a free order");
   }
-  console.log("paymentIntent from ceate payment.............");
+  else{
 
-  // console.log(paymentIntent);
+  try {
+    let paymentIntent = await stripe.paymentIntents.create({
+      amount: bill,
+      currency: "egp",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
 
+    if (order.status == "pendingPayment") {
+      order.transaction_id = paymentIntent.id;
+      await order.save();
 
+      res.send({
+        clientSecret: paymentIntent.client_secret,
+      });
+    } else {
+      res
+        .status(409)
+        .send(`u can't pay for this order as status is ${order.status}`);
+    }
+    console.log("paymentIntent from ceate payment.............");
+
+    // console.log(paymentIntent);
+  } catch (err) {
+    next(err);
+  }
+}
 };

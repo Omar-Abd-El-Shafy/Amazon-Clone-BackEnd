@@ -25,7 +25,8 @@ exports.incItemByOne = async (req, res, next) => {
     } else {
       const product = { product_id, quantity: 1 };
       cart.products.push(product);
-      await cart.save().then((cart) => res.status(200).send(cart));
+      await cart.save().then((cart) => res.status(202).send("quantity updated"));
+      //edit in swagger
     }
   } catch (err) {
     next(err);
