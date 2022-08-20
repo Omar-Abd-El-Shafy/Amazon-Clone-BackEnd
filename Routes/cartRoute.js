@@ -128,7 +128,27 @@ cartRoute.put("/addItem", auth, cartController.addItem);
  */
 cartRoute.put("/removeItem", auth, cartController.removeItem);
 
-cartRoute.put("/emptyCart", auth, cartController.emptyCart);
+/**
+ * @swagger
+ * /cart/emptyCart:
+ *   put:
+ *     summary: empty cart from products and make bill = 0
+ *     tags:
+ *       - Cart
+ *     parameters:
+ *       - in: header
+ *         name: x-access-token
+ *         required: true
+ *         description: The user token
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200' :
+ *         description: cart is empty
+ *       '404' :
+ *         description: invalid token
+ */
+ cartRoute.put("/emptyCart", auth, cartController.emptyCart);
 
 /**
  * @swagger
