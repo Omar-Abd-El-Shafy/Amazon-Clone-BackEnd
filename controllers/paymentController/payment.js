@@ -26,8 +26,12 @@ exports.payment = async (req, res, next) => {
   const bill = order.bill;
   // console.log("billlll----------");
   // console.log(bill);
-
   // Create a PaymentIntent with the order amount and currency
+
+  if( bill == 0 ){
+    return res.status(400).send("you can't pay for a free order")
+  }
+
   let paymentIntent = await stripe.paymentIntents.create({
     amount: bill,
     currency: "egp",
