@@ -23,7 +23,7 @@ exports.payment = async (req, res, next) => {
   // console.log("ORDER ID --------- ,", order_id);
   const order = await Order.findById(order_id);
   // console.log("order--==-=-=", order);
-  const bill = order.bill;
+  const bill = Math.ceil(order.bill);
   // console.log("billlll----------");
   // console.log(bill);
   // Create a PaymentIntent with the order amount and currency
