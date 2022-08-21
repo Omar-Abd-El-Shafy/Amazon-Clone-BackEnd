@@ -3,7 +3,7 @@ const Order = require("../../Model/orders");
 //shoudl check if order exist !
 exports.getOrderForAdmin = async (req, res, next) => {
   try {
-    const user_id = req.param.id;
+    const user_id = req.params.id;
     Order.find({ user: user_id })
       // .populate("products.productBrief.product_id", "stock -_id")
       .then((order) => {
