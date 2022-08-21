@@ -74,7 +74,6 @@ const orderController = require("../controllers/orderController/index");
  *           default: 0
  */
 
-
 /**
  * @swagger
  * /order:
@@ -117,18 +116,18 @@ const orderController = require("../controllers/orderController/index");
  *                 type: string
  *                 enum: ["cash", "visa"]
  *             required:
- *               - deliveryAddress   
- *               - deliveryNotes   
- *               - paymentMethod   
+ *               - deliveryAddress
+ *               - deliveryNotes
+ *               - paymentMethod
  *           example:
- *             deliveryAddress: 
+ *             deliveryAddress:
  *               building: 100
  *               street: 9
  *               city: El-Mokkattam
  *               state: Cairo
  *               country: Egypt
  *               zipCode: 11571
- *               phone: 01012345678 
+ *               phone: 01012345678
  *             paymentMethod: visa
  *     responses:
  *       '201' :
@@ -178,8 +177,8 @@ orderRoute.post("/", auth, orderController.makeOrder);
  *               status:
  *                 type: string
  *             required:
- *               - order_id   
- *               - status   
+ *               - order_id
+ *               - status
  *           example:
  *             order_id: 62fec76c83d928fc3b4792cd
  *             status: canceled
@@ -225,7 +224,7 @@ orderRoute.put("/", isAdmin, orderController.cacnelOrder);
  *       '404' :
  *         description: Order not found
  */
- orderRoute.get("/:id", auth, orderController.getOrderById);
+orderRoute.get("/:id", auth, orderController.getOrderById);
 
 /**
  * @swagger
@@ -252,6 +251,7 @@ orderRoute.put("/", isAdmin, orderController.cacnelOrder);
  *                 items:
  *                   $ref: '#/components/schemas/Order'
  */
- orderRoute.get("/", auth, orderController.getAllOrders);
+orderRoute.get("/", auth, orderController.getAllOrders);
+orderRoute.get("/admin", isAdmin, orderController.getOrderForAdmin);
 
 module.exports = orderRoute;
