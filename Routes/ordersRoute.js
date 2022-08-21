@@ -252,6 +252,6 @@ orderRoute.get("/:id", auth, orderController.getOrderById);
  *                   $ref: '#/components/schemas/Order'
  */
 orderRoute.get("/", auth, orderController.getAllOrders);
-orderRoute.get("/admin", isAdmin, orderController.getOrderForAdmin);
+orderRoute.get("/admin/:id", isAdmin, orderController.getOrderForAdmin);
 
 module.exports = orderRoute;
