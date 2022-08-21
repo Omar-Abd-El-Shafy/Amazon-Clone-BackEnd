@@ -93,7 +93,7 @@ const { idValidator, addressValidator } = require("../MiddleWare/validators");
  *     responses:
  *       '201' :
  *         description: Created
- *       '409' :
+ *       '200' :
  *         description: Address already exists
  */
 addressRoute.post("/", auth, addressValidator, addressController.addAddress);

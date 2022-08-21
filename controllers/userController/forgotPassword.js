@@ -24,7 +24,7 @@ exports.forgotPassword = async (req, res) => {
       }
     );
 
-    const url = `http://localhost:3000/password-reset/${user._id}/${token}/`;
+    const url = `https://amazon-clone-front-end-alpha.vercel.app/password-reset/${user._id}/${token}/`;
     let test = await sendEmail(user.email, "Password Reset", url);
     if (test instanceof Error) throw test;
 
