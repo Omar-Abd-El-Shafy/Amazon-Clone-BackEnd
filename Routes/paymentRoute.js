@@ -4,7 +4,7 @@ const auth = require("../MiddleWare/auth");
 
 //controller
 const paymentController = require("../controllers/paymentController/index");
-paymentRoute.post("/create-payment-intent", auth, paymentController.payment);
+paymentRoute.get("/create-payment-intent", auth, paymentController.payment);
 paymentRoute.post(
   "/webhook",
   express.raw({ type: "application/json" }),
