@@ -19,6 +19,8 @@
     "type": "git",
     "url": "git+https://github.com/Omar-Abd-El-Shafy/Amazon-Clone-BackEnd.git"
   },
+  "proxy": "https://amazon-clone-deploy.herokuapp.com/",
+
   "dependencies": {
     "aws-sdk": "^2.1181.0",
     "bcryptjs": "^2.4.3",
